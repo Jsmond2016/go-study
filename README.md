@@ -47,3 +47,5 @@ windows 下执行 `go mod tidy`，报错为  `Permission Denied`
 
 - [Go 从入门到实战](https://github.com/xinliangnote/Go) 从零开始学 Go、Gin 框架，基本语法包括 26 个Demo，Gin 框架包括：Gin 自定义路由配置、Gin 使用 Logrus 进行日志记录、Gin 数据绑定和验证、Gin 自定义错误处理、Go gRPC Hello World... 持续更新中
 - [基于Gin + Vue + Element UI的前后端分离权限管理系统脚手架](https://github.com/go-admin-team/go-admin) 开源项目，综合学习 Go 开发
+- [Go语言高级编程](https://github.com/chai2010/advanced-go-programming-book) 开源电子书
+- [Go语言刷LeetCode](https://github.com/halfrost/LeetCode-Go)
