@@ -1,10 +1,26 @@
 # go 语言学习
 
-> [VS Code配置Go语言开发环境](https://www.liwenzhou.com/posts/Go/00_go_in_vscode/)
+## 学习资料
+
+**官方：**
+
+- 官网：[Go 指南](https://tour.go-zh.org/list)
+
+**其他：**
+
+- 视频：[最新Go语言急速入门视频教程（七米出品）](https://www.bilibili.com/video/BV1ZJ411W7jG)
+- 文档：[李文周的博客](https://www.liwenzhou.com/posts/Go/golang-menu/)
+- 代码地址：[go_tutorial](https://github.com/Q1mi/go_tutorial)
+
+**其他2：**
+
+- [Go编程时光](https://golang.iswbm.com/preface.html)
+- [代码](https://github.com/iswbm/GolangCodingTime)
 
 
 ## go 安装
 
+- [VS Code配置Go语言开发环境](https://www.liwenzhou.com/posts/Go/00_go_in_vscode/)
 - 安装包地址：[go](https://golang.google.cn/dl/) 下载安装即可
 - 配置 vs code 环境，参考上面的教程
 - 安装 go 语言格式化以及相关工具
@@ -14,7 +30,6 @@
 ## hello，world
 
 ```go
-
 package main
 import "fmt"
 

@@ -1,0 +1,19 @@
+{
+  "name": "go-study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Jsmond2016/go-study.git",
+  "author": "Jsmond2016 <Jsmond2016@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs"
+  },
+  "devDependencies": {
+    "vitepress": "^0.19.1"
+  },
+  "dependencies": {
+    "markdown-it-task-lists": "^2.1.1"
+  }
+}
