@@ -46,7 +46,7 @@ function getGuideSidebar() {
       children: [
         { text: '学习目标', link: '/record/goal' },
         { text: '模板', link: '/record/template' },
-        { text: 'TODOS', link: '/record/todos' },
+        // { text: 'TODOS', link: '/record/todos' },
         ...require('./sidebar')
       ]
     },
