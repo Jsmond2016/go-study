@@ -5,7 +5,7 @@ module.exports = {
   lang: 'zh-CN',
   title: 'Go语言学习笔记',
   description: 'Go语言学习笔记',
-  base: "/go-everyday/",
+  base: "/go-study/",
   themeConfig: {
     repo: 'Jsmond2016/go-study',
     docsDir: 'docs',
