@@ -4,7 +4,7 @@ module.exports = [
     "children": [
       {
         "text": "Go的安装和配置PATH",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
     ],
   },
@@ -13,31 +13,31 @@ module.exports = [
     "children": [
       {
         "text": "数组",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "切片",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "指针",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "Map",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "结构体",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "流程控制",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "函数和方法",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
     ]
   },
@@ -46,19 +46,19 @@ module.exports = [
     "children": [
       {
         "text": "面向对象",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "网络编程",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "并发编程",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
       {
         "text": "数据库操作",
-        "link": "/record/09/0922"
+        "link": "/record/todos"
       },
     ]
   },
