@@ -15,15 +15,6 @@ module.exports = {
 
     nav: [
       { text: '首页', link: '/' },
-      // {
-      //   text: '归档',
-      //   link: '/config/basics',
-      //   activeMatch: '^/config/'
-      // },
-      // {
-      //   text: '分类',
-      //   link: '/category'
-      // }
     ],
 
     sidebar: {
@@ -45,8 +36,6 @@ function getGuideSidebar() {
       text: 'Go语言学习',
       children: [
         { text: '学习目标', link: '/record/goal' },
-        { text: '模板', link: '/record/template' },
-        // { text: 'TODOS', link: '/record/todos' },
         ...require('./sidebar')
       ]
     },

@@ -1,23 +1,3 @@
-# go 语言学习
-
-## 学习资料
-
-**官方：**
-
-- 官网：[Go 指南](https://tour.go-zh.org/list)
-
-**其他：**
-
-- 视频：[最新Go语言急速入门视频教程（七米出品）](https://www.bilibili.com/video/BV1ZJ411W7jG)
-- 文档：[李文周的博客](https://www.liwenzhou.com/posts/Go/golang-menu/)
-- 代码地址：[go_tutorial](https://github.com/Q1mi/go_tutorial)
-
-**其他2：**
-
-- [Go编程时光](https://golang.iswbm.com/preface.html)
-- [代码](https://github.com/iswbm/GolangCodingTime)
-
-
 ## go 安装
 
 - [VS Code配置Go语言开发环境](https://www.liwenzhou.com/posts/Go/00_go_in_vscode/)
@@ -458,31 +438,21 @@ func main() {
   - 长度：`len(s)`
   - 容量：`cap(s)`
 
-## map
 
-## 指针
+**待完成：**
 
-## 自定义类型和类型别名
-
-## 结构体定义和结构体
-
-## 方法和接收者
-
-## 结构体嵌套
-
-## 结构体可见性和 json
-
-## 实战：员信息管理系统
-
-## 包-package
-
-## 接口定义，接口变量
-
-## 反射
-
-## 结构体反射
-
-## go语言并发之goroutine
-
-## go语言并发之channel
+- map
+- 指针
+- 自定义类型和类型别名
+- 结构体定义和结构体
+- 方法和接收者
+- 结构体嵌套
+- 结构体可见性和 json
+- 实战：员信息管理系统
+- 包-package
+- 接口定义，接口变量
+- 反射
+- 结构体反射
+- go语言并发之goroutine
+- go语言并发之channel
 
