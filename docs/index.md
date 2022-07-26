@@ -1,7 +1,9 @@
 # go-study
 
-> 学习资料：[李文周博客](https://www.liwenzhou.com/)
-> [go语言介绍](https://www.topgoer.com/)
+- [推荐学习地址-强烈推荐](https://www.topgoer.com/)
+- [李文周博客](https://www.liwenzhou.com/)
+
+
 ## Go 基础
 
 - 数组
