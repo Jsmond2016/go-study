@@ -1,4 +1,4 @@
-module test3
+module code
 
 go 1.17
 
