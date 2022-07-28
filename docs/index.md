@@ -79,6 +79,18 @@
 > [Gin 视频教程-网易云课堂](https://study.163.com/course/courseLearn.htm?courseId=1210182958#/learn/video?lessonId=1281052216&courseId=1210182958)
 
 
+- https://github.com/haydenzhourepo/gin-vue-gin-essential Gin + Vue 前后端分离项目实战 Gin 项目代码
+- https://github.com/e421083458/hello_gin
+- https://github.com/itachizhu/gin-vue-samples
+- https://github.com/wangsongyan/wblog
+- https://github.com/wejectchen/Ginblog
+- https://github.com/pythonsite/lyanna
+- https://github.com/Away0x/gin_bbs
+- https://github.com/rocboss/paopao-ce
+- https://github.com/lvpengc/Go-Vue-Shop
+- https://github.com/gotomicro/egoshop
+
+
 ## Go 微服务
 > https://www.topgoer.com/%E5%BE%AE%E6%9C%8D%E5%8A%A1/
 
