@@ -1,0 +1,1 @@
+import{_ as t,c as e,o as r,a as o}from"./app.a8f7bf13.js";const a='{"title":"数据类型、字符串及其操作、类型转换","description":"","frontmatter":{},"relativePath":"record/data-type.md","lastUpdated":1659052142749}',l={},p=[o('',3)];var n=t(l,[["render",function(t,o,a,l,n,h){return r(),e("div",null,p)}]]);export{a as __pageData,n as default};

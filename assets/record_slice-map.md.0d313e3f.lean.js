@@ -1,0 +1,1 @@
+import{_ as e,c as r,o,a as t}from"./app.a8f7bf13.js";const a='{"title":"切片、集合 及其常用操作","description":"","frontmatter":{},"relativePath":"record/slice-map.md","lastUpdated":1659052142749}',l={},n=[t('',2)];var i=e(l,[["render",function(e,t,a,l,i,s){return o(),r("div",null,n)}]]);export{a as __pageData,i as default};

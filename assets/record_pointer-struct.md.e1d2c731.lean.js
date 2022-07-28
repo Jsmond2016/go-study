@@ -1,0 +1,1 @@
+import{_ as t,c as r,o as e,a as o}from"./app.a8f7bf13.js";const a='{"title":"指针、结构体","description":"","frontmatter":{},"relativePath":"record/pointer-struct.md","lastUpdated":1659052142749}',l={},n=[o('',2)];var s=t(l,[["render",function(t,o,a,l,s,h){return e(),r("div",null,n)}]]);export{a as __pageData,s as default};
