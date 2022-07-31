@@ -35,7 +35,7 @@ function getGuideSidebar() {
     {
       text: 'Go语言学习',
       children: [
-        { text: '学习目标', link: '/record/goal' },
+        { text: '学习目标和成果', link: '/record/goal' },
         ...require('./sidebar')
       ]
     },
