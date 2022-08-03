@@ -1,21 +1,17 @@
 module.exports = [
   {
-    "text": "学习资料",
-    "link": "/record/info"
-  },
-  {
     "text": "快速了解Go语言",
     "link": "/record/quick-go"
   },
   {
     "text": "待完成",
     "children": [
+      // {
+      //   "text": "todo-示例模板",
+      //   "link": "/record/todos"
+      // }, 
       {
-        "text": "todo-示例模板",
-        "link": "/record/todos"
-      }, 
-      {
-        "text": "todo-fmt常用工具和配置、常用的格式化占位符",
+        "text": "fmt常用工具和配置、常用的格式化占位符",
         "link": "/record/fmt-log-format"
       },
       {
