@@ -4,15 +4,19 @@ module.exports = [
     "link": "/record/quick-go"
   },
   {
-    "text": "待完成",
+    "text": "阅读进度",
+    "link": "/record/progress"
+  },
+  {
+    "text": "go语言基础",
     "children": [
-      // {
-      //   "text": "todo-示例模板",
-      //   "link": "/record/todos"
-      // }, 
       {
         "text": "fmt常用工具和配置、常用的格式化占位符",
         "link": "/record/fmt-log-format"
+      },
+      {
+        "text": "函数",
+        "link": "/record/func"
       },
       {
         "text": "todo-数据类型、字符串和常用操作、类型转换",
@@ -23,26 +27,35 @@ module.exports = [
         "link": "/record/slice-map"
       },
       {
-        "text": "todo-函数",
-        "link": "/record/func"
-      },
-      {
         "text": "todo-指针和结构体",
         "link": "/record/pointer-struct"
       },
       // 001-第1阶段
+      // 方法 https://www.topgoer.com/%E6%96%B9%E6%B3%95/
       // 包
+      // 文件操作
       // 接口
       // err 处理
       // 反射
-      // 并发
+
       // 网络编程
-      // 常用标准库
+      // 并发
+
+      // 常用标准库 time strings strvc
       // 可选-单元测试
       // 数据库操作 MySql、Redis、Mongodb
 
       // 002-第2阶段 Web 开发阶段
       // 
+    ]
+  },
+  {
+    "text": "Gin基础",
+    "children": [
+      {
+        "text": "数组",
+        "link": "/record/gin/"
+      },
     ]
   }
   // {
@@ -123,5 +136,5 @@ module.exports = [
   //   "text": "Go项目实战",
   //   "children": []
   // },
-  
+
 ]
