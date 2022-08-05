@@ -57,51 +57,51 @@ module.exports = [
         "link": "/record/gin/home",
       },
       {
-        "text": "gin-begin",
+        "text": "开始",
         "link": "/record/gin/gin-begin"
       },
       {
-        "text": "gin-ping",
+        "text": "ping 测试",
         "link": "/record/gin/gin-ping"
       },
       {
-        "text": "gin-router",
+        "text": "路由",
         "link": "/record/gin/gin-router"
       },
       {
-        "text": "gin-router-params",
+        "text": "路由参数",
         "link": "/record/gin/gin-router-params"
       },
       {
-        "text": "gin-router-group",
+        "text": "路由分组",
         "link": "/record/gin/gin-router-group"
       },
       {
-        "text": "gin-router-params-bind",
+        "text": "参数-模型-绑定",
         "link": "/record/gin/gin-router-params-bind"
       },
       {
-        "text": "gin-response-type",
+        "text": "响应类型",
         "link": "/record/gin/gin-response-type"
       },
       {
-        "text": "gin-template-render",
+        "text": "模板渲染",
         "link": "/record/gin/gin-template-render"
       },
       {
-        "text": "gin-static",
+        "text": "静态文件",
         "link": "/record/gin/gin-static"
       },
       {
-        "text": "gin-sync-async",
+        "text": "同步和异步任务处理",
         "link": "/record/gin/gin-sync-async"
       },
       {
-        "text": "gin-middleware",
+        "text": "中间件",
         "link": "/record/gin/gin-middleware"
       },
       {
-        "text": "gin-mysql",
+        "text": "MySql-数据库",
         "link": "/record/gin/gin-mysql"
       },
     ]

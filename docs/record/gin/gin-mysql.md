@@ -235,5 +235,32 @@ func main() {
 
 
 ```http
+@base = 127.0.0.1:8080
+
+### 
+GET http://{{base}}/user HTTP/1.1
+
+
+###
+POST http://{{base}}/add HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "Delete test",
+  "password": "test"
+}
+
+###
+PUT http://{{base}}/update HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "username": "Tony",
+  "password": "3333333"
+}
+###
+DELETE http://{{base}}/delete/3 HTTP/1.1
+
 
 ```
