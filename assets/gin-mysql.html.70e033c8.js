@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-0d31bc60","path":"/record/gin/gin-mysql.html","title":"","lang":"zh-CN","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1659688745000,"contributors":[{"name":"Jsmond2016","email":"jsmond2016@gmail.com","commits":2}]},"filePathRelative":"record/gin/gin-mysql.md"}');export{e as data};

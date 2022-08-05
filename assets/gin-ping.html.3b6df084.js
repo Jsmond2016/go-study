@@ -1,4 +1,4 @@
-import{_ as n,o as s,c as a,e as t}from"./app.6882f82d.js";const e={},p=t(`<h2 id="gin-ping-\u6D4B\u8BD5" tabindex="-1"><a class="header-anchor" href="#gin-ping-\u6D4B\u8BD5" aria-hidden="true">#</a> Gin-ping \u6D4B\u8BD5</h2><div class="language-go ext-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+import{_ as n,o as s,c as a,e as t}from"./app.286a3ac7.js";const e={},p=t(`<h2 id="gin-ping-\u6D4B\u8BD5" tabindex="-1"><a class="header-anchor" href="#gin-ping-\u6D4B\u8BD5" aria-hidden="true">#</a> Gin-ping \u6D4B\u8BD5</h2><div class="language-go ext-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
 
 <span class="token keyword">import</span> <span class="token punctuation">(</span>
     <span class="token string">&quot;net/http&quot;</span>

@@ -1,4 +1,4 @@
-import{_ as n,o as s,c as a,e}from"./app.6882f82d.js";const i={},l=e(`<h1 id="gin-\u5B89\u88C5\u548C\u521D\u59CB\u5316" tabindex="-1"><a class="header-anchor" href="#gin-\u5B89\u88C5\u548C\u521D\u59CB\u5316" aria-hidden="true">#</a> Gin \u5B89\u88C5\u548C\u521D\u59CB\u5316</h1><ul><li>\u521B\u5EFA\u76EE\u5F55\u548C\u521D\u59CB\u5316 go mod</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">mkdir</span> gin_demo/chapter-01
+import{_ as n,o as s,c as a,e}from"./app.286a3ac7.js";const i={},l=e(`<h1 id="gin-\u5B89\u88C5\u548C\u521D\u59CB\u5316" tabindex="-1"><a class="header-anchor" href="#gin-\u5B89\u88C5\u548C\u521D\u59CB\u5316" aria-hidden="true">#</a> Gin \u5B89\u88C5\u548C\u521D\u59CB\u5316</h1><ul><li>\u521B\u5EFA\u76EE\u5F55\u548C\u521D\u59CB\u5316 go mod</li></ul><div class="language-bash ext-sh line-numbers-mode"><pre class="language-bash"><code><span class="token function">mkdir</span> gin_demo/chapter-01
 
 
 <span class="token builtin class-name">cd</span> gin_demo
