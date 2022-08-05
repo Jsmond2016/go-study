@@ -53,8 +53,56 @@ module.exports = [
     "text": "Gin基础",
     "children": [
       {
-        "text": "数组",
-        "link": "/record/gin/"
+        "text": "大纲",
+        "link": "/record/gin/home",
+      },
+      {
+        "text": "gin-begin",
+        "link": "/record/gin/gin-begin"
+      },
+      {
+        "text": "gin-ping",
+        "link": "/record/gin/gin-ping"
+      },
+      {
+        "text": "gin-router",
+        "link": "/record/gin/gin-router"
+      },
+      {
+        "text": "gin-router-params",
+        "link": "/record/gin/gin-router-params"
+      },
+      {
+        "text": "gin-router-group",
+        "link": "/record/gin/gin-router-group"
+      },
+      {
+        "text": "gin-router-params-bind",
+        "link": "/record/gin/gin-router-params-bind"
+      },
+      {
+        "text": "gin-response-type",
+        "link": "/record/gin/gin-response-type"
+      },
+      {
+        "text": "gin-template-render",
+        "link": "/record/gin/gin-template-render"
+      },
+      {
+        "text": "gin-static",
+        "link": "/record/gin/gin-static"
+      },
+      {
+        "text": "gin-sync-async",
+        "link": "/record/gin/gin-sync-async"
+      },
+      {
+        "text": "gin-middleware",
+        "link": "/record/gin/gin-middleware"
+      },
+      {
+        "text": "gin-mysql",
+        "link": "/record/gin/gin-mysql"
       },
     ]
   }
