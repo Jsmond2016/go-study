@@ -50,6 +50,25 @@ module.exports = [
     ]
   },
   {
+    "text": "go进阶",
+    "children": [
+      {
+        "text": "fmt常用工具和配置、常用的格式化占位符",
+        "link": "/record/fmt-log-format"
+      },
+      // 实战准备：来源-李文周 web 开发视频相关
+      // Go连接 MySql
+      // databasesql 的增删查改操作
+      // mysql 的预处理和事务
+      // sqlx 连接 MySql、以及使用方式
+      // go redis 连接和使用
+      // pipeline 和 watch 事务
+      // zap 日志库介绍
+      // gin框架集成 zap 日之苦
+      // viper 配置加载器的介绍和使用
+    ]
+  },
+  {
     "text": "Gin基础",
     "children": [
       {

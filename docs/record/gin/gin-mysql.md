@@ -4,6 +4,23 @@ gin-mysql
 
 知识要点：对 MySQL 的 crud 操作
 
+- MySql 的初始化和释放连接
+- 查询
+  - 单个查询
+  - 多个查询
+  - 模糊查询
+- 新增
+  - 单个新增
+  - 多个新增
+- 更新
+  - 单个更新
+  - 多个更新
+- 删除
+  - 单个删除
+  - 多个删除
+
+
+
 
 
 Code：
@@ -104,7 +121,7 @@ func update(user User) (rowsAffected int64, err error) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	//推迟数据库连接的关闭
+	//推迟数据库连接的关闭，确保 db 不为 Nil
 	defer db.Close()
 	stmt, err := db.Prepare("UPDATE  user_info SET username=?, password=? WHERE id=?")
 	if err != nil {
