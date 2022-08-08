@@ -1,4 +1,4 @@
-import{_ as n,o as s,c as a,e as t}from"./app.286a3ac7.js";const p={},o=t(`<h2 id="gin-middleware" tabindex="-1"><a class="header-anchor" href="#gin-middleware" aria-hidden="true">#</a> gin-middleware</h2><p>\u77E5\u8BC6\u8981\u70B9\uFF1A</p><p>\u4E2D\u95F4\u4EF6\u7684\u7F16\u5199</p><p>\u4EE3\u7801\uFF1A</p><div class="language-go ext-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
+import{_ as n,o as s,c as a,e as t}from"./app.50b80db3.js";const p={},o=t(`<h2 id="gin-middleware" tabindex="-1"><a class="header-anchor" href="#gin-middleware" aria-hidden="true">#</a> gin-middleware</h2><p>\u77E5\u8BC6\u8981\u70B9\uFF1A</p><p>\u4E2D\u95F4\u4EF6\u7684\u7F16\u5199</p><p>\u4EE3\u7801\uFF1A</p><div class="language-go ext-go line-numbers-mode"><pre class="language-go"><code><span class="token keyword">package</span> main
 
 <span class="token keyword">import</span> <span class="token punctuation">(</span>
     <span class="token string">&quot;fmt&quot;</span>
