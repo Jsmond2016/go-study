@@ -3,9 +3,10 @@ import mdTaskListPlugin from 'markdown-it-task-lists'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "golang-study",
+  lang: 'zh-CN',
+  title: 'Go语言学习笔记',
   description: "golang study notes",
-
+  base: '/golang-study/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
