@@ -1,16 +1,16 @@
 import { defineConfig } from "vitepress"
-import mdTaskListPlugin from 'markdown-it-task-lists'
+import mdTaskListPlugin from "markdown-it-task-lists"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  lang: 'zh-CN',
-  title: 'Go语言学习笔记',
+  lang: "zh-CN",
+  title: "Go语言学习笔记",
   description: "golang study notes",
-  base: '/go-study/',
+  base: "/go-study/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/record/home" },
+      { text: "资料", link: "/record/info" },
       { text: "Golang 基础", link: "/record/base" },
       { text: "Golang 进阶", link: "/record/advance" },
       { text: "Golang 框架-gin", link: "/record/gin" },
@@ -18,6 +18,8 @@ export default defineConfig({
     ],
 
     sidebar: {
+      // 首页
+      "/record/info/": getInfoSidebar(),
       // golang 基础
       "/record/base/": getBaseSidebar(),
       // golang 进阶
@@ -36,6 +38,18 @@ export default defineConfig({
     },
   },
 })
+
+function getInfoSidebar() {
+  return [
+    {
+      text: "基础篇",
+      items: [
+        { text: "Go 语言学习目标及成果", link: "/record/info/goal-result" },
+        { text: "学习大纲", link: "/record/info/structure" },
+      ],
+    },
+  ]
+}
 
 function getBaseSidebar() {
   return [
