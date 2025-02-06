@@ -6,7 +6,7 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'Go语言学习笔记',
   description: "golang study notes",
-  base: '/golang-study/',
+  base: '/go-study/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
