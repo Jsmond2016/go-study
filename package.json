@@ -1,17 +1,17 @@
 {
-  "name": "go-study",
+  "name": "golang-study",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:Jsmond2016/go-study.git",
   "author": "Jsmond2016 <Jsmond2016@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
-    "serve": "vuepress serve docs"
+    "dev": "vitepress dev docs --host 127.0.0.1 --port 3000",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "vuepress": "^2.0.0-beta.49"
+    "vitepress": "^1.6.3"
   },
   "dependencies": {
     "markdown-it-task-lists": "^2.1.1"
