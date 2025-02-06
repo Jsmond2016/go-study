@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-765af0b9","path":"/record/gin/gin-begin.html","title":"Gin \u5B89\u88C5\u548C\u521D\u59CB\u5316","lang":"zh-CN","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1659688317000,"contributors":[{"name":"Jsmond2016","email":"jsmond2016@gmail.com","commits":1}]},"filePathRelative":"record/gin/gin-begin.md"}');export{e as data};
