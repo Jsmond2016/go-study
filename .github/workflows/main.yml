@@ -20,7 +20,7 @@ jobs:
       - name: install and build
         run: |
           corepack enable
-          corepack prepare pnpm@latest --activate
+          corepack prepare pnpm@10.0.0 --activate
           pnpm install
           pnpm build
       - name: 部署到 github-page...
