@@ -1,5 +1,10 @@
-import { defineConfig } from "vitepress"
-import mdTaskListPlugin from "markdown-it-task-lists"
+import { defineConfig } from "vitepress";
+import mdTaskListPlugin from "markdown-it-task-lists";
+import {
+  baseNavConfig,
+  baseNavSideBar,
+} from "./navSideConfig/base.navConfig.mts";
+// import { advanceNavConfig, advanceNavSideBar } from './navSideConfig/advance.navConfig.mts'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -11,8 +16,9 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "资料", link: "/record/info" },
-      { text: "Golang 基础", link: "/record/base" },
-      { text: "Golang 进阶", link: "/record/advance" },
+      // { text: "Golang 基础", link: "/record/base" },
+      baseNavConfig,
+      // advanceNavConfig,
       { text: "Golang 框架-gin", link: "/record/gin" },
       // { text: "Golang 项目", link: "/projects" },
     ],
@@ -21,7 +27,8 @@ export default defineConfig({
       // 首页
       "/record/info/": getInfoSidebar(),
       // golang 基础
-      "/record/base/": getBaseSidebar(),
+      ...baseNavSideBar,
+      //  ...advanceNavSideBar,
       // golang 进阶
       "/record/advance/": getAdvanceSidebar(),
       // gin
@@ -29,15 +36,18 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      {
+        icon: "github",
+        link: "https://vitepress.dev/zh/guide/what-is-vitepress",
+      },
     ],
   },
   markdown: {
     config: (md) => {
-      md.use(mdTaskListPlugin)
+      md.use(mdTaskListPlugin);
     },
   },
-})
+});
 
 function getInfoSidebar() {
   return [
@@ -48,54 +58,7 @@ function getInfoSidebar() {
         { text: "学习大纲", link: "/record/info/structure" },
       ],
     },
-  ]
-}
-
-function getBaseSidebar() {
-  return [
-    {
-      text: "基础篇",
-      items: [
-        {
-          text: "fmt常用工具和配置、常用的格式化占位符",
-          link: "/record/base/fmt-log-format",
-        },
-        {
-          text: "函数",
-          link: "/record/base/func",
-        },
-        {
-          text: "todo-数据类型、字符串和常用操作、类型转换",
-          link: "/record/base/data-type",
-        },
-        {
-          text: "todo-切片、集合 及其常用操作",
-          link: "/record/base/slice-map",
-        },
-        {
-          text: "todo-指针和结构体",
-          link: "/record/base/pointer-struct",
-        },
-        // 001-第1阶段
-        // 方法 https://www.topgoer.com/%E6%96%B9%E6%B3%95/
-        // 包
-        // 文件操作
-        // 接口
-        // err 处理
-        // 反射
-
-        // 网络编程
-        // 并发
-
-        // 常用标准库 time strings strvc
-        // 可选-单元测试
-        // 数据库操作 MySql、Redis、Mongodb
-
-        // 002-第2阶段 Web 开发阶段
-        //
-      ],
-    },
-  ]
+  ];
 }
 
 function getAdvanceSidebar() {
@@ -119,7 +82,7 @@ function getAdvanceSidebar() {
         // viper 配置加载器的介绍和使用
       ],
     },
-  ]
+  ];
 }
 
 function getGinSidebar() {
@@ -127,10 +90,6 @@ function getGinSidebar() {
     {
       text: "Gin基础",
       items: [
-        {
-          text: "大纲",
-          link: "/record/gin/home",
-        },
         {
           text: "开始",
           link: "/record/gin/gin-begin",
@@ -181,5 +140,5 @@ function getGinSidebar() {
         },
       ],
     },
-  ]
+  ];
 }

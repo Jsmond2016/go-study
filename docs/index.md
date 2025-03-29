@@ -3,16 +3,19 @@
 layout: home
 
 hero:
-  name: "golang-study"
-  text: "golang study notes"
-  tagline: My great project tagline
+  name: Go语言学习笔记
+  # text: "Golang 学习的点滴记录"
+  tagline: Golang 学习的点滴记录
+  image:
+    src: /hand-coding.png
+    alt: VitePress
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: golang 基础
+      link: /record/base/
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: github
+      link: https://github.com/Jsmond2016/go-study
 
 features:
   - title: Feature A
