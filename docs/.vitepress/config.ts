@@ -108,12 +108,9 @@ export default defineConfig({
     theme: {
       light: 'github-light',
       dark: 'github-dark'
-    },
-    config: async (md) => {
-      // 可以使用 markdown-it 插件
-      const taskLists = await import('markdown-it-task-lists')
-      md.use(taskLists.default)
     }
+    // 注意：markdown-it-task-lists 需要在 VitePress 配置中通过其他方式配置
+    // 或者使用 VitePress 内置的任务列表支持
   },
   
   // 开发服务器配置
