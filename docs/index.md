@@ -11,10 +11,13 @@ hero:
     alt: VitePress
   actions:
     - theme: brand
-      text: golang 基础
-      link: /record/base/
+      text: 开始学习
+      link: /guide/getting-started
     - theme: alt
-      text: github
+      text: 基础语法
+      link: /basics/
+    - theme: alt
+      text: GitHub
       link: https://github.com/Jsmond2016/go-study
 
 features:
