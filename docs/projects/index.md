@@ -107,12 +107,21 @@ project/
 - [RESTful API 设计](https://restfulapi.net/)
 - [系统设计指南](https://github.com/donnemartin/system-design-primer)
 
+## 📚 前置知识
+
+在开始实战项目前，建议先学习：
+
+- [开发工具链](../toolchain/) - MySQL、GORM、配置管理、日志等工程化工具
+- [Web 开发](../web-development/) - Web 框架和 API 开发
+
 ## ⏭️ 下一阶段
 
 完成项目学习后，可以：
 
 - 开发自己的项目
 - 参与开源项目
+- [微服务](../microservices/) - 分布式系统开发
+- [运维部署](../devops/) - 部署和运维
 - 深入学习特定领域
 
 ---
