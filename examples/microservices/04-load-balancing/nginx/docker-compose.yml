@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-lb
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - server1
+      - server2
+      - server3
+    networks:
+      - loadbalancer
+
+  server1:
+    image: nginx:latest
+    container_name: backend-server1
+    volumes:
+      - ./server1.html:/usr/share/nginx/html/index.html:ro
+    networks:
+      - loadbalancer
+
+  server2:
+    image: nginx:latest
+    container_name: backend-server2
+    volumes:
+      - ./server2.html:/usr/share/nginx/html/index.html:ro
+    networks:
+      - loadbalancer
+
+  server3:
+    image: nginx:latest
+    container_name: backend-server3
+    volumes:
+      - ./server3.html:/usr/share/nginx/html/index.html:ro
+    networks:
+      - loadbalancer
+
+networks:
+  loadbalancer:
+    driver: bridge
+
