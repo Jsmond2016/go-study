@@ -1,144 +1,79 @@
-import { defineConfig } from "vitepress";
 import mdTaskListPlugin from "markdown-it-task-lists";
-import {
-  baseNavConfig,
-  baseNavSideBar,
-} from "./navSideConfig/base.navConfig.mts";
-// import { advanceNavConfig, advanceNavSideBar } from './navSideConfig/advance.navConfig.mts'
+import { defineConfig } from "vitepress";
+import { sidebar } from "./sidebar";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: "zh-CN",
   title: "Go语言学习笔记",
-  description: "golang study notes",
+  description: "从零基础到实战应用的完整 Go 语言学习路径",
   base: "/go-study/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    siteTitle: "Go 语言学习笔记",
+    logo: "/hand-coding.png",
+
     nav: [
-      { text: "资料", link: "/record/info" },
-      // { text: "Golang 基础", link: "/record/base" },
-      baseNavConfig,
-      // advanceNavConfig,
-      { text: "Golang 框架-gin", link: "/record/gin" },
-      // { text: "Golang 项目", link: "/projects" },
+      { text: "首页", link: "/" },
+      { text: "学习指南", link: "/guide/getting-started" },
+      { text: "基础语法", link: "/basics/" },
+      { text: "标准库", link: "/standard-library/" },
+      { text: "Web 开发", link: "/web-development/" },
+      { text: "开发工具链", link: "/toolchain/" },
+      { text: "实战项目", link: "/projects/" },
     ],
 
-    sidebar: {
-      // 首页
-      "/record/info/": getInfoSidebar(),
-      // golang 基础
-      ...baseNavSideBar,
-      //  ...advanceNavSideBar,
-      // golang 进阶
-      "/record/advance/": getAdvanceSidebar(),
-      // gin
-      "/record/gin": getGinSidebar(),
-    },
+    sidebar: sidebar,
 
     socialLinks: [
       {
         icon: "github",
-        link: "https://vitepress.dev/zh/guide/what-is-vitepress",
+        link: "https://github.com/Jsmond2016/go-study",
       },
     ],
+
+    search: {
+      provider: 'local',
+      options: {
+        translations: {
+          button: {
+            buttonText: '搜索文档',
+            buttonAriaLabel: '搜索文档'
+          },
+          modal: {
+            noResultsText: '无法找到相关结果',
+            resetButtonTitle: '清除查询条件',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换'
+            }
+          }
+        }
+      }
+    },
+
+    editLink: {
+      pattern: 'https://github.com/Jsmond2016/go-study/edit/main/docs/:path',
+      text: '在 GitHub 上编辑此页'
+    },
+
+    lastUpdated: {
+      text: '最后更新于'
+    },
+
+    footer: {
+      message: '基于 VitePress 构建',
+      copyright: 'Copyright © 2025 Go 语言学习笔记'
+    },
   },
   markdown: {
+    lineNumbers: true,
     config: (md) => {
-      md.use(mdTaskListPlugin);
+      // 支持任务列表
+      md.use(mdTaskListPlugin, { enabled: true });
     },
   },
 });
 
-function getInfoSidebar() {
-  return [
-    {
-      text: "基础篇",
-      items: [
-        { text: "Go 语言学习目标及成果", link: "/record/info/goal-result" },
-        { text: "学习大纲", link: "/record/info/structure" },
-      ],
-    },
-  ];
-}
-
-function getAdvanceSidebar() {
-  return [
-    {
-      text: "go进阶",
-      items: [
-        {
-          text: "fmt常用工具和配置、常用的格式化占位符",
-          link: "/record/advance/fmt-log-format",
-        },
-        // 实战准备：来源-李文周 web 开发视频相关
-        // Go连接 MySql
-        // databasesql 的增删查改操作
-        // mysql 的预处理和事务
-        // sqlx 连接 MySql、以及使用方式
-        // go redis 连接和使用
-        // pipeline 和 watch 事务
-        // zap 日志库介绍
-        // gin框架集成 zap 日之苦
-        // viper 配置加载器的介绍和使用
-      ],
-    },
-  ];
-}
-
-function getGinSidebar() {
-  return [
-    {
-      text: "Gin基础",
-      items: [
-        {
-          text: "开始",
-          link: "/record/gin/gin-begin",
-        },
-        {
-          text: "ping 测试",
-          link: "/record/gin/gin-ping",
-        },
-        {
-          text: "路由",
-          link: "/record/gin/gin-router",
-        },
-        {
-          text: "路由参数",
-          link: "/record/gin/gin-router-params",
-        },
-        {
-          text: "路由分组",
-          link: "/record/gin/gin-router-group",
-        },
-        {
-          text: "参数-模型-绑定",
-          link: "/record/gin/gin-router-params-bind",
-        },
-        {
-          text: "响应类型",
-          link: "/record/gin/gin-response-type",
-        },
-        {
-          text: "模板渲染",
-          link: "/record/gin/gin-template-render",
-        },
-        {
-          text: "静态文件",
-          link: "/record/gin/gin-static",
-        },
-        {
-          text: "同步和异步任务处理",
-          link: "/record/gin/gin-sync-async",
-        },
-        {
-          text: "中间件",
-          link: "/record/gin/gin-middleware",
-        },
-        {
-          text: "MySql-数据库",
-          link: "/record/gin/gin-mysql",
-        },
-      ],
-    },
-  ];
-}
+// 注意：record 目录已删除，相关内容已整合到正式文档中
+// 如需配置侧边栏，请使用 config.ts 中的 sidebar 配置

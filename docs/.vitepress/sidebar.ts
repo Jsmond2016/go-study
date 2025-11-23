@@ -35,7 +35,8 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '13. 包管理', link: '/basics/13-packages' },
         { text: '14. 并发编程', link: '/basics/14-concurrency' },
         { text: '15. 反射', link: '/basics/15-reflection' },
-        { text: '16. 测试', link: '/basics/16-testing' }
+        { text: '16. 测试', link: '/basics/16-testing' },
+        { text: '17. 基础练习题', link: '/basics/17-practice-exercises' }
       ]
     }
   ],
@@ -72,7 +73,9 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '07. HTTP 客户端 (net/http)', link: '/standard-library/07-net-http' },
         { text: '08. 上下文 (context)', link: '/standard-library/08-context' },
         { text: '09. 编码解码 (encoding)', link: '/standard-library/09-encoding' },
-        { text: '10. 加密 (crypto)', link: '/standard-library/10-crypto' }
+        { text: '10. 加密 (crypto)', link: '/standard-library/10-crypto' },
+        { text: '11. 字符串操作 (strings)', link: '/standard-library/11-strings' },
+        { text: '12. 数学运算 (math)', link: '/standard-library/12-math' }
       ]
     }
   ],
@@ -108,7 +111,8 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '06. 数据验证', link: '/web-development/06-gin-validation' },
         { text: '07. 认证授权', link: '/web-development/07-gin-auth' },
         { text: '08. REST API 设计', link: '/web-development/08-rest-api' },
-        { text: '09. Beego 框架', link: '/web-development/09-beego' }
+        { text: '09. Beego 框架', link: '/web-development/09-beego' },
+        { text: '10. Gin 数据库操作', link: '/web-development/10-gin-database' }
       ]
     }
   ],

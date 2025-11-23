@@ -1,85 +1,252 @@
-# Markdown Extension Examples
+---
+title: Markdown 扩展示例
+description: VitePress Markdown 扩展功能演示
+---
 
-This page demonstrates some of the built-in markdown extensions provided by VitePress.
+# Markdown 扩展示例
 
-## Syntax Highlighting
+本文档演示 VitePress 提供的 Markdown 扩展功能，包括任务列表、代码高亮、自定义容器等。
 
-VitePress provides Syntax Highlighting powered by [Shiki](https://github.com/shikijs/shiki), with additional features like line-highlighting:
+## ✅ 任务列表（Task Lists）
 
-**Input**
+VitePress 支持 GitHub 风格的任务列表，可以用于学习进度跟踪和待办事项。
 
-````md
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
+### 基本用法
+
+**输入：**
+
+```markdown
+- [ ] 未完成的任务
+- [x] 已完成的任务
+- [ ] 另一个未完成的任务
+```
+
+**输出：**
+
+- [ ] 未完成的任务
+- [x] 已完成的任务
+- [ ] 另一个未完成的任务
+
+### 嵌套任务列表
+
+- [x] 学习 Go 语言基础
+  - [x] 变量与常量
+  - [x] 数据类型
+  - [ ] 控制流程
+  - [ ] 函数
+- [ ] 学习标准库
+  - [ ] fmt 包
+  - [ ] time 包
+  - [ ] strings 包
+- [ ] 实战项目
+
+### 在文档中使用
+
+你可以在任何文档中使用任务列表来跟踪学习进度：
+
+```markdown
+## 📋 学习目标
+
+- [ ] 掌握变量和常量的使用
+- [ ] 理解数据类型转换
+- [ ] 学会使用控制流程
+- [x] 完成基础语法学习
+```
+
+## 🎨 语法高亮
+
+VitePress 提供强大的语法高亮功能，支持行号和高亮特定行。
+
+### 基本代码块
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Go!")
 }
 ```
-````
 
-**Output**
+### 行号显示
 
-```js{4}
-export default {
-  data () {
-    return {
-      msg: 'Highlighted!'
-    }
-  }
+```go{1-3}
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Go!")
 }
 ```
 
-## Custom Containers
+### 高亮特定行
 
-**Input**
+```go{4,6}
+package main
 
-```md
-::: info
-This is an info box.
-:::
+import "fmt"
 
-::: tip
-This is a tip.
-:::
-
-::: warning
-This is a warning.
-:::
-
-::: danger
-This is a dangerous warning.
-:::
-
-::: details
-This is a details block.
-:::
+func main() {
+    fmt.Println("Hello, Go!")
+}
 ```
 
-**Output**
+### 行号范围
+
+```go{2-4}
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, Go!")
+}
+```
+
+## 📦 自定义容器
+
+VitePress 支持多种自定义容器，用于突出显示不同类型的内容。
+
+### 信息框
 
 ::: info
-This is an info box.
+这是一条信息提示。用于展示一般性的说明信息。
 :::
+
+### 提示框
 
 ::: tip
-This is a tip.
+这是一个提示。用于展示有用的建议和技巧。
 :::
+
+### 警告框
 
 ::: warning
-This is a warning.
+这是一个警告。用于提醒需要注意的事项。
 :::
+
+### 危险框
 
 ::: danger
-This is a dangerous warning.
+这是一个危险提示。用于展示重要的警告信息。
 :::
 
-::: details
-This is a details block.
+### 详情折叠框
+
+::: details 点击查看详情
+这是一个可折叠的详情框，可以隐藏详细内容。
+
+```go
+func example() {
+    // 这里可以放置代码示例
+}
+```
 :::
 
-## More
+### 自定义标题
 
-Check out the documentation for the [full list of markdown extensions](https://vitepress.dev/guide/markdown).
+::: tip 学习建议
+建议每天学习 1-2 小时，循序渐进，不要急于求成。
+:::
+
+## 🔗 链接和引用
+
+### 内部链接
+
+- [基础语法](/basics/) - 学习 Go 语言基础
+- [标准库](/standard-library/) - 了解标准库使用
+- [Web 开发](/web-development/) - 学习 Web 开发
+
+### 外部链接
+
+- [Go 官方文档](https://golang.org/doc/)
+- [Go 语言之旅](https://tour.golang.org/)
+
+### 引用块
+
+> 这是一段引用文字。
+> 可以用于引用重要内容或名言。
+
+## 📊 表格
+
+### 基本表格
+
+| 功能 | 说明      | 难度 |
+| ---- | --------- | ---- |
+| 变量 | 存储数据  | ⭐    |
+| 函数 | 代码复用  | ⭐⭐   |
+| 并发 | goroutine | ⭐⭐⭐  |
+
+### 对齐表格
+
+| 左对齐 | 居中  | 右对齐 |
+| :----- | :---: | -----: |
+| 内容1  | 内容2 |  内容3 |
+| 内容4  | 内容5 |  内容6 |
+
+## 🎯 其他 Markdown 特性
+
+### 强调
+
+**粗体文字** 和 *斜体文字*
+
+### 代码
+
+行内代码：`fmt.Println()`
+
+### 删除线
+
+~~已删除的内容~~
+
+### 数学公式（如果启用）
+
+行内公式：$E = mc^2$
+
+块级公式：
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+
+## 📝 完整示例
+
+以下是一个完整的学习目标示例，展示了任务列表的实际应用：
+
+### Go 语言学习计划
+
+#### 第一阶段：基础语法（第1-2周）
+
+- [x] 环境搭建和第一个程序
+- [x] 变量、常量和数据类型
+- [x] 运算符和控制流程
+- [ ] 函数和闭包
+- [ ] 数组、切片和映射
+- [ ] 结构体和指针
+
+#### 第二阶段：标准库（第3-4周）
+
+- [ ] fmt 格式化输出
+- [ ] time 时间处理
+- [ ] strings 字符串操作
+- [ ] net/http HTTP 客户端
+- [ ] encoding/json JSON 处理
+
+#### 第三阶段：Web 开发（第5-6周）
+
+- [ ] Gin 框架基础
+- [ ] 路由和中间件
+- [ ] 数据库操作
+- [ ] 用户认证
+- [ ] RESTful API 设计
+
+## 💡 使用建议
+
+1. **任务列表**：用于跟踪学习进度和待办事项
+2. **代码高亮**：使用行号和高亮帮助理解代码
+3. **自定义容器**：使用不同类型的容器突出重要信息
+4. **表格**：用于对比和展示结构化数据
+
+## 📚 更多信息
+
+查看 [VitePress Markdown 扩展文档](https://vitepress.dev/guide/markdown) 了解完整功能列表。

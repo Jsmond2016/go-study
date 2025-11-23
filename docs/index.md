@@ -3,29 +3,38 @@
 layout: home
 
 hero:
-  name: Go语言学习笔记
-  # text: "Golang 学习的点滴记录"
-  tagline: Golang 学习的点滴记录
+  name: Go 语言学习笔记
+  text: "从零基础到实战应用"
+  tagline: 系统化的 Go 语言学习路径，包含基础语法、标准库、Web 开发和实战项目
   image:
     src: /hand-coding.png
-    alt: VitePress
+    alt: Go 语言学习
   actions:
     - theme: brand
-      text: 开始学习
+      text: 快速开始
       link: /guide/getting-started
     - theme: alt
-      text: 基础语法
+      text: 查看文档
       link: /basics/
-    - theme: alt
-      text: GitHub
-      link: https://github.com/Jsmond2016/go-study
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🎯
+    title: 系统化学习路径
+    details: 从基础语法到实战项目，循序渐进的学习路径，适合零基础学习者
+  - icon: 📚
+    title: 丰富的学习内容
+    details: 涵盖基础语法、标准库、Web 开发、工具链和实战项目，内容全面深入
+  - icon: 💻
+    title: 实践代码示例
+    details: 每个知识点都配有可运行的代码示例，理论与实践相结合
+  - icon: 🚀
+    title: 实战项目指导
+    details: 提供完整的项目实战教程，包括博客系统、电商系统和聊天应用
+  - icon: 🛠️
+    title: 开发工具链
+    details: 详细介绍 MySQL、GORM、日志、配置管理等工程化工具的使用
+  - icon: 📖
+    title: 优质学习资源
+    details: 整理推荐优质的学习资源，包括书籍、视频、博客和工具
 ---
 
