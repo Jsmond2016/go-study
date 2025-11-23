@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "go-study/examples/microservices/06-ecommerce-microservices/proto/product";
+
+// 商品服务
+service ProductService {
+  // 创建商品
+  rpc CreateProduct(CreateProductRequest) returns (ProductResponse);
+  // 获取商品
+  rpc GetProduct(GetProductRequest) returns (ProductResponse);
+  // 更新商品
+  rpc UpdateProduct(UpdateProductRequest) returns (ProductResponse);
+  // 删除商品
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+  // 获取商品列表
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+  // 更新库存
+  rpc UpdateStock(UpdateStockRequest) returns (UpdateStockResponse);
+  // 检查库存
+  rpc CheckStock(CheckStockRequest) returns (CheckStockResponse);
+}
+
+// 创建商品请求
+message CreateProductRequest {
+  string name = 1;
+  string description = 2;
+  double price = 3;
+  int32 stock = 4;
+  string category = 5;
+}
+
+// 获取商品请求
+message GetProductRequest {
+  int64 product_id = 1;
+}
+
+// 更新商品请求
+message UpdateProductRequest {
+  int64 product_id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 stock = 5;
+  string category = 6;
+}
+
+// 删除商品请求
+message DeleteProductRequest {
+  int64 product_id = 1;
+}
+
+// 获取商品列表请求
+message ListProductsRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string category = 3;
+}
+
+// 更新库存请求
+message UpdateStockRequest {
+  int64 product_id = 1;
+  int32 quantity = 2;
+}
+
+// 检查库存请求
+message CheckStockRequest {
+  int64 product_id = 1;
+  int32 quantity = 2;
+}
+
+// 商品响应
+message ProductResponse {
+  int64 product_id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 stock = 5;
+  string category = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+// 获取商品列表响应
+message ListProductsResponse {
+  repeated ProductResponse products = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+// 更新库存响应
+message UpdateStockResponse {
+  bool success = 1;
+  int32 new_stock = 2;
+  string message = 3;
+}
+
+// 检查库存响应
+message CheckStockResponse {
+  bool available = 1;
+  int32 current_stock = 2;
+}
+

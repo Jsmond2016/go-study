@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "go-study/examples/microservices/06-ecommerce-microservices/proto/order";
+
+// 订单服务
+service OrderService {
+  // 创建订单
+  rpc CreateOrder(CreateOrderRequest) returns (OrderResponse);
+  // 获取订单
+  rpc GetOrder(GetOrderRequest) returns (OrderResponse);
+  // 获取用户订单列表
+  rpc GetUserOrders(GetUserOrdersRequest) returns (GetUserOrdersResponse);
+  // 更新订单状态
+  rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (OrderResponse);
+  // 取消订单
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
+}
+
+// 创建订单请求
+message CreateOrderRequest {
+  int64 user_id = 1;
+  repeated OrderItem items = 2;
+  string shipping_address = 3;
+}
+
+// 订单项
+message OrderItem {
+  int64 product_id = 1;
+  int32 quantity = 2;
+  double price = 3;
+}
+
+// 获取订单请求
+message GetOrderRequest {
+  int64 order_id = 1;
+}
+
+// 获取用户订单请求
+message GetUserOrdersRequest {
+  int64 user_id = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}
+
+// 更新订单状态请求
+message UpdateOrderStatusRequest {
+  int64 order_id = 1;
+  string status = 2;
+}
+
+// 取消订单请求
+message CancelOrderRequest {
+  int64 order_id = 1;
+}
+
+// 订单响应
+message OrderResponse {
+  int64 order_id = 1;
+  int64 user_id = 2;
+  repeated OrderItem items = 3;
+  double total_amount = 4;
+  string status = 5;
+  string shipping_address = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+// 获取用户订单响应
+message GetUserOrdersResponse {
+  repeated OrderResponse orders = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+// 取消订单响应
+message CancelOrderResponse {
+  bool success = 1;
+  string message = 2;
+}
+

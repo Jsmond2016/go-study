@@ -154,7 +154,21 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '02. Protocol Buffers', link: '/microservices/02-protobuf' },
         { text: '03. 服务发现', link: '/microservices/03-service-discovery' },
         { text: '04. 负载均衡', link: '/microservices/04-load-balancing' },
-        { text: '05. API 网关', link: '/microservices/05-api-gateway' }
+        { text: '05. API 网关', link: '/microservices/05-api-gateway' },
+        {
+          text: '06. 电商微服务实战',
+          collapsed: false,
+          items: [
+            { text: '项目概述', link: '/microservices/ecommerce-microservices/' },
+            { text: '01. 环境搭建', link: '/microservices/ecommerce-microservices/01-setup' },
+            { text: '02. 架构设计', link: '/microservices/ecommerce-microservices/02-architecture' },
+            { text: '03. 用户服务', link: '/microservices/ecommerce-microservices/03-user-service' },
+            { text: '04. 商品服务', link: '/microservices/ecommerce-microservices/04-product-service' },
+            { text: '05. 订单服务', link: '/microservices/ecommerce-microservices/05-order-service' },
+            { text: '06. API 网关', link: '/microservices/ecommerce-microservices/06-gateway' },
+            { text: '07. 部署运维', link: '/microservices/ecommerce-microservices/07-deployment' }
+          ]
+        }
       ]
     }
   ],
