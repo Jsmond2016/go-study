@@ -209,7 +209,21 @@ export const sidebar: DefaultTheme.Sidebar = {
             { text: '08. 部署优化', link: '/projects/e-commerce/08-deployment' }
           ]
         },
-        { text: '04. 聊天应用项目', link: '/projects/04-chat-app' }
+        {
+          text: '04. 聊天应用项目',
+          collapsed: false,
+          items: [
+            { text: '项目概述', link: '/projects/chat-app/' },
+            { text: '01. 环境搭建', link: '/projects/chat-app/01-setup' },
+            { text: '02. 数据模型设计', link: '/projects/chat-app/02-models' },
+            { text: '03. WebSocket基础', link: '/projects/chat-app/03-websocket' },
+            { text: '04. 消息系统', link: '/projects/chat-app/04-messages' },
+            { text: '05. 用户状态', link: '/projects/chat-app/05-presence' },
+            { text: '06. 群组聊天', link: '/projects/chat-app/06-rooms' },
+            { text: '07. 消息推送', link: '/projects/chat-app/07-notifications' },
+            { text: '08. 部署优化', link: '/projects/chat-app/08-deployment' }
+          ]
+        }
       ]
     }
   ],
