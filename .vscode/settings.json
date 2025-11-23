@@ -1,0 +1,75 @@
+{
+  // Go 语言配置
+  "go.useLanguageServer": true,
+  "go.formatTool": "goimports",
+  "go.lintTool": "golangci-lint",
+  "go.testFlags": ["-v", "-race"],
+  "go.coverOnSave": true,
+  "go.coverageDecorator": {
+    "type": "gutter",
+    "coveredHighlightColor": "rgba(64,128,64,0.5)",
+    "uncoveredHighlightColor": "rgba(128,64,64,0.25)"
+  },
+  
+  // 编辑器配置
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  "editor.defaultFormatter": "golang.go",
+  
+  // 文件配置
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/bin": true,
+    "**/dist": true,
+    "**/.vitepress/cache": true,
+    "**/.vitepress/dist": true
+  },
+  
+  // 搜索配置
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bin": true,
+    "**/dist": true,
+    "**/.vitepress/cache": true,
+    "**/.vitepress/dist": true,
+    "**/go.sum": true
+  },
+  
+  // Markdown 配置
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  
+  // TypeScript 配置（用于 VitePress 配置）
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  
+  // JSON 配置
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  
+  // 工作区配置
+  "go.toolsManagement.checkForUpdates": "local",
+  "go.testTimeout": "30s",
+  "go.buildOnSave": "off",
+  "go.liveErrors": {
+    "enabled": true,
+    "delay": 500
+  }
+}
+

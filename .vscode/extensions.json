@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "golang.go",
+    "vscode.vscode-typescript-next",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "vitepress.vitepress",
+    "ms-vscode.vscode-json"
+  ]
+}
+
