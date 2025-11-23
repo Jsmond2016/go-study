@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "./proto;service";
+
+// 用户服务定义
+service UserService {
+  rpc GetUser (GetUserRequest) returns (User);
+  rpc CreateUser (CreateUserRequest) returns (User);
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+  rpc UpdateUser (UpdateUserRequest) returns (User);
+  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
+}
+
+// 获取用户请求
+message GetUserRequest {
+  string id = 1;
+}
+
+// 创建用户请求
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  int32 age = 3;
+}
+
+// 列出用户请求
+message ListUsersRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+// 列出用户响应
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+// 更新用户请求
+message UpdateUserRequest {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+}
+
+// 删除用户请求
+message DeleteUserRequest {
+  string id = 1;
+}
+
+// 用户消息
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  bool active = 5;
+}
+

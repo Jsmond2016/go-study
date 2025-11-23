@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./proto;user";
+
+// UserService 用户服务
+service UserService {
+  // 获取用户
+  rpc GetUser (GetUserRequest) returns (User);
+  
+  // 创建用户
+  rpc CreateUser (CreateUserRequest) returns (User);
+  
+  // 列出用户（服务端流）
+  rpc ListUsers (ListUsersRequest) returns (stream User);
+  
+  // 批量创建用户（客户端流）
+  rpc CreateUsers (stream CreateUserRequest) returns (CreateUsersResponse);
+  
+  // 聊天（双向流）
+  rpc Chat (stream ChatMessage) returns (stream ChatMessage);
+}
+
+// 获取用户请求
+message GetUserRequest {
+  string id = 1;
+}
+
+// 创建用户请求
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+}
+
+// 列出用户请求
+message ListUsersRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+// 批量创建用户响应
+message CreateUsersResponse {
+  int32 count = 1;
+  repeated User users = 2;
+}
+
+// 用户消息
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
+
+// 聊天消息
+message ChatMessage {
+  string user = 1;
+  string message = 2;
+}
+

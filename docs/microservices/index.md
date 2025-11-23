@@ -27,8 +27,16 @@ tags: ["微服务", "gRPC", "服务发现", "负载均衡", "API 网关"]
 
 | 章节                                    | 内容               | 预计时间 | 难度 |
 | --------------------------------------- | ------------------ | -------- | ---- |
-| [gRPC](./01-grpc.md)                    | gRPC 基础和使用    | 5-6小时  | ⭐⭐⭐ |
+| [gRPC 基础](./01-grpc.md)               | gRPC 基础和使用    | 5-6小时  | ⭐⭐⭐ |
 | [Protocol Buffers](./02-protobuf.md)    | protobuf 定义和使用 | 4-5小时  | ⭐⭐⭐ |
+
+**学习内容**：
+- gRPC 概念和架构
+- gRPC 服务端和客户端实现
+- 拦截器和错误处理
+- 流式传输（单向流、双向流）
+- Protocol Buffers 语法和类型
+- 服务定义和代码生成
 
 ### 🔧 第二部分：服务治理（第4-6周）
 
@@ -37,6 +45,14 @@ tags: ["微服务", "gRPC", "服务发现", "负载均衡", "API 网关"]
 | [服务发现](./03-service-discovery.md)   | 服务注册和发现     | 4-5小时  | ⭐⭐⭐ |
 | [负载均衡](./04-load-balancing.md)      | 负载均衡策略       | 4-5小时  | ⭐⭐⭐ |
 | [API 网关](./05-api-gateway.md)         | 网关设计和实现     | 5-6小时  | ⭐⭐⭐⭐ |
+
+**学习内容**：
+- Consul 和 etcd 服务发现
+- 服务注册和健康检查
+- 负载均衡算法（轮询、加权、最少连接、一致性哈希）
+- API 网关路由和转发
+- 认证授权、限流、熔断
+- 监控和日志
 
 ## 🚀 快速开始
 
@@ -67,10 +83,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	
+
 	s := grpc.NewServer()
 	pb.RegisterGreeterServer(s, &server{})
-	
+
 	log.Println("gRPC server listening on :50051")
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

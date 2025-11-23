@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package basic;
+
+option go_package = "./proto;basic";
+
+// 基础用户消息
+message User {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  bool active = 5;
+}
+

@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package complex;
+
+option go_package = "./proto;complex";
+
+import "google/protobuf/timestamp.proto";
+
+// 产品状态枚举
+enum ProductStatus {
+  PRODUCT_STATUS_UNSPECIFIED = 0;
+  PRODUCT_STATUS_ACTIVE = 1;
+  PRODUCT_STATUS_INACTIVE = 2;
+  PRODUCT_STATUS_DISCONTINUED = 3;
+}
+
+// 地址消息
+message Address {
+  string street = 1;
+  string city = 2;
+  string country = 3;
+  int32 zip_code = 4;
+}
+
+// 供应商消息
+message Supplier {
+  int64 id = 1;
+  string name = 2;
+  Address address = 3;
+  map<string, string> metadata = 4;
+}
+
+// 产品消息（复杂结构）
+message Product {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 stock = 5;
+  ProductStatus status = 6;
+  
+  // 嵌套消息
+  Supplier supplier = 7;
+  
+  // 数组
+  repeated string tags = 8;
+  repeated Address warehouses = 9;
+  
+  // Map
+  map<string, string> attributes = 10;
+  
+  // 时间戳
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+  
+  // Oneof
+  oneof discount {
+    double percentage = 13;
+    double fixed_amount = 14;
+  }
+}
+
