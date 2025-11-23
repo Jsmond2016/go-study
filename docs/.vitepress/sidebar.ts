@@ -128,7 +128,13 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '06. JWT 鉴权', link: '/toolchain/06-jwt' },
         { text: '07. Validator 验证', link: '/toolchain/07-validator' },
         { text: '08. CORS 跨域', link: '/toolchain/08-cors' },
-        { text: '09. 限流与熔断', link: '/toolchain/09-rate-limit' }
+        { text: '09. 限流与熔断', link: '/toolchain/09-rate-limit' },
+        { text: '10. Swagger API 文档', link: '/toolchain/10-swagger' },
+        { text: '11. Redis 缓存', link: '/toolchain/11-redis' },
+        { text: '12. Docker 基础', link: '/toolchain/12-docker' },
+        { text: '13. 测试框架 Testify', link: '/toolchain/13-testify' },
+        { text: '14. 任务调度 Cron', link: '/toolchain/14-cron' },
+        { text: '15. WebSocket', link: '/toolchain/15-websocket' }
       ]
     }
   ],
