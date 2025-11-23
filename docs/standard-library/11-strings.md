@@ -472,7 +472,7 @@ func cleanText(text string) string {
 
 func main() {
 	text := "  Hello   World  Hello  Go  "
-	
+
 	// 单词计数
 	counts := wordCount(text)
 	fmt.Printf("单词计数: %v\n", counts)
@@ -574,7 +574,7 @@ newStr := "h" + str[1:]
 
 ## ⏭️ 下一章节
 
-[正则表达式 (regexp)](./12-regexp.md) → 学习使用正则表达式处理复杂文本模式
+[数学运算 (math)](./12-math.md) → 学习使用数学函数进行数值计算
 
 ---
 

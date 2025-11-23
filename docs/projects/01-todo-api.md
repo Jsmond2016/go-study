@@ -800,7 +800,7 @@ func authMiddleware() gin.HandlerFunc {
 完成本项目后，可以：
 
 - 尝试实现扩展功能
-- 学习下一个项目：[博客系统](./02-blog-system.md)
+- 学习下一个项目：[博客系统](./blog-system/)
 - 深入学习 [微服务](../microservices/) 架构
 - 学习 [运维部署](../devops/) 相关知识
 
