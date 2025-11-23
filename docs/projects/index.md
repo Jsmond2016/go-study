@@ -137,6 +137,24 @@ project/
 - [RESTful API 设计](https://restfulapi.net/)
 - [系统设计指南](https://github.com/donnemartin/system-design-primer)
 
+## 🎓 学习项目参考
+
+以下是一些优秀的学习项目，可以作为参考和实践：
+
+### Gin 框架学习项目
+
+- **[gin_demo](https://github.com/Jsmond2016/gin_demo)** - Gin 框架基础示例项目
+- **[gin_weibo](https://github.com/Jsmond2016/gin_weibo)** - 基于 Gin 的微博系统
+- **[gin-gorm-todo-list](https://github.com/Jsmond2016/gin-gorm-todo-list)** - Gin + GORM 实现的待办事项系统
+  - [视频教程](https://www.bilibili.com/video/BV1GT4y1R7tX)
+
+### 进阶项目
+
+- **[Gin+WebSocket构建IM即时聊天Demo](https://www.bilibili.com/video/BV1BP4y1H7gV)** - WebSocket 实时聊天应用
+- **[Go/Golang 并发爬虫](https://www.bilibili.com/video/BV1CR4y1g7wB)** - 并发编程实战
+- **[Go-Micro+RabbitMQ 构建简单备忘录](https://www.bilibili.com/video/BV1h44y1L7LN)** - 微服务架构实践
+- **[gin+grpc+etcd 构建简单备忘录](https://www.bilibili.com/video/BV1fS4y177og)** - gRPC 和 etcd 使用
+
 ## 📚 前置知识
 
 在开始实战项目前，建议先学习：

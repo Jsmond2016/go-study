@@ -33,8 +33,10 @@ tags: ["资源", "书籍", "视频", "博客", "工具"]
 | 博客名称 | 链接 | 推荐理由 |
 |---------|------|---------|
 | Go 官方博客 | https://blog.golang.org/ | 官方博客，权威内容 |
-| 李文周博客 | https://www.liwenzhou.com/ | 中文教程，通俗易懂 |
+| 李文周博客 | https://www.liwenzhou.com/ | 中文教程，通俗易懂，强烈推荐 |
+| TopGoer | https://www.topgoer.com/ | 系统全面的 Go 语言学习网站 |
 | Go 语言中文网 | https://studygolang.com/ | 中文社区，资源丰富 |
+| Go 编程时光 | https://golang.iswbm.com/ | 系统化教程，包含大量实践案例 |
 
 ### 🛠️ 开发工具
 

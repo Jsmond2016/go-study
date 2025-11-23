@@ -31,18 +31,18 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	// 加载模板
 	r.LoadHTMLGlob("templates/*")
 	// 或
 	r.LoadHTMLFiles("templates/index.html", "templates/about.html")
-	
+
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", gin.H{
 			"title": "首页",
 		})
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -129,7 +129,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	// 自定义模板函数
 	r.SetFuncMap(template.FuncMap{
 		"formatDate": func(t time.Time) string {
@@ -139,15 +139,15 @@ func main() {
 			return strings.ToUpper(s)
 		},
 	})
-	
+
 	r.LoadHTMLGlob("templates/*")
-	
+
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", gin.H{
 			"date": time.Now(),
 		})
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -197,7 +197,7 @@ import (
 func main() {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/**/*")
-	
+
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", gin.H{
 			"title": "首页",
@@ -207,7 +207,54 @@ func main() {
 			},
 		})
 	})
-	
+
+	r.Run(":8080")
+}
+```
+
+## 📁 静态文件服务
+
+### 基本用法
+
+```go
+r := gin.Default()
+
+// 静态文件服务
+r.Static("/assets", "./assets")
+// 访问: http://localhost:8080/assets/img.png
+
+// 静态文件系统
+r.StaticFS("/files", http.Dir("./public"))
+// 显示目录下的所有文件
+
+// 单个静态文件
+r.StaticFile("/favicon.ico", "./favicon.ico")
+```
+
+### 完整示例
+
+```go
+package main
+
+import (
+	"net/http"
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	r := gin.Default()
+
+	// 静态资源
+	r.Static("/assets", "./assets")
+	r.StaticFS("/show-dir", http.Dir("."))
+	r.StaticFile("/image", "./images/img.png")
+
+	// 重定向
+	r.GET("/redirect", func(c *gin.Context) {
+		// 支持内部和外部重定向
+		c.Redirect(http.StatusMovedPermanently, "http://www.example.com/")
+	})
+
 	r.Run(":8080")
 }
 ```
@@ -220,6 +267,9 @@ func main() {
 // ✅ 使用相对路径或绝对路径
 r.LoadHTMLGlob("templates/*")
 r.LoadHTMLFiles("./templates/index.html")
+
+// ✅ 支持多层级模板
+r.LoadHTMLGlob("templates/**/*")
 ```
 
 ### 2. 模板缓存
@@ -234,6 +284,16 @@ gin.SetMode(gin.ReleaseMode)
 ```go
 // ✅ 使用 html/template 自动转义
 // ❌ 不要使用 text/template 渲染用户输入
+```
+
+### 4. 静态文件安全
+
+```go
+// ✅ 限制静态文件目录
+r.Static("/assets", "./public/assets")
+
+// ❌ 避免暴露敏感目录
+// r.StaticFS("/", http.Dir(".")) // 危险！
 ```
 
 ## 📚 扩展阅读

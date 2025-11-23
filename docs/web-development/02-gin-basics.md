@@ -48,13 +48,13 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Hello, Gin!",
 		})
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -69,13 +69,13 @@ import "github.com/gin-gonic/gin"
 func main() {
 	// 开发模式（默认）
 	gin.SetMode(gin.DebugMode)
-	
+
 	// 发布模式
 	gin.SetMode(gin.ReleaseMode)
-	
+
 	// 测试模式
 	gin.SetMode(gin.TestMode)
-	
+
 	r := gin.Default()
 	// ...
 }
@@ -94,27 +94,27 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	// 路径参数
 	r.GET("/user/:id", func(c *gin.Context) {
 		id := c.Param("id")
 		c.String(200, "用户ID: %s", id)
 	})
-	
+
 	// 查询参数
 	r.GET("/search", func(c *gin.Context) {
 		keyword := c.Query("q")
 		page := c.DefaultQuery("page", "1")
 		c.String(200, "搜索: %s, 页码: %s", keyword, page)
 	})
-	
+
 	// 表单参数
 	r.POST("/form", func(c *gin.Context) {
 		name := c.PostForm("name")
 		email := c.DefaultPostForm("email", "default@example.com")
 		c.String(200, "姓名: %s, 邮箱: %s", name, email)
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -137,7 +137,7 @@ type User struct {
 
 func main() {
 	r := gin.Default()
-	
+
 	// JSON 绑定
 	r.POST("/user", func(c *gin.Context) {
 		var user User
@@ -147,7 +147,7 @@ func main() {
 		}
 		c.JSON(http.StatusOK, user)
 	})
-	
+
 	// 表单绑定
 	r.POST("/form", func(c *gin.Context) {
 		var user User
@@ -157,7 +157,7 @@ func main() {
 		}
 		c.JSON(http.StatusOK, user)
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -206,6 +206,34 @@ r.GET("/xml", func(c *gin.Context) {
 })
 ```
 
+### YAML 响应
+
+```go
+r.GET("/yaml", func(c *gin.Context) {
+	c.YAML(200, gin.H{
+		"message": "success",
+		"status":  200,
+	})
+})
+```
+
+### Protobuf 响应
+
+```go
+import "github.com/gin-gonic/gin/testdata/protoexample"
+
+r.GET("/protobuf", func(c *gin.Context) {
+	reps := []int64{int64(1), int64(2)}
+	label := "test"
+	data := &protoexample.Test{
+		Label: &label,
+		Reps:  reps,
+	}
+	// 注意：响应为二进制数据
+	c.ProtoBuf(200, data)
+})
+```
+
 ### 文件响应
 
 ```go
@@ -219,6 +247,62 @@ r.GET("/download", func(c *gin.Context) {
 	c.File("./file.txt")
 })
 ```
+
+### 自定义结构体响应
+
+```go
+type Response struct {
+	Code    int         `json:"code"`
+	Data    interface{} `json:"data"`
+	Message string      `json:"message"`
+}
+
+r.GET("/custom", func(c *gin.Context) {
+	response := Response{
+		Code:    0,
+		Data:    gin.H{"name": "Tony", "age": 30},
+		Message: "success",
+	}
+	c.JSON(200, response)
+})
+```
+
+## ⚡ 异步处理
+
+### 同步处理
+
+```go
+r.GET("/sync", func(c *gin.Context) {
+	// 同步处理，会阻塞直到完成
+	time.Sleep(5 * time.Second)
+	log.Println("Done! in path " + c.Request.URL.Path)
+	c.JSON(200, gin.H{"message": "同步处理完成，耗时 5s"})
+})
+```
+
+### 异步处理
+
+```go
+r.GET("/async", func(c *gin.Context) {
+	// 创建上下文的副本（只读）
+	cCp := c.Copy()
+
+	// 在 goroutine 中处理耗时任务
+	go func() {
+		time.Sleep(5 * time.Second)
+		// 注意：必须使用只读上下文
+		log.Println("Done! in path " + cCp.Request.URL.Path)
+	}()
+
+	// 立即返回响应
+	c.JSON(200, gin.H{"message": "异步请求已提交，请稍后查看结果"})
+})
+```
+
+**注意事项**：
+- 异步处理中必须使用 `c.Copy()` 创建只读上下文
+- 原始上下文 `c` 在 handler 返回后可能被回收
+- 适合处理耗时任务，如文件上传、邮件发送等
 
 ## 🛣️ 路由
 
@@ -332,7 +416,7 @@ var nextID = 1
 
 func main() {
 	r := gin.Default()
-	
+
 	api := r.Group("/api/v1")
 	{
 		api.GET("/users", getUsers)
@@ -341,7 +425,7 @@ func main() {
 		api.PUT("/users/:id", updateUser)
 		api.DELETE("/users/:id", deleteUser)
 	}
-	
+
 	r.Run(":8080")
 }
 

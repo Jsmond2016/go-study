@@ -14,7 +14,7 @@ tags: ["博客", "文章", "学习"]
 
 ### Go 官方博客
 
-**链接**: https://blog.golang.org/  
+**链接**: https://blog.golang.org/
 **推荐理由**: 官方博客，内容权威，更新及时。
 
 **主要内容**:
@@ -27,8 +27,8 @@ tags: ["博客", "文章", "学习"]
 
 ### 李文周博客
 
-**链接**: https://www.liwenzhou.com/  
-**推荐理由**: 中文教程，通俗易懂，内容全面。
+**链接**: https://www.liwenzhou.com/
+**推荐理由**: 中文教程，通俗易懂，内容全面，强烈推荐。
 
 **主要内容**:
 - Go 语言基础教程
@@ -36,9 +36,20 @@ tags: ["博客", "文章", "学习"]
 - 项目实战
 - 学习笔记
 
+**详细教程链接**:
+- [Go 语言教程菜单](https://www.liwenzhou.com/posts/Go/golang-menu/) - 完整的 Go 语言学习路径
+- [数组](https://www.liwenzhou.com/posts/Go/05_array/)
+- [切片](https://www.liwenzhou.com/posts/Go/06_slice/)
+- [映射](https://www.liwenzhou.com/posts/Go/08_map/)
+- [函数](https://www.liwenzhou.com/posts/Go/09_function/)
+- [指针](https://www.liwenzhou.com/posts/Go/07_pointer/)
+- [结构体](https://www.liwenzhou.com/posts/Go/10-struct/)
+- [包管理](https://www.liwenzhou.com/posts/Go/11-package/)
+- [Gin 框架安装与使用](https://www.liwenzhou.com/posts/Go/Gin_framework/)
+
 ### Go 语言中文网
 
-**链接**: https://studygolang.com/  
+**链接**: https://studygolang.com/
 **推荐理由**: 中文社区，资源丰富，活跃度高。
 
 **主要内容**:
@@ -46,6 +57,29 @@ tags: ["博客", "文章", "学习"]
 - 学习资源
 - 社区讨论
 - 招聘信息
+
+### TopGoer
+
+**链接**: https://www.topgoer.com/
+**推荐理由**: 强烈推荐的 Go 语言学习网站，内容系统全面。
+
+**主要内容**:
+- Go 语言基础教程
+- 标准库详解
+- 框架使用指南
+- 项目实战
+
+### Go 编程时光
+
+**链接**: https://golang.iswbm.com/preface.html
+**代码仓库**: https://github.com/iswbm/GolangCodingTime
+**推荐理由**: 系统化的 Go 语言学习教程，包含大量实践案例。
+
+**主要内容**:
+- Go 语言基础
+- 进阶主题
+- 实战项目
+- 代码示例
 
 ## 🔍 技术博客
 

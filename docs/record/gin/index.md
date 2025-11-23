@@ -1,32 +1,35 @@
-# Gin 导航页
+# Gin 学习记录
 
-> 代码参考：[gin_demo](https://github.com/Jsmond2016/gin_demo)
+> 注意：此目录下的文档已整合到 [Web 开发](../web-development/) 模块中
 
-学习顺序
+## 📚 已整合的文档
 
-- gin-begin
+以下文档内容已整合到对应的正式文档中：
 
-- gin-ping
+- **gin-begin** → [Gin 基础](../web-development/02-gin-basics.md)
+- **gin-router** → [Gin 路由](../web-development/03-gin-routing.md)
+- **gin-router-params** → [Gin 路由](../web-development/03-gin-routing.md)
+- **gin-router-group** → [Gin 路由](../web-development/03-gin-routing.md)
+- **gin-router-params-bind** → [Gin 路由](../web-development/03-gin-routing.md)
+- **gin-response-type** → [Gin 基础](../web-development/02-gin-basics.md)
+- **gin-template-render** → [Gin 模板](../web-development/05-gin-template.md)
+- **gin-static** → [Gin 模板](../web-development/05-gin-template.md)
+- **gin-sync-async** → [Gin 基础](../web-development/02-gin-basics.md)
+- **gin-middleware** → [Gin 中间件](../web-development/04-gin-middleware.md)
+- **gin-mysql** → [Gin 数据库操作](../web-development/10-gin-database.md)
 
-- gin-router
+## 🎯 推荐学习路径
 
-- gin-router-params
+请按照以下顺序学习 Gin 框架：
 
-- gin-router-group
-
-- gin-router-params-bind
-
-- gin-response-type
-
-- gin-template-render
-
-- gin-static
-
-- gin-sync-async
-
-- gin-middleware
-
-- gin-mysql
+1. [Gin 基础](../web-development/02-gin-basics.md) - 安装、基本使用、响应类型、异步处理
+2. [Gin 路由](../web-development/03-gin-routing.md) - 路由配置、参数获取、路由组、参数绑定
+3. [Gin 中间件](../web-development/04-gin-middleware.md) - 中间件开发和使用
+4. [Gin 模板](../web-development/05-gin-template.md) - 模板渲染、静态文件服务
+5. [Gin 数据库操作](../web-development/10-gin-database.md) - MySQL CRUD 操作
+6. [数据验证](../web-development/06-gin-validation.md) - 请求验证和绑定
+7. [认证授权](../web-development/07-gin-auth.md) - JWT、Session
+8. [REST API 设计](../web-development/08-rest-api.md) - API 设计最佳实践
 
 ## 其他准备：
 

@@ -31,35 +31,35 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	r.GET("/get", func(c *gin.Context) {
 		c.String(200, "GET 方法")
 	})
-	
+
 	r.POST("/post", func(c *gin.Context) {
 		c.String(200, "POST 方法")
 	})
-	
+
 	r.PUT("/put", func(c *gin.Context) {
 		c.String(200, "PUT 方法")
 	})
-	
+
 	r.DELETE("/delete", func(c *gin.Context) {
 		c.String(200, "DELETE 方法")
 	})
-	
+
 	r.PATCH("/patch", func(c *gin.Context) {
 		c.String(200, "PATCH 方法")
 	})
-	
+
 	r.HEAD("/head", func(c *gin.Context) {
 		c.String(200, "HEAD 方法")
 	})
-	
+
 	r.OPTIONS("/options", func(c *gin.Context) {
 		c.String(200, "OPTIONS 方法")
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -121,17 +121,17 @@ r := gin.Default()
 r.GET("/search", func(c *gin.Context) {
 	// 必需参数
 	keyword := c.Query("q")
-	
+
 	// 可选参数（带默认值）
 	page := c.DefaultQuery("page", "1")
 	pageSize := c.DefaultQuery("page_size", "10")
-	
+
 	// 检查参数是否存在
 	if keyword == "" {
 		c.JSON(400, gin.H{"error": "缺少查询参数 q"})
 		return
 	}
-	
+
 	c.JSON(200, gin.H{
 		"keyword":  keyword,
 		"page":     page,
@@ -149,6 +149,81 @@ r.GET("/tags", func(c *gin.Context) {
 })
 
 // 请求: /tags?tag=go&tag=web&tag=api
+```
+
+### 表单参数
+
+```go
+r := gin.Default()
+
+// 获取表单参数
+r.POST("/form", func(c *gin.Context) {
+	// 必需参数
+	username := c.PostForm("username")
+	password := c.PostForm("password")
+
+	// 可选参数（带默认值）
+	email := c.DefaultPostForm("email", "default@example.com")
+
+	// 获取数组参数
+	hobbys := c.PostFormArray("hobby")
+
+	c.JSON(200, gin.H{
+		"username": username,
+		"password": password,
+		"email":    email,
+		"hobbys":   hobbys,
+	})
+})
+```
+
+### 文件上传
+
+```go
+r := gin.Default()
+
+// 设置最大上传文件大小
+r.MaxMultipartMemory = 8 << 20 // 8 MiB
+
+// 单文件上传
+r.POST("/upload", func(c *gin.Context) {
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	// 保存文件
+	if err := c.SaveUploadedFile(file, file.Filename); err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"message": fmt.Sprintf("'%s' uploaded!", file.Filename),
+	})
+})
+
+// 多文件上传
+r.POST("/uploads", func(c *gin.Context) {
+	form, err := c.MultipartForm()
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	files := form.File["files"]
+	for _, file := range files {
+		if err := c.SaveUploadedFile(file, file.Filename); err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+	}
+
+	c.JSON(200, gin.H{
+		"message": fmt.Sprintf("Uploaded successfully %d files", len(files)),
+	})
+})
 ```
 
 ## 📦 路由组
@@ -242,6 +317,48 @@ r.GET("/user/:id", handler1)
 
 ## 🔧 高级路由
 
+### 参数绑定
+
+Gin 支持将请求参数自动绑定到结构体，支持多种 Content-Type：
+
+```go
+type Login struct {
+	Name     string `form:"name" json:"name" uri:"name" xml:"name" binding:"required"`
+	Password string `form:"password" json:"password" uri:"password" xml:"password" binding:"required"`
+}
+
+// JSON 绑定
+r.POST("/login-json", func(c *gin.Context) {
+	var json Login
+	if err := c.ShouldBindJSON(&json); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(200, gin.H{"status": "登录成功"})
+})
+
+// Form 表单绑定
+r.POST("/login-form", func(c *gin.Context) {
+	var form Login
+	// 根据 Content-Type 自动推断绑定方式
+	if err := c.ShouldBind(&form); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(200, gin.H{"status": "登录成功"})
+})
+
+// URI 绑定
+r.GET("/login/:name/:password", func(c *gin.Context) {
+	var login Login
+	if err := c.ShouldBindUri(&login); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(200, login)
+})
+```
+
 ### 路由绑定
 
 ```go
@@ -285,7 +402,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	api := r.Group("/api/v1")
 	{
 		// 用户资源
@@ -297,7 +414,7 @@ func main() {
 			users.PUT("/:id", updateUser)      // PUT /api/v1/users/:id
 			users.DELETE("/:id", deleteUser)   // DELETE /api/v1/users/:id
 		}
-		
+
 		// 文章资源
 		posts := api.Group("/posts")
 		{
@@ -308,7 +425,7 @@ func main() {
 			posts.DELETE("/:id", deletePost)
 		}
 	}
-	
+
 	r.Run(":8080")
 }
 ```
