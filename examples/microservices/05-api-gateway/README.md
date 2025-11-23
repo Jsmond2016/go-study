@@ -178,6 +178,52 @@ func generateToken(userID, username string) (string, error) {
 }
 ```
 
+## 📝 测试
+
+### 1. 测试认证中间件
+
+```bash
+# 不带 token 的请求（应该返回 401）
+curl http://localhost:8080/api/users
+
+# 带有效 token 的请求
+curl -H "Authorization: Bearer <your-token>" http://localhost:8080/api/users
+```
+
+### 2. 测试限流
+
+```bash
+# 快速发送多个请求，观察限流效果
+for i in {1..20}; do
+  curl http://localhost:8080/api/users
+  sleep 0.1
+done
+```
+
+### 3. 测试熔断器
+
+```bash
+# 停止后端服务，然后发送请求
+# 观察熔断器状态变化
+curl http://localhost:8080/api/users
+```
+
+### 4. 测试路由转发
+
+```bash
+# 测试不同的路由
+curl -H "Authorization: Bearer <token>" http://localhost:8080/api/users
+curl -H "Authorization: Bearer <token>" http://localhost:8080/api/products
+curl -H "Authorization: Bearer <token>" http://localhost:8080/api/orders
+```
+
+### 5. 测试健康检查
+
+```bash
+# 健康检查不需要认证
+curl http://localhost:8080/health
+```
+
 ## 🐛 常见问题
 
 ### 1. 认证失败

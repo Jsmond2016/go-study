@@ -665,6 +665,7 @@ web.BConfig.WebConfig.TemplateRight = "}}"
 
 完成 Beego 学习后，可以：
 
+- [Iris 框架](./02-iris.md) - 学习另一个 Go Web 框架
 - [实战项目](../projects/) - 使用 Beego 构建完整项目
 - [数据库](../database/) - 深入学习数据库操作
 

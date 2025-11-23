@@ -168,31 +168,116 @@ thirdPartyConfig := &ThirdPartyConfig{
 - [Apollo 官方文档](https://www.apolloconfig.io/)
 - [Nacos 官方文档](https://nacos.io/docs/what-is-nacos.html)
 
+## 📝 测试
+
+### 1. 测试 Nacos 配置获取
+
+```bash
+# 1. 启动 Nacos
+docker-compose up -d
+
+# 2. 在 Nacos Console 创建配置
+# DataId: test-config
+# Group: DEFAULT_GROUP
+# 配置内容: {"key": "value"}
+
+# 3. 运行示例
+cd nacos/basic
+go run main.go
+```
+
+### 2. 测试配置变更监听
+
+```bash
+# 1. 启动监听程序
+cd nacos/basic
+go run main.go
+
+# 2. 在 Nacos Console 修改配置
+# 观察程序输出，应该能看到配置变更通知
+```
+
+### 3. 测试 Apollo 配置
+
+```bash
+# 1. 启动 Apollo 服务（参考官方文档）
+
+# 2. 在 Apollo Portal 创建配置
+# AppID: your-app-id
+# Namespace: application
+# Key: test.key
+# Value: test-value
+
+# 3. 运行示例
+cd apollo/basic
+go run main.go
+```
+
+### 4. 测试数据库配置管理
+
+```bash
+# 1. 在配置中心配置数据库连接信息
+# 2. 运行数据库配置示例
+cd apollo/database
+go run main.go
+
+# 3. 修改配置中心的数据库配置
+# 观察程序是否自动重新连接
+```
+
 ## 🐛 常见问题
 
 ### 1. 无法连接到配置中心
 
-确保配置中心服务已启动：
-
+**Nacos**：
 ```bash
-# Nacos
+# 检查 Nacos 是否运行
 docker-compose ps
 
-# Apollo
-# 检查 Apollo 服务状态
+# 检查端口是否被占用
+netstat -an | grep 8848
 ```
+
+**Apollo**：
+- 检查 Apollo Config Service 是否运行
+- 检查端口 8080 是否可访问
+- 检查网络连接
 
 ### 2. 配置获取失败
 
-- 检查 AppID/DataId 是否正确
+**可能原因**：
+- AppID/DataId 配置错误
+- 命名空间（Namespace）不匹配
+- 分组（Group）不匹配
+- 配置未发布
+
+**解决方法**：
+- 检查配置中心的配置项是否与代码中的配置一致
+- 确认配置已发布（不是草稿状态）
 - 检查命名空间和分组是否正确
-- 检查配置是否已发布
 
 ### 3. 配置变更不生效
 
-- 确保已添加配置变更监听器
-- 检查配置中心推送是否正常
-- 检查客户端连接是否正常
+**可能原因**：
+- 未添加配置变更监听器
+- 配置中心推送失败
+- 客户端连接断开
+
+**解决方法**：
+- 确保代码中已添加 `AddChangeListener`
+- 检查配置中心日志
+- 检查客户端连接状态
+- 重启客户端程序
+
+### 4. 配置格式错误
+
+**JSON 配置**：
+- 确保 JSON 格式正确
+- 使用 JSON 验证工具检查
+
+**Properties 配置**：
+- 确保键值对格式正确
+- 注意转义字符
 
 ## 📝 下一步
 
