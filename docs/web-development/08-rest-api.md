@@ -49,7 +49,7 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	// 用户资源
 	users := r.Group("/api/v1/users")
 	{
@@ -59,7 +59,7 @@ func main() {
 		users.PUT("/:id", updateUser)      // PUT /api/v1/users/:id
 		users.DELETE("/:id", deleteUser)   // DELETE /api/v1/users/:id
 	}
-	
+
 	// 文章资源
 	posts := r.Group("/api/v1/posts")
 	{
@@ -68,12 +68,12 @@ func main() {
 		posts.GET("/:id", getPost)
 		posts.PUT("/:id", updatePost)
 		posts.DELETE("/:id", deletePost)
-		
+
 		// 嵌套资源
 		posts.GET("/:id/comments", getPostComments)
 		posts.POST("/:id/comments", createComment)
 	}
-	
+
 	r.Run(":8080")
 }
 ```
@@ -124,7 +124,7 @@ func createUser(c *gin.Context) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
-	
+
 	// 创建用户
 	if err := userService.Create(&user); err != nil {
 		if err == ErrUserExists {
@@ -134,7 +134,7 @@ func createUser(c *gin.Context) {
 		}
 		return
 	}
-	
+
 	c.JSON(201, user)
 }
 ```
@@ -254,7 +254,7 @@ var nextID = 1
 
 func main() {
 	r := gin.Default()
-	
+
 	api := r.Group("/api/v1")
 	{
 		users := api.Group("/users")
@@ -266,7 +266,7 @@ func main() {
 			users.DELETE("/:id", deleteUser)
 		}
 	}
-	
+
 	r.Run(":8080")
 }
 

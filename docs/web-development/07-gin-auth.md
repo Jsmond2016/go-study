@@ -38,7 +38,7 @@ func basicAuthMiddleware() gin.HandlerFunc {
 
 func main() {
 	r := gin.Default()
-	
+
 	protected := r.Group("/admin")
 	protected.Use(basicAuthMiddleware())
 	{
@@ -47,7 +47,7 @@ func main() {
 			c.JSON(200, gin.H{"user": user})
 		})
 	}
-	
+
 	r.Run(":8080")
 }
 ```
@@ -88,7 +88,7 @@ func generateToken(userID int, username string) (string, error) {
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 		},
 	}
-	
+
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(jwtSecret)
 }
@@ -101,46 +101,46 @@ func authMiddleware() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		
+
 		// 移除 "Bearer " 前缀
 		if len(tokenString) > 7 && tokenString[:7] == "Bearer " {
 			tokenString = tokenString[7:]
 		}
-		
+
 		token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 			return jwtSecret, nil
 		})
-		
+
 		if err != nil || !token.Valid {
 			c.JSON(401, gin.H{"error": "无效的认证令牌"})
 			c.Abort()
 			return
 		}
-		
+
 		if claims, ok := token.Claims.(*Claims); ok {
 			c.Set("user_id", claims.UserID)
 			c.Set("username", claims.Username)
 		}
-		
+
 		c.Next()
 	}
 }
 
 func main() {
 	r := gin.Default()
-	
+
 	// 登录接口
 	r.POST("/login", func(c *gin.Context) {
 		var loginReq struct {
 			Username string `json:"username" binding:"required"`
 			Password string `json:"password" binding:"required"`
 		}
-		
+
 		if err := c.ShouldBindJSON(&loginReq); err != nil {
 			c.JSON(400, gin.H{"error": err.Error()})
 			return
 		}
-		
+
 		// 验证用户名密码（实际应用中应该查询数据库）
 		if loginReq.Username == "admin" && loginReq.Password == "admin123" {
 			token, _ := generateToken(1, loginReq.Username)
@@ -149,7 +149,7 @@ func main() {
 			c.JSON(401, gin.H{"error": "用户名或密码错误"})
 		}
 	})
-	
+
 	// 受保护的路由
 	protected := r.Group("/api")
 	protected.Use(authMiddleware())
@@ -163,7 +163,7 @@ func main() {
 			})
 		})
 	}
-	
+
 	r.Run(":8080")
 }
 ```
@@ -183,20 +183,20 @@ import (
 
 func main() {
 	r := gin.Default()
-	
+
 	// 配置 Session
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
-	
+
 	r.POST("/login", func(c *gin.Context) {
 		session := sessions.Default(c)
 		session.Set("user_id", 1)
 		session.Set("username", "admin")
 		session.Save()
-		
+
 		c.JSON(200, gin.H{"message": "登录成功"})
 	})
-	
+
 	r.GET("/profile", func(c *gin.Context) {
 		session := sessions.Default(c)
 		userID := session.Get("user_id")
@@ -204,12 +204,12 @@ func main() {
 			c.JSON(401, gin.H{"error": "未登录"})
 			return
 		}
-		
+
 		c.JSON(200, gin.H{
 			"user_id": userID,
 		})
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -222,7 +222,7 @@ func main() {
 func roleMiddleware(roles ...string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userRole := c.GetString("role")
-		
+
 		hasRole := false
 		for _, role := range roles {
 			if userRole == role {
@@ -230,20 +230,20 @@ func roleMiddleware(roles ...string) gin.HandlerFunc {
 				break
 			}
 		}
-		
+
 		if !hasRole {
 			c.JSON(403, gin.H{"error": "权限不足"})
 			c.Abort()
 			return
 		}
-		
+
 		c.Next()
 	}
 }
 
 func main() {
 	r := gin.Default()
-	
+
 	api := r.Group("/api")
 	api.Use(authMiddleware())
 	{
@@ -253,7 +253,7 @@ func main() {
 		{
 			admin.GET("/users", getUsers)
 		}
-		
+
 		// 普通用户路由
 		user := api.Group("/user")
 		user.Use(roleMiddleware("user", "admin"))
@@ -261,7 +261,7 @@ func main() {
 			user.GET("/profile", getProfile)
 		}
 	}
-	
+
 	r.Run(":8080")
 }
 ```
@@ -297,7 +297,7 @@ func (s *AuthService) GenerateToken(userID int, username string) (string, error)
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
 		},
 	}
-	
+
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(s.jwtSecret)
 }
@@ -306,34 +306,34 @@ func (s *AuthService) ValidateToken(tokenString string) (*Claims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return s.jwtSecret, nil
 	})
-	
+
 	if err != nil {
 		return nil, err
 	}
-	
+
 	if claims, ok := token.Claims.(*Claims); ok && token.Valid {
 		return claims, nil
 	}
-	
+
 	return nil, jwt.ErrSignatureInvalid
 }
 
 func main() {
 	authService := NewAuthService("your-secret-key")
-	
+
 	r := gin.Default()
-	
+
 	r.POST("/login", func(c *gin.Context) {
 		var loginReq struct {
 			Username string `json:"username" binding:"required"`
 			Password string `json:"password" binding:"required"`
 		}
-		
+
 		if err := c.ShouldBindJSON(&loginReq); err != nil {
 			c.JSON(400, gin.H{"error": err.Error()})
 			return
 		}
-		
+
 		// 验证用户（实际应用中查询数据库）
 		if loginReq.Username == "admin" && loginReq.Password == "admin123" {
 			token, _ := authService.GenerateToken(1, loginReq.Username)
@@ -342,7 +342,7 @@ func main() {
 			c.JSON(401, gin.H{"error": "认证失败"})
 		}
 	})
-	
+
 	r.Run(":8080")
 }
 ```

@@ -38,7 +38,7 @@ type User struct {
 
 func main() {
 	r := gin.Default()
-	
+
 	r.POST("/user", func(c *gin.Context) {
 		var user User
 		if err := c.ShouldBindJSON(&user); err != nil {
@@ -47,7 +47,7 @@ func main() {
 		}
 		c.JSON(200, user)
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -58,25 +58,25 @@ func main() {
 type User struct {
 	// 必需字段
 	Name string `binding:"required"`
-	
+
 	// 字符串长度
 	Title string `binding:"min=1,max=100"`
-	
+
 	// 数值范围
 	Age int `binding:"gte=0,lte=150"`
-	
+
 	// 邮箱格式
 	Email string `binding:"email"`
-	
+
 	// URL 格式
 	Website string `binding:"url"`
-	
+
 	// 枚举值
 	Status string `binding:"oneof=pending completed cancelled"`
-	
+
 	// 正则表达式
 	Phone string `binding:"regexp=^1[3-9]\\d{9}$"`
-	
+
 	// 忽略空值
 	Description string `binding:"omitempty,min=0,max=500"`
 }
@@ -177,7 +177,7 @@ type User struct {
 
 func main() {
 	r := gin.Default()
-	
+
 	r.POST("/user", func(c *gin.Context) {
 		var user User
 		if err := c.ShouldBindJSON(&user); err != nil {
@@ -186,7 +186,7 @@ func main() {
 		}
 		c.JSON(200, user)
 	})
-	
+
 	r.Run(":8080")
 }
 ```
@@ -217,7 +217,7 @@ type UpdateUserRequest struct {
 
 func main() {
 	r := gin.Default()
-	
+
 	r.POST("/users", func(c *gin.Context) {
 		var req CreateUserRequest
 		if err := c.ShouldBindJSON(&req); err != nil {
@@ -226,7 +226,7 @@ func main() {
 		}
 		c.JSON(201, gin.H{"message": "用户创建成功"})
 	})
-	
+
 	r.PUT("/users/:id", func(c *gin.Context) {
 		var req UpdateUserRequest
 		if err := c.ShouldBindJSON(&req); err != nil {
@@ -235,7 +235,7 @@ func main() {
 		}
 		c.JSON(200, gin.H{"message": "用户更新成功"})
 	})
-	
+
 	r.Run(":8080")
 }
 
