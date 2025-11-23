@@ -155,6 +155,10 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '03. 服务发现', link: '/microservices/03-service-discovery' },
         { text: '04. 负载均衡', link: '/microservices/04-load-balancing' },
         { text: '05. API 网关', link: '/microservices/05-api-gateway' },
+        { text: '06. 分布式追踪', link: '/microservices/06-distributed-tracing' },
+        { text: '07. 配置中心', link: '/microservices/07-config-center' },
+        { text: '08. 消息队列', link: '/microservices/08-message-queue' },
+        { text: '09. 服务网格', link: '/microservices/09-service-mesh' },
         {
           text: '06. 电商微服务实战',
           collapsed: false,
