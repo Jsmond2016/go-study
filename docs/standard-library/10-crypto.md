@@ -35,19 +35,19 @@ import (
 
 func main() {
 	data := []byte("Hello, Go!")
-	
+
 	// MD5
 	md5Hash := md5.Sum(data)
 	fmt.Printf("MD5: %x\n", md5Hash)
-	
+
 	// SHA1
 	sha1Hash := sha1.Sum(data)
 	fmt.Printf("SHA1: %x\n", sha1Hash)
-	
+
 	// SHA256
 	sha256Hash := sha256.Sum256(data)
 	fmt.Printf("SHA256: %x\n", sha256Hash)
-	
+
 	// SHA512
 	sha512Hash := sha512.Sum512(data)
 	fmt.Printf("SHA512: %x\n", sha512Hash)
@@ -103,7 +103,7 @@ func checkPassword(password, hash string) bool {
 func main() {
 	password := "myPassword123"
 	hash, _ := hashPassword(password)
-	
+
 	fmt.Printf("密码: %s\n", password)
 	fmt.Printf("哈希: %s\n", hash)
 	fmt.Printf("验证: %t\n", checkPassword(password, hash))
@@ -130,16 +130,16 @@ func encryptAES(key, plaintext []byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	ciphertext := make([]byte, aes.BlockSize+len(plaintext))
 	iv := ciphertext[:aes.BlockSize]
 	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
 		return nil, err
 	}
-	
+
 	stream := cipher.NewCFBEncrypter(block, iv)
 	stream.XORKeyStream(ciphertext[aes.BlockSize:], plaintext)
-	
+
 	return ciphertext, nil
 }
 
@@ -148,17 +148,17 @@ func decryptAES(key, ciphertext []byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	if len(ciphertext) < aes.BlockSize {
 		return nil, fmt.Errorf("ciphertext too short")
 	}
-	
+
 	iv := ciphertext[:aes.BlockSize]
 	ciphertext = ciphertext[aes.BlockSize:]
-	
+
 	stream := cipher.NewCFBDecrypter(block, iv)
 	stream.XORKeyStream(ciphertext, ciphertext)
-	
+
 	return ciphertext, nil
 }
 ```
@@ -254,12 +254,12 @@ func calculateFileHash(filename string) (string, error) {
 		return "", err
 	}
 	defer file.Close()
-	
+
 	hash := sha256.New()
 	if _, err := io.Copy(hash, file); err != nil {
 		return "", err
 	}
-	
+
 	return fmt.Sprintf("%x", hash.Sum(nil)), nil
 }
 ```

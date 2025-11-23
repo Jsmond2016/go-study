@@ -44,7 +44,7 @@ func main() {
 	}
 	fmt.Println(string(jsonData))
 	// 输出: {"name":"张三","age":30}
-	
+
 	// 解码（反序列化）
 	var p2 Person
 	err = json.Unmarshal(jsonData, &p2)
@@ -69,7 +69,7 @@ func main() {
 	// 编码到流
 	encoder := json.NewEncoder(os.Stdout)
 	encoder.Encode(Person{Name: "张三", Age: 30})
-	
+
 	// 从流解码
 	decoder := json.NewDecoder(os.Stdin)
 	var p Person
@@ -98,7 +98,7 @@ func main() {
 			Country: "中国",
 		},
 	}
-	
+
 	jsonData, _ := json.Marshal(user)
 	fmt.Println(string(jsonData))
 }
@@ -130,7 +130,7 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(string(xmlData))
-	
+
 	// 解码
 	var p2 Person
 	xml.Unmarshal(xmlData, &p2)
@@ -155,7 +155,7 @@ func main() {
 	data := []byte("Hello, Go!")
 	encoded := base64.StdEncoding.EncodeToString(data)
 	fmt.Println(encoded)
-	
+
 	// 解码
 	decoded, err := base64.StdEncoding.DecodeString(encoded)
 	if err != nil {
@@ -170,11 +170,11 @@ func main() {
 ```go
 func main() {
 	data := []byte("Hello, Go!")
-	
+
 	// URL 安全编码
 	encoded := base64.URLEncoding.EncodeToString(data)
 	fmt.Println(encoded)
-	
+
 	// URL 安全解码
 	decoded, _ := base64.URLEncoding.DecodeString(encoded)
 	fmt.Println(string(decoded))
@@ -197,7 +197,7 @@ func loadConfig(filename string) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	var config Config
 	err = json.Unmarshal(data, &config)
 	return &config, err
@@ -227,7 +227,7 @@ func sendJSONResponse(w http.ResponseWriter, code int, data interface{}) {
 		Message: "success",
 		Data:    data,
 	}
-	
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
