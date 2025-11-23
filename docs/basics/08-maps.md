@@ -32,15 +32,15 @@ func main() {
 	// 声明映射（nil 映射）
 	var m1 map[string]int
 	fmt.Printf("nil 映射: %v, 是否为 nil: %t\n", m1, m1 == nil)
-	
+
 	// 使用 make 创建映射
 	m2 := make(map[string]int)
 	fmt.Printf("空映射: %v, 长度: %d\n", m2, len(m2))
-	
+
 	// 创建时指定容量
 	m3 := make(map[string]int, 10)
 	fmt.Printf("指定容量的映射: %v, 容量: %d\n", m3, cap(m3))
-	
+
 	// 直接初始化
 	m4 := map[string]int{
 		"apple":  5,
@@ -48,12 +48,12 @@ func main() {
 		"orange": 8,
 	}
 	fmt.Printf("初始化映射: %v, 长度: %d\n", m4, len(m4))
-	
+
 	// 不同类型的映射
 	stringMap := map[string]string{"hello": "world"}
 	intMap := map[int]string{1: "one", 2: "two"}
 	boolMap := map[bool]string{true: "yes", false: "no"}
-	
+
 	fmt.Printf("字符串映射: %v\n", stringMap)
 	fmt.Printf("整数映射: %v\n", intMap)
 	fmt.Printf("布尔映射: %v\n", boolMap)
@@ -70,36 +70,36 @@ import "fmt"
 func main() {
 	// 创建映射
 	scores := make(map[string]int)
-	
+
 	// 添加元素
 	scores["张三"] = 95
 	scores["李四"] = 88
 	scores["王五"] = 76
 	fmt.Printf("添加元素后: %v\n", scores)
-	
+
 	// 获取元素
 	score := scores["张三"]
 	fmt.Printf("张三的成绩: %d\n", score)
-	
+
 	// 获取不存在的键
 	unknownScore := scores["赵六"]
 	fmt.Printf("赵六的成绩: %d (零值)\n", unknownScore)
-	
+
 	// 检查键是否存在
 	value, exists := scores["李四"]
 	fmt.Printf("李四是否存在: %t, 成绩: %d\n", exists, value)
-	
+
 	_, exists2 := scores["赵六"]
 	fmt.Printf("赵六是否存在: %t\n", exists2)
-	
+
 	// 修改元素
 	scores["张三"] = 98
 	fmt.Printf("修改后: %v\n", scores)
-	
+
 	// 删除元素
 	delete(scores, "王五")
 	fmt.Printf("删除王五后: %v\n", scores)
-	
+
 	// 删除不存在的键（不会报错）
 	delete(scores, "赵六")
 	fmt.Printf("删除不存在的键后: %v\n", scores)
@@ -124,25 +124,25 @@ func main() {
 		"赵六": 92,
 		"钱七": 84,
 	}
-	
+
 	// 遍历键值对
 	fmt.Println("遍历键值对:")
 	for name, grade := range studentGrades {
 		fmt.Printf("%s: %d\n", name, grade)
 	}
-	
+
 	// 只遍历键
 	fmt.Println("\n只遍历键:")
 	for name := range studentGrades {
 		fmt.Printf("学生: %s\n", name)
 	}
-	
+
 	// 只遍历值
 	fmt.Println("\n只遍历值:")
 	for _, grade := range studentGrades {
 		fmt.Printf("成绩: %d\n", grade)
 	}
-	
+
 	// 收集所有键
 	fmt.Println("\n收集所有键:")
 	var names []string
@@ -171,12 +171,12 @@ func main() {
 		"王五": 28,
 		"赵六": 22,
 	}
-	
+
 	fmt.Println("随机顺序遍历:")
 	for name, age := range ages {
 		fmt.Printf("%s: %d\n", name, age)
 	}
-	
+
 	// 如果需要有序遍历，先排序键
 	fmt.Println("\n按键名排序后遍历:")
 	var names []string
@@ -184,23 +184,23 @@ func main() {
 		names = append(names, name)
 	}
 	sort.Strings(names)
-	
+
 	for _, name := range names {
 		fmt.Printf("%s: %d\n", name, ages[name])
 	}
-	
+
 	// 按值排序遍历
 	fmt.Println("\n按年龄排序后遍历:")
 	type NameAge struct {
 		Name string
 		Age  int
 	}
-	
+
 	var nameAges []NameAge
 	for name, age := range ages {
 		nameAges = append(nameAges, NameAge{name, age})
 	}
-	
+
 	// 按年龄排序
 	for i := 0; i < len(nameAges)-1; i++ {
 		for j := i + 1; j < len(nameAges); j++ {
@@ -209,7 +209,7 @@ func main() {
 			}
 		}
 	}
-	
+
 	for _, na := range nameAges {
 		fmt.Printf("%s: %d\n", na.Name, na.Age)
 	}
@@ -228,28 +228,28 @@ import "fmt"
 func main() {
 	// 使用映射模拟集合
 	set := make(map[string]bool)
-	
+
 	// 添加元素到集合
 	items := []string{"apple", "banana", "orange", "apple", "grape"}
 	for _, item := range items {
 		set[item] = true
 	}
-	
+
 	fmt.Printf("集合元素: ")
 	for item := range set {
 		fmt.Printf("%s ", item)
 	}
 	fmt.Printf("(总数: %d)\n", len(set))
-	
+
 	// 检查元素是否存在
 	fmt.Println("\n集合操作:")
 	fmt.Printf("apple 在集合中: %t\n", set["apple"])
 	fmt.Printf("pear 在集合中: %t\n", set["pear"])
-	
+
 	// 从集合中删除
 	delete(set, "orange")
 	fmt.Printf("删除 orange 后集合大小: %d\n", len(set))
-	
+
 	// 集合运算：交集
 	set2 := map[string]bool{
 		"apple":  true,
@@ -257,7 +257,7 @@ func main() {
 		"pear":   true,
 		"melon":  true,
 	}
-	
+
 	fmt.Println("\n两个集合的交集:")
 	for item := range set {
 		if set2[item] {
@@ -294,7 +294,7 @@ func main() {
 			"物理": 79,
 		},
 	}
-	
+
 	// 访问嵌套数据
 	fmt.Println("学生成绩:")
 	for name, subjects := range students {
@@ -304,15 +304,15 @@ func main() {
 		}
 		fmt.Println()
 	}
-	
+
 	// 获取特定学生的特定科目
 	mathScore := students["张三"]["数学"]
 	fmt.Printf("\n张三的数学成绩: %d\n", mathScore)
-	
+
 	// 添加新科目
 	students["张三"]["化学"] = 90
 	fmt.Printf("张三的化学成绩: %d\n", students["张三"]["化学"])
-	
+
 	// 安全访问嵌套映射
 	if student, exists := students["赵六"]; exists {
 		if mathScore, hasMath := student["数学"]; hasMath {
@@ -374,21 +374,21 @@ func main() {
 		"go":      5,
 		"programming": 1,
 	}
-	
+
 	fmt.Printf("原始映射: %v\n", wordCounts)
-	
+
 	// 过滤：只保留出现次数 >= 3 的单词
 	filtered := filterMap(wordCounts, func(word string, count int) bool {
 		return count >= 3
 	})
 	fmt.Printf("过滤后: %v\n", filtered)
-	
+
 	// 转换：将单词转为大写，计数加倍
 	transformed := transformMap(wordCounts, func(word string, count int) (string, int) {
 		return strings.ToUpper(word), count * 2
 	})
 	fmt.Printf("转换后: %v\n", transformed)
-	
+
 	// 聚合：计算总词数
 	totalCount := reduceMap(wordCounts, 0, func(acc int, word string, count int) int {
 		return acc + count
@@ -409,12 +409,12 @@ import "fmt"
 func main() {
 	// 使用空结构体作为集合元素，节省内存
 	seen := make(map[string]struct{})
-	
+
 	items := []string{"apple", "banana", "apple", "orange", "banana"}
 	for _, item := range items {
 		seen[item] = struct{}{} // 空结构体不占用内存
 	}
-	
+
 	fmt.Printf("唯一元素: ")
 	for key := range seen {
 		fmt.Printf("%s ", key)
@@ -437,13 +437,13 @@ func main() {
 		"banana": 2,
 		"orange": 3,
 	}
-	
+
 	// 键值对调
 	reverse := make(map[int]string)
 	for k, v := range original {
 		reverse[v] = k
 	}
-	
+
 	fmt.Printf("原始映射: %v\n", original)
 	fmt.Printf("反转映射: %v\n", reverse)
 }
@@ -468,7 +468,7 @@ func main() {
 	m[Key{Path: "/api/users", Type: "GET"}] = "用户列表"
 	m[Key{Path: "/api/users", Type: "POST"}] = "创建用户"
 	m[Key{Path: "/api/users/1", Type: "GET"}] = "用户详情"
-	
+
 	// 访问
 	value := m[Key{Path: "/api/users", Type: "GET"}]
 	fmt.Printf("路由处理: %s\n", value)
@@ -503,15 +503,15 @@ func getWithCache(key string) interface{} {
 		return val
 	}
 	cacheMu.RUnlock()
-	
+
 	// 计算值
 	val := computeExpensiveOperation(key)
-	
+
 	// 写锁更新缓存
 	cacheMu.Lock()
 	cache[key] = val
 	cacheMu.Unlock()
-	
+
 	return val
 }
 
@@ -520,7 +520,7 @@ func main() {
 	start := time.Now()
 	result1 := getWithCache("key1")
 	fmt.Printf("第一次: %v (耗时: %v)\n", result1, time.Since(start))
-	
+
 	// 第二次调用，从缓存获取
 	start = time.Now()
 	result2 := getWithCache("key1")
@@ -540,25 +540,25 @@ import (
 
 func main() {
 	var sm sync.Map
-	
+
 	// 存储
 	sm.Store("key1", "value1")
 	sm.Store("key2", "value2")
-	
+
 	// 读取
 	if value, ok := sm.Load("key1"); ok {
 		fmt.Printf("key1: %v\n", value)
 	}
-	
+
 	// 删除
 	sm.Delete("key2")
-	
+
 	// 遍历
 	sm.Range(func(key, value interface{}) bool {
 		fmt.Printf("key: %v, value: %v\n", key, value)
 		return true // 返回 false 停止遍历
 	})
-	
+
 	// 加载或存储（如果不存在则存储）
 	actual, loaded := sm.LoadOrStore("key3", "value3")
 	fmt.Printf("key3 loaded: %t, value: %v\n", loaded, actual)
@@ -576,13 +576,13 @@ func main() {
 	// 当知道大约容量时，预分配可提高性能
 	expectedSize := 100
 	m := make(map[string]int, expectedSize)
-	
+
 	// 添加元素
 	for i := 0; i < expectedSize; i++ {
 		key := fmt.Sprintf("key%d", i)
 		m[key] = i
 	}
-	
+
 	fmt.Printf("映射大小: %d\n", len(m))
 }
 ```
@@ -648,21 +648,21 @@ func (cm *ConfigManager) PrintAll() {
 
 func main() {
 	config := NewConfigManager()
-	
+
 	// 设置配置
 	config.Set("server.port", "8080")
 	config.Set("server.host", "localhost")
 	config.Set("debug.mode", "true")
 	config.Set("max.connections", "100")
-	
+
 	config.PrintAll()
-	
+
 	// 获取配置
 	port := config.GetInt("server.port", 3000)
 	host := config.GetString("server.host", "127.0.0.1")
 	debug := config.GetBool("debug.mode", false)
 	maxConn := config.GetInt("max.connections", 50)
-	
+
 	fmt.Printf("\n使用配置:\n")
 	fmt.Printf("服务器地址: %s:%d\n", host, port)
 	fmt.Printf("调试模式: %t\n", debug)
@@ -726,7 +726,7 @@ func (c *Cache) Clear() {
 
 func main() {
 	cache := NewCache()
-	
+
 	// 缓存操作
 	cache.Set("user:1", "张三")
 	cache.Set("user:2", "李四")
@@ -734,23 +734,23 @@ func main() {
 		"user_id": 1,
 		"login_time": time.Now(),
 	})
-	
+
 	// 读取缓存
 	if user1, exists := cache.Get("user:1"); exists {
 		fmt.Printf("用户1: %v\n", user1)
 	}
-	
+
 	if session, exists := cache.Get("session:abc123"); exists {
 		fmt.Printf("会话信息: %v\n", session)
 	}
-	
+
 	// 缓存统计
 	fmt.Printf("缓存大小: %d\n", cache.Size())
-	
+
 	// 删除和清空
 	cache.Delete("user:2")
 	fmt.Printf("删除后缓存大小: %d\n", cache.Size())
-	
+
 	cache.Clear()
 	fmt.Printf("清空后缓存大小: %d\n", cache.Size())
 }
@@ -782,28 +782,28 @@ import (
 func wordFrequency(text string) map[string]int {
 	words := strings.Fields(text)
 	freq := make(map[string]int)
-	
+
 	// 停用词
 	stopWords := map[string]bool{
 		"the": true, "a": true, "an": true, "and": true, "or": true,
 		"but": true, "in": true, "on": true, "at": true, "to": true,
 	}
-	
+
 	for _, word := range words {
 		// 转为小写并清理
 		word = strings.ToLower(word)
 		word = strings.TrimFunc(word, func(r rune) bool {
 			return !unicode.IsLetter(r)
 		})
-		
+
 		// 跳过停用词和空字符串
 		if word == "" || stopWords[word] {
 			continue
 		}
-		
+
 		freq[word]++
 	}
-	
+
 	return freq
 }
 
@@ -812,17 +812,17 @@ func printWordFrequency(freq map[string]int) {
 		Word  string
 		Count int
 	}
-	
+
 	var wordCounts []WordCount
 	for word, count := range freq {
 		wordCounts = append(wordCounts, WordCount{word, count})
 	}
-	
+
 	// 按频率排序
 	sort.Slice(wordCounts, func(i, j int) bool {
 		return wordCounts[i].Count > wordCounts[j].Count
 	})
-	
+
 	fmt.Println("词频统计结果:")
 	for i, wc := range wordCounts {
 		fmt.Printf("%d. %s: %d\n", i+1, wc.Word, wc.Count)
@@ -833,10 +833,10 @@ func printWordFrequency(freq map[string]int) {
 }
 
 func main() {
-	text := `The Go programming language is an open source project to make programmers more productive. 
-	Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make it easy to write programs 
+	text := `The Go programming language is an open source project to make programmers more productive.
+	Go is expressive, concise, clean, and efficient. Its concurrency mechanisms make it easy to write programs
 	that get the most out of multicore and networked machines.`
-	
+
 	freq := wordFrequency(text)
 	printWordFrequency(freq)
 }

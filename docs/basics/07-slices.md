@@ -543,6 +543,180 @@ numbers := []int{1, 2, 3, 4, 5}
 index := sort.SearchInts(numbers, 3)  // 返回值为2
 ```
 
+## 🔗 切片与字符串
+
+### 字符串与切片的转换
+
+```go
+package main
+
+import (
+	"fmt"
+	"unicode/utf8"
+)
+
+func main() {
+	str := "Hello, 世界"
+
+	// 字符串转字节切片
+	bytes := []byte(str)
+	fmt.Printf("字节切片: %v\n", bytes)
+
+	// 字符串转 rune 切片（Unicode 字符）
+	runes := []rune(str)
+	fmt.Printf("Rune 切片: %v\n", runes)
+
+	// 切片转字符串
+	byteSlice := []byte{'H', 'e', 'l', 'l', 'o'}
+	runeSlice := []rune{'世', '界'}
+	str1 := string(byteSlice)
+	str2 := string(runeSlice)
+	fmt.Printf("字节转字符串: %s\n", str1) // Hello
+	fmt.Printf("Rune 转字符串: %s\n", str2) // 世界
+}
+```
+
+### 安全的字符串截取
+
+```go
+package main
+
+import (
+	"fmt"
+	"unicode/utf8"
+)
+
+func main() {
+	str := "Hello, 世界"
+
+	// ❌ 危险：直接截取可能破坏 UTF-8 编码
+	substr1 := str[:5] // "Hello" (对于 ASCII 字符是安全的)
+	fmt.Printf("直接截取: %s\n", substr1)
+
+	// ✅ 安全：先转换为 rune 切片再截取
+	runes := []rune(str)
+	substr2 := string(runes[:7]) // 前7个字符
+	fmt.Printf("安全截取: %s\n", substr2) // Hello, 世界
+
+	// 获取字符串真实长度
+	byteLen := len(str)                      // 字节长度
+	charLen := utf8.RuneCountInString(str)   // 字符长度
+	fmt.Printf("字节长度: %d, 字符长度: %d\n", byteLen, charLen)
+
+	// 检查 UTF-8 编码
+	isValid := utf8.ValidString(str)
+	fmt.Printf("有效 UTF-8: %t\n", isValid)
+}
+```
+
+### 字符串与切片的常用操作
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	// 数字切片转字符串切片
+	nums := []int{1, 2, 3, 4, 5}
+	strSlice := make([]string, len(nums))
+	for i, num := range nums {
+		strSlice[i] = strconv.Itoa(num)
+	}
+	fmt.Printf("数字转字符串: %v\n", strSlice)
+
+	// 字符串切片拼接
+	parts := []string{"Hello", "World", "Go"}
+	result := strings.Join(parts, " ")
+	fmt.Printf("拼接结果: %s\n", result) // Hello World Go
+
+	// 字符串分割为切片
+	str := "a,b,c,d"
+	parts2 := strings.Split(str, ",")
+	fmt.Printf("分割结果: %v\n", parts2) // [a b c d]
+}
+```
+
+### 性能优化技巧
+
+```go
+package main
+
+import (
+	"fmt"
+	"strings"
+	"unicode/utf8"
+)
+
+func main() {
+	// 使用 Builder 高效构建字符串
+	var builder strings.Builder
+	builder.Grow(100) // 预分配内存
+	for i := 0; i < 100; i++ {
+		builder.WriteString("a")
+	}
+	result := builder.String()
+	fmt.Printf("构建结果长度: %d\n", len(result))
+
+	// 批量字符处理
+	str := "Hello, 世界"
+	runes := make([]rune, 0, utf8.RuneCountInString(str))
+	for _, r := range str {
+		runes = append(runes, r)
+	}
+	fmt.Printf("字符切片: %v\n", runes)
+}
+```
+
+### 实用工具函数
+
+```go
+package main
+
+import (
+	"fmt"
+	"unicode"
+)
+
+// 安全的子字符串提取
+func SubString(s string, start, end int) string {
+	runes := []rune(s)
+	if start < 0 {
+		start = 0
+	}
+	if end > len(runes) {
+		end = len(runes)
+	}
+	if start > end {
+		return ""
+	}
+	return string(runes[start:end])
+}
+
+// 检查字符串是否包含中文字符
+func ContainsChinese(s string) bool {
+	for _, r := range s {
+		if unicode.Is(unicode.Han, r) {
+			return true
+		}
+	}
+	return false
+}
+
+func main() {
+	str := "Hello, 世界"
+	substr := SubString(str, 0, 7)
+	fmt.Printf("子字符串: %s\n", substr) // Hello, 世界
+
+	hasChinese := ContainsChinese(str)
+	fmt.Printf("包含中文: %t\n", hasChinese) // true
+}
+```
+
 ## ⚠️ 常见陷阱
 
 ### 1. 在循环中使用 append
