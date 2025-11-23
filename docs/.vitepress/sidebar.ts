@@ -107,7 +107,8 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '05. Gin 模板', link: '/web-development/05-gin-template' },
         { text: '06. 数据验证', link: '/web-development/06-gin-validation' },
         { text: '07. 认证授权', link: '/web-development/07-gin-auth' },
-        { text: '08. REST API 设计', link: '/web-development/08-rest-api' }
+        { text: '08. REST API 设计', link: '/web-development/08-rest-api' },
+        { text: '09. Beego 框架', link: '/web-development/09-beego' }
       ]
     }
   ],

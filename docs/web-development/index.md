@@ -16,6 +16,7 @@ tags: ["Web", "HTTP", "Gin", "API", "REST"]
 
 - [ ] 构建 HTTP 服务器
 - [ ] 使用 Gin 框架开发 Web 应用
+- [ ] 使用 Beego 框架开发 MVC 应用
 - [ ] 设计 RESTful API
 - [ ] 实现中间件和认证
 - [ ] 处理请求和响应
@@ -45,6 +46,12 @@ tags: ["Web", "HTTP", "Gin", "API", "REST"]
 | [数据验证](./06-gin-validation.md)      | 请求验证和绑定     | 3-4小时  | ⭐⭐⭐ |
 | [认证授权](./07-gin-auth.md)            | JWT、Session        | 4-5小时  | ⭐⭐⭐ |
 | [REST API 设计](./08-rest-api.md)       | API 设计最佳实践   | 4-5小时  | ⭐⭐⭐ |
+
+### 🐝 第四部分：Beego 框架（第7-8周）
+
+| 章节                                    | 内容               | 预计时间 | 难度 |
+| --------------------------------------- | ------------------ | -------- | ---- |
+| [Beego 框架](./09-beego.md)             | MVC 架构、ORM、模板 | 5-6小时  | ⭐⭐⭐ |
 
 ## 🚀 快速开始
 
@@ -83,6 +90,7 @@ func main() {
 ### 🔍 推荐资源
 
 - [Gin 官方文档](https://gin-gonic.com/)
+- [Beego 官方文档](https://beego.me/)
 - [HTTP 协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
 - [RESTful API 设计指南](https://restfulapi.net/)
 
