@@ -244,7 +244,7 @@ Go 常用的一些工具函数：
 
 ### 工具配置
 
-参考 [开发环境配置](../guide/development-environment.md) 了解详细的工具配置方法。
+参考 [开发环境配置](../development-environment.md) 了解详细的工具配置方法。
 
 ---
 

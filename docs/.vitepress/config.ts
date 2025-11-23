@@ -25,6 +25,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '学习指南', link: '/guide/getting-started' },
+      { text: '学习资源', link: '/guide/resources/' },
       { text: '基础语法', link: '/basics/' },
       { text: '标准库', link: '/standard-library/' },
       { text: 'Web 开发', link: '/web-development/' },

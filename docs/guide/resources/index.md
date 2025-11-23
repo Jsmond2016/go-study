@@ -80,9 +80,10 @@ tags: ["资源", "书籍", "视频", "博客", "工具"]
 
 ## ⏭️ 相关链接
 
-- [快速开始](../guide/getting-started.md) - 开始你的学习之旅
-- [学习路径](../guide/learning-path.md) - 规划学习路线
-- [基础语法](../basics/) - 学习基础语法
+- [快速开始](../getting-started.md) - 开始你的学习之旅
+- [学习路径](../learning-path.md) - 规划学习路线
+- [开发环境](../development-environment.md) - 配置开发环境
+- [基础语法](../../basics/) - 学习基础语法
 
 ---
 

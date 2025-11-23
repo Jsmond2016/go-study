@@ -5,10 +5,46 @@ export const sidebar: DefaultTheme.Sidebar = {
   '/guide/': [
     {
       text: '学习指南',
+      collapsed: false,
       items: [
         { text: '快速开始', link: '/guide/getting-started' },
         { text: '学习路径', link: '/guide/learning-path' },
-        { text: '开发环境', link: '/guide/development-environment' }
+        { text: '开发环境', link: '/guide/development-environment' },
+        {
+          text: '学习资源',
+          collapsed: false,
+          items: [
+            { text: '总览', link: '/guide/resources/' },
+            { text: '推荐书籍', link: '/guide/resources/books' },
+            { text: '视频教程', link: '/guide/resources/videos' },
+            { text: '优质博客', link: '/guide/resources/blogs' },
+            { text: '开发工具', link: '/guide/resources/tools' }
+          ]
+        }
+      ]
+    }
+  ],
+
+  // 学习资源（子目录页面访问时使用）
+  '/guide/resources/': [
+    {
+      text: '学习指南',
+      collapsed: false,
+      items: [
+        { text: '快速开始', link: '/guide/getting-started' },
+        { text: '学习路径', link: '/guide/learning-path' },
+        { text: '开发环境', link: '/guide/development-environment' },
+        {
+          text: '学习资源',
+          collapsed: false,
+          items: [
+            { text: '总览', link: '/guide/resources/' },
+            { text: '推荐书籍', link: '/guide/resources/books' },
+            { text: '视频教程', link: '/guide/resources/videos' },
+            { text: '优质博客', link: '/guide/resources/blogs' },
+            { text: '开发工具', link: '/guide/resources/tools' }
+          ]
+        }
       ]
     }
   ],
@@ -291,19 +327,5 @@ export const sidebar: DefaultTheme.Sidebar = {
     }
   ],
 
-  // 学习资源
-  '/resources/': [
-    {
-      text: '学习资源',
-      collapsed: false,
-      items: [
-        { text: '总览', link: '/resources/' },
-        { text: '推荐书籍', link: '/resources/books' },
-        { text: '视频教程', link: '/resources/videos' },
-        { text: '优质博客', link: '/resources/blogs' },
-        { text: '开发工具', link: '/resources/tools' }
-      ]
-    }
-  ]
 }
 
