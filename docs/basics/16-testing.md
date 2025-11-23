@@ -54,7 +54,7 @@ func Add(a, b int) int {
 func TestAdd(t *testing.T) {
 	result := Add(2, 3)
 	expected := 5
-	
+
 	if result != expected {
 		t.Errorf("Add(2, 3) = %d; 期望 %d", result, expected)
 	}
@@ -91,7 +91,7 @@ func TestAdd(t *testing.T) {
 		{"负数", -1, -2, -3},
 		{"零", 0, 5, 5},
 	}
-	
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result := Add(tt.a, tt.b)
@@ -135,7 +135,7 @@ func TestMultiply(t *testing.T) {
 			expected: 0,
 		},
 	}
-	
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			result := Multiply(tt.a, tt.b)
@@ -193,13 +193,13 @@ func BenchmarkStringConcat(b *testing.B) {
 			_ = "Hello" + " " + "World"
 		}
 	})
-	
+
 	b.Run("使用 fmt.Sprintf", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			_ = fmt.Sprintf("%s %s", "Hello", "World")
 		}
 	})
-	
+
 	b.Run("使用 strings.Builder", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			var builder strings.Builder
@@ -292,12 +292,12 @@ func assertEqual(t *testing.T, got, want int) {
 func TestWithCleanup(t *testing.T) {
 	// 设置测试环境
 	tempFile := createTempFile(t)
-	
+
 	// 注册清理函数
 	t.Cleanup(func() {
 		os.Remove(tempFile.Name())
 	})
-	
+
 	// 测试代码
 	// ...
 }

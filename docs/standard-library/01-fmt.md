@@ -31,14 +31,14 @@ func main() {
 	fmt.Print("Hello")
 	fmt.Print("World")
 	// 输出: HelloWorld
-	
+
 	// Println: 输出后换行
 	fmt.Println("Hello")
 	fmt.Println("World")
 	// 输出:
 	// Hello
 	// World
-	
+
 	// Printf: 格式化输出
 	fmt.Printf("姓名: %s, 年龄: %d\n", "张三", 30)
 	// 输出: 姓名: 张三, 年龄: 30
@@ -113,12 +113,12 @@ func main() {
 	name := "张三"
 	age := 30
 	height := 175.5
-	
+
 	// 基本格式化
 	fmt.Printf("姓名: %s\n", name)
 	fmt.Printf("年龄: %d\n", age)
 	fmt.Printf("身高: %.1f cm\n", height)
-	
+
 	// 使用 %v（默认格式）
 	fmt.Printf("信息: %v\n", name)
 	fmt.Printf("信息: %+v\n", name)
@@ -136,12 +136,12 @@ import "fmt"
 
 func main() {
 	num := 123
-	
+
 	// 宽度
 	fmt.Printf("|%5d|\n", num)    // |  123|
 	fmt.Printf("|%-5d|\n", num)   // |123  |
 	fmt.Printf("|%05d|\n", num)   // |00123|
-	
+
 	// 浮点数精度
 	pi := 3.14159
 	fmt.Printf("%.2f\n", pi)     // 3.14
@@ -163,7 +163,7 @@ type Person struct {
 
 func main() {
 	p := Person{Name: "张三", Age: 30}
-	
+
 	fmt.Printf("%v\n", p)   // {张三 30}
 	fmt.Printf("%+v\n", p)  // {Name:张三 Age:30}
 	fmt.Printf("%#v\n", p)  // main.Person{Name:"张三", Age:30}
@@ -182,17 +182,17 @@ import "fmt"
 func main() {
 	var name string
 	var age int
-	
+
 	// Scan: 从标准输入读取
 	fmt.Print("请输入姓名和年龄: ")
 	fmt.Scan(&name, &age)
 	fmt.Printf("姓名: %s, 年龄: %d\n", name, age)
-	
+
 	// Scanf: 格式化输入
 	fmt.Print("请输入姓名: ")
 	fmt.Scanf("%s", &name)
 	fmt.Printf("姓名: %s\n", name)
-	
+
 	// Scanln: 读取一行
 	fmt.Print("请输入一行文本: ")
 	var line string
@@ -213,7 +213,7 @@ import "fmt"
 func main() {
 	name := "张三"
 	age := 30
-	
+
 	// 格式化但不输出，返回字符串
 	message := fmt.Sprintf("姓名: %s, 年龄: %d", name, age)
 	fmt.Println(message)
@@ -234,7 +234,7 @@ func main() {
 	// 写入到文件
 	file, _ := os.Create("output.txt")
 	defer file.Close()
-	
+
 	fmt.Fprintf(file, "姓名: %s, 年龄: %d\n", "张三", 30)
 }
 ```

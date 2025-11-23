@@ -47,13 +47,13 @@ import (
 
 func main() {
 	var x int = 42
-	
+
 	// 获取类型
 	t := reflect.TypeOf(x)
 	fmt.Printf("类型: %v\n", t)
 	fmt.Printf("类型名称: %v\n", t.Name())
 	fmt.Printf("类型种类: %v\n", t.Kind())
-	
+
 	// 获取值
 	v := reflect.ValueOf(x)
 	fmt.Printf("值: %v\n", v)
@@ -101,11 +101,11 @@ import (
 
 func main() {
 	var x int = 42
-	
+
 	// 获取值
 	v := reflect.ValueOf(x)
 	fmt.Printf("值: %v\n", v.Int())
-	
+
 	// 设置值（需要指针）
 	p := reflect.ValueOf(&x)
 	e := p.Elem()
@@ -119,22 +119,22 @@ func main() {
 ```go
 func setValue(v interface{}, newValue int) {
 	rv := reflect.ValueOf(v)
-	
+
 	// 必须是指针
 	if rv.Kind() != reflect.Ptr {
 		fmt.Println("不是指针，无法设置")
 		return
 	}
-	
+
 	// 获取指向的值
 	elem := rv.Elem()
-	
+
 	// 检查是否可设置
 	if !elem.CanSet() {
 		fmt.Println("值不可设置")
 		return
 	}
-	
+
 	// 设置值
 	if elem.Kind() == reflect.Int {
 		elem.SetInt(int64(newValue))
@@ -163,18 +163,18 @@ type Person struct {
 func printStruct(s interface{}) {
 	t := reflect.TypeOf(s)
 	v := reflect.ValueOf(s)
-	
+
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()
 		v = v.Elem()
 	}
-	
+
 	fmt.Printf("结构体: %v\n", t.Name())
-	
+
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
 		value := v.Field(i)
-		
+
 		fmt.Printf("  字段: %s, 类型: %v, 值: %v\n",
 			field.Name, field.Type, value.Interface())
 	}
@@ -211,12 +211,12 @@ func printTags(s interface{}) {
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()
 	}
-	
+
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
 		jsonTag := field.Tag.Get("json")
 		dbTag := field.Tag.Get("db")
-		
+
 		fmt.Printf("字段: %s\n", field.Name)
 		fmt.Printf("  JSON 标签: %s\n", jsonTag)
 		fmt.Printf("  DB 标签: %s\n", dbTag)
@@ -254,7 +254,7 @@ func (c Calculator) Multiply(a, b int) int {
 func main() {
 	calc := Calculator{}
 	v := reflect.ValueOf(calc)
-	
+
 	// 调用 Add 方法
 	method := v.MethodByName("Add")
 	args := []reflect.Value{
@@ -271,7 +271,7 @@ func main() {
 ```go
 func printMethods(v interface{}) {
 	t := reflect.TypeOf(v)
-	
+
 	for i := 0; i < t.NumMethod(); i++ {
 		method := t.Method(i)
 		fmt.Printf("方法: %s\n", method.Name)
@@ -288,27 +288,27 @@ func printMethods(v interface{}) {
 func toJSON(v interface{}) string {
 	t := reflect.TypeOf(v)
 	val := reflect.ValueOf(v)
-	
+
 	if t.Kind() == reflect.Ptr {
 		t = t.Elem()
 		val = val.Elem()
 	}
-	
+
 	result := "{"
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
 		value := val.Field(i)
-		
+
 		jsonTag := field.Tag.Get("json")
 		if jsonTag == "" {
 			jsonTag = field.Name
 		}
-		
+
 		if i > 0 {
 			result += ","
 		}
 		result += fmt.Sprintf(`"%s":`, jsonTag)
-		
+
 		switch value.Kind() {
 		case reflect.String:
 			result += fmt.Sprintf(`"%v"`, value.String())
@@ -328,13 +328,13 @@ func toJSON(v interface{}) string {
 ```go
 func callFunction(fn interface{}, args ...interface{}) []reflect.Value {
 	fnValue := reflect.ValueOf(fn)
-	
+
 	// 准备参数
 	argsValue := make([]reflect.Value, len(args))
 	for i, arg := range args {
 		argsValue[i] = reflect.ValueOf(arg)
 	}
-	
+
 	// 调用函数
 	return fnValue.Call(argsValue)
 }
