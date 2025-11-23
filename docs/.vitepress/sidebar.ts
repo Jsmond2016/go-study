@@ -113,6 +113,26 @@ export const sidebar: DefaultTheme.Sidebar = {
     }
   ],
 
+  // 开发工具链
+  '/toolchain/': [
+    {
+      text: '开发工具链',
+      collapsed: false,
+      items: [
+        { text: '总览', link: '/toolchain/' },
+        { text: '01. MySQL 基础', link: '/toolchain/01-mysql' },
+        { text: '02. GORM 框架', link: '/toolchain/02-gorm' },
+        { text: '03. Go Modules', link: '/toolchain/03-go-modules' },
+        { text: '04. Viper 配置管理', link: '/toolchain/04-viper' },
+        { text: '05. Zap 日志库', link: '/toolchain/05-zap' },
+        { text: '06. JWT 鉴权', link: '/toolchain/06-jwt' },
+        { text: '07. Validator 验证', link: '/toolchain/07-validator' },
+        { text: '08. CORS 跨域', link: '/toolchain/08-cors' },
+        { text: '09. 限流与熔断', link: '/toolchain/09-rate-limit' }
+      ]
+    }
+  ],
+
   // 微服务
   '/microservices/': [
     {

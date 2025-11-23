@@ -27,6 +27,7 @@ export default defineConfig({
       { text: '基础语法', link: '/basics/' },
       { text: '标准库', link: '/standard-library/' },
       { text: 'Web 开发', link: '/web-development/' },
+      { text: '开发工具链', link: '/toolchain/' },
       { text: '实战项目', link: '/projects/' },
     ],
     
