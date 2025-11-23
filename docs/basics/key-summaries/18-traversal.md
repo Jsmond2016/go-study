@@ -1,4 +1,12 @@
-# Golang 遍历操作详解
+---
+title: 遍历操作详解
+difficulty: intermediate
+duration: "2-3小时"
+prerequisites: ["数组", "切片", "映射", "控制流程"]
+tags: ["遍历", "range", "循环", "字符串", "数组", "切片", "映射"]
+---
+
+# 遍历操作详解
 
 ## 概述
 
@@ -108,7 +116,7 @@ func main() {
     for i, char := range asciiStr {
         fmt.Printf("位置: %d, 字符: %c\n", i, char)
     }
-    
+
     // 输出结果：
     // ASCII 字符串遍历:
     // 位置: 0, 字符: H
@@ -116,18 +124,18 @@ func main() {
     // 位置: 2, 字符: l
     // 位置: 3, 字符: l
     // 位置: 4, 字符: o
-    // 位置: 5, 字符:  
+    // 位置: 5, 字符:
     // 位置: 6, 字符: G
     // 位置: 7, 字符: o
-    
+
     // Unicode 字符串
     unicodeStr := "你好，Go语言"
     fmt.Println("\nUnicode 字符串遍历:")
     for i, char := range unicodeStr {
-        fmt.Printf("位置: %d, 字符: %c, 字节数: %d\n", 
+        fmt.Printf("位置: %d, 字符: %c, 字节数: %d\n",
             i, char, utf8.RuneLen(char))
     }
-    
+
     // 输出结果：
     // Unicode 字符串遍历:
     // 位置: 0, 字符: 你, 字节数: 3
@@ -137,11 +145,11 @@ func main() {
     // 位置: 10, 字符: o, 字节数: 1
     // 位置: 11, 字符: 语, 字节数: 3
     // 位置: 14, 字符: 言, 字节数: 3
-    
+
     // 获取字符串长度
     fmt.Printf("\n字节长度: %d\n", len(unicodeStr))
     fmt.Printf("字符数量: %d\n", utf8.RuneCountInString(unicodeStr))
-    
+
     // 输出结果：
     // 字节长度: 17
     // 字符数量: 7
@@ -320,7 +328,7 @@ for _, value := range m {
 // 注意：Map 的遍历顺序是随机的
 m := map[int]string{
     1: "one",
-    2: "two", 
+    2: "two",
     3: "three",
 }
 

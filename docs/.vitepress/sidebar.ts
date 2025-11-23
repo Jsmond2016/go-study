@@ -72,7 +72,49 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '14. 并发编程', link: '/basics/14-concurrency' },
         { text: '15. 反射', link: '/basics/15-reflection' },
         { text: '16. 测试', link: '/basics/16-testing' },
-        { text: '17. 基础练习题', link: '/basics/17-practice-exercises' }
+        { text: '17. 基础练习题', link: '/basics/17-practice-exercises' },
+        {
+          text: '重点总结',
+          collapsed: false,
+          items: [
+            { text: '01.遍历操作详解', link: '/basics/key-summaries/18-traversal' }
+          ]
+        }
+      ]
+    }
+  ],
+
+  // 重点总结（子目录页面访问时使用）
+  '/basics/key-summaries/': [
+    {
+      text: '基础语法',
+      collapsed: false,
+      items: [
+        { text: '总览', link: '/basics/' },
+        { text: '01. 变量与常量', link: '/basics/01-variables-constants' },
+        { text: '02. 数据类型', link: '/basics/02-data-types' },
+        { text: '03. 运算符', link: '/basics/03-operators' },
+        { text: '04. 控制流程', link: '/basics/04-control-flow' },
+        { text: '05. 函数', link: '/basics/05-functions' },
+        { text: '06. 数组', link: '/basics/06-arrays' },
+        { text: '07. 切片', link: '/basics/07-slices' },
+        { text: '08. 映射', link: '/basics/08-maps' },
+        { text: '09. 结构体', link: '/basics/09-structs' },
+        { text: '10. 指针', link: '/basics/10-pointers' },
+        { text: '11. 接口', link: '/basics/11-interfaces' },
+        { text: '12. 错误处理', link: '/basics/12-error-handling' },
+        { text: '13. 包管理', link: '/basics/13-packages' },
+        { text: '14. 并发编程', link: '/basics/14-concurrency' },
+        { text: '15. 反射', link: '/basics/15-reflection' },
+        { text: '16. 测试', link: '/basics/16-testing' },
+        { text: '17. 基础练习题', link: '/basics/17-practice-exercises' },
+        {
+          text: '重点总结',
+          collapsed: false,
+          items: [
+            { text: '遍历操作详解', link: '/basics/key-summaries/18-traversal' }
+          ]
+        }
       ]
     }
   ],
