@@ -150,17 +150,21 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: '总览', link: '/microservices/' },
+        // 第一部分：gRPC 基础
         { text: '01. gRPC', link: '/microservices/01-grpc' },
         { text: '02. Protocol Buffers', link: '/microservices/02-protobuf' },
+        // 第二部分：服务治理
         { text: '03. 服务发现', link: '/microservices/03-service-discovery' },
         { text: '04. 负载均衡', link: '/microservices/04-load-balancing' },
         { text: '05. API 网关', link: '/microservices/05-api-gateway' },
+        // 第三部分：进阶主题
         { text: '06. 分布式追踪', link: '/microservices/06-distributed-tracing' },
         { text: '07. 配置中心', link: '/microservices/07-config-center' },
         { text: '08. 消息队列', link: '/microservices/08-message-queue' },
         { text: '09. 服务网格', link: '/microservices/09-service-mesh' },
+        // 第四部分：实战项目
         {
-          text: '06. 电商微服务实战',
+          text: '10. 电商微服务实战',
           collapsed: false,
           items: [
             { text: '项目概述', link: '/microservices/ecommerce-microservices/' },
