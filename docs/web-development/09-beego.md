@@ -145,11 +145,11 @@ func main() {
 	// 基本路由
 	web.Router("/", &MainController{})
 	web.Router("/user/:id", &UserController{})
-	
+
 	// RESTful 路由
 	web.Router("/api/user", &UserController{}, "get:GetUser;post:CreateUser")
 	web.Router("/api/user/:id", &UserController{}, "get:GetUser;put:UpdateUser;delete:DeleteUser")
-	
+
 	web.Run()
 }
 ```
@@ -183,12 +183,12 @@ func (c *UserController) Post() {
 		Name  string `json:"name"`
 		Email string `json:"email"`
 	}
-	
+
 	if err := web.BindJSON(&c.Controller, &user); err != nil {
 		c.Ctx.WriteString("参数错误")
 		return
 	}
-	
+
 	c.Data["json"] = map[string]interface{}{
 		"message": "创建成功",
 		"user":    user,
@@ -250,7 +250,7 @@ import (
 )
 
 func init() {
-	orm.RegisterDataBase("default", "mysql", 
+	orm.RegisterDataBase("default", "mysql",
 		"root:password@tcp(127.0.0.1:3306)/mydb?charset=utf8")
 }
 
@@ -279,7 +279,7 @@ func (c *UserController) Get() {
 	o := orm.NewOrm()
 	user := models.User{Id: 1}
 	err := o.Read(&user)
-	
+
 	if err == nil {
 		c.Data["json"] = user
 		c.ServeJSON()
@@ -294,7 +294,7 @@ func (c *UserController) Post() {
 		Email: "zhangsan@example.com",
 		Age:   25,
 	}
-	
+
 	id, err := o.Insert(&user)
 	if err == nil {
 		c.Data["json"] = map[string]interface{}{
@@ -309,7 +309,7 @@ func (c *UserController) Post() {
 func (c *UserController) Put() {
 	o := orm.NewOrm()
 	user := models.User{Id: 1}
-	
+
 	if o.Read(&user) == nil {
 		user.Name = "李四"
 		o.Update(&user)
@@ -321,7 +321,7 @@ func (c *UserController) Put() {
 func (c *UserController) Delete() {
 	o := orm.NewOrm()
 	user := models.User{Id: 1}
-	
+
 	if o.Read(&user) == nil {
 		o.Delete(&user)
 		c.ServeJSON()
@@ -332,10 +332,10 @@ func (c *UserController) Delete() {
 func (c *UserController) List() {
 	o := orm.NewOrm()
 	var users []models.User
-	
+
 	qs := o.QueryTable("user")
 	qs.Filter("age__gte", 18).All(&users)
-	
+
 	c.Data["json"] = users
 	c.ServeJSON()
 }
@@ -469,7 +469,7 @@ sessiongcmaxlifetime = 3600
 func (c *UserController) Login() {
 	username := c.GetString("username")
 	password := c.GetString("password")
-	
+
 	// 验证用户
 	if username == "admin" && password == "admin123" {
 		c.SetSession("user_id", 1)
@@ -491,7 +491,7 @@ func (c *UserController) Profile() {
 		c.Ctx.WriteString("请先登录")
 		return
 	}
-	
+
 	c.Data["json"] = map[string]interface{}{
 		"user_id": userID,
 	}
@@ -529,13 +529,13 @@ type UserController struct {
 func (c *UserController) List() {
 	o := orm.NewOrm()
 	var users []models.User
-	
+
 	page, _ := c.GetInt("page", 1)
 	pageSize, _ := c.GetInt("page_size", 10)
-	
+
 	qs := o.QueryTable("user")
 	qs.Limit(pageSize, (page-1)*pageSize).All(&users)
-	
+
 	c.Data["json"] = map[string]interface{}{
 		"users": users,
 		"page":  page,
@@ -548,7 +548,7 @@ func (c *UserController) Get() {
 	id, _ := c.GetInt(":id")
 	o := orm.NewOrm()
 	user := models.User{Id: id}
-	
+
 	if err := o.Read(&user); err == nil {
 		c.Data["json"] = user
 	} else {
@@ -567,7 +567,7 @@ func (c *UserController) Post() {
 		c.ServeJSON()
 		return
 	}
-	
+
 	o := orm.NewOrm()
 	id, err := o.Insert(&user)
 	if err == nil {
@@ -585,21 +585,21 @@ func (c *UserController) Put() {
 	id, _ := c.GetInt(":id")
 	o := orm.NewOrm()
 	user := models.User{Id: id}
-	
+
 	if o.Read(&user) != nil {
 		c.Ctx.Output.Status = 404
 		c.Data["json"] = map[string]string{"error": "用户不存在"}
 		c.ServeJSON()
 		return
 	}
-	
+
 	if err := web.BindJSON(&c.Controller, &user); err != nil {
 		c.Ctx.Output.Status = 400
 		c.Data["json"] = map[string]string{"error": err.Error()}
 		c.ServeJSON()
 		return
 	}
-	
+
 	o.Update(&user)
 	c.Data["json"] = user
 	c.ServeJSON()
@@ -610,7 +610,7 @@ func (c *UserController) Delete() {
 	id, _ := c.GetInt(":id")
 	o := orm.NewOrm()
 	user := models.User{Id: id}
-	
+
 	if o.Read(&user) == nil {
 		o.Delete(&user)
 		c.Data["json"] = map[string]string{"message": "删除成功"}

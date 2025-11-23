@@ -12,7 +12,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 基础语法
   '/basics/': [
     {
@@ -39,7 +39,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 进阶主题
   '/advanced/': [
     {
@@ -55,7 +55,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 标准库
   '/standard-library/': [
     {
@@ -76,7 +76,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 数据库操作
   '/database/': [
     {
@@ -92,7 +92,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // Web 开发
   '/web-development/': [
     {
@@ -112,7 +112,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 微服务
   '/microservices/': [
     {
@@ -128,7 +128,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 运维部署
   '/devops/': [
     {
@@ -144,7 +144,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 实战项目
   '/projects/': [
     {
@@ -159,7 +159,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  
+
   // 学习资源
   '/resources/': [
     {
