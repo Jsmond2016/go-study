@@ -179,8 +179,36 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         { text: '总览', link: '/projects/' },
         { text: '01. TODO API 项目', link: '/projects/01-todo-api' },
-        { text: '02. 博客系统项目', link: '/projects/02-blog-system' },
-        { text: '03. 电商系统项目', link: '/projects/03-e-commerce' },
+        {
+          text: '02. 博客系统项目',
+          collapsed: false,
+          items: [
+            { text: '项目概述', link: '/projects/blog-system/' },
+            { text: '01. 环境搭建', link: '/projects/blog-system/01-setup' },
+            { text: '02. 数据模型设计', link: '/projects/blog-system/02-models' },
+            { text: '03. 用户认证', link: '/projects/blog-system/03-auth' },
+            { text: '04. 文章管理', link: '/projects/blog-system/04-articles' },
+            { text: '05. 评论系统', link: '/projects/blog-system/05-comments' },
+            { text: '06. 文件上传', link: '/projects/blog-system/06-upload' },
+            { text: '07. 搜索功能', link: '/projects/blog-system/07-search' },
+            { text: '08. 部署优化', link: '/projects/blog-system/08-deployment' }
+          ]
+        },
+        {
+          text: '03. 电商系统项目',
+          collapsed: false,
+          items: [
+            { text: '项目概述', link: '/projects/e-commerce/' },
+            { text: '01. 环境搭建', link: '/projects/e-commerce/01-setup' },
+            { text: '02. 数据模型设计', link: '/projects/e-commerce/02-models' },
+            { text: '03. 商品管理', link: '/projects/e-commerce/03-products' },
+            { text: '04. 购物车', link: '/projects/e-commerce/04-cart' },
+            { text: '05. 订单系统', link: '/projects/e-commerce/05-orders' },
+            { text: '06. 支付集成', link: '/projects/e-commerce/06-payment' },
+            { text: '07. 库存管理', link: '/projects/e-commerce/07-inventory' },
+            { text: '08. 部署优化', link: '/projects/e-commerce/08-deployment' }
+          ]
+        },
         { text: '04. 聊天应用项目', link: '/projects/04-chat-app' }
       ]
     }
