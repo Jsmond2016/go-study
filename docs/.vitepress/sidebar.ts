@@ -111,20 +111,45 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '06. 数据验证', link: '/web-development/06-gin-validation' },
         { text: '07. 认证授权', link: '/web-development/07-gin-auth' },
         { text: '08. REST API 设计', link: '/web-development/08-rest-api' },
-        { text: '09. Gin 数据库操作', link: '/web-development/09-gin-database' }
+        { text: '09. Gin 数据库操作', link: '/web-development/09-gin-database' },
+        {
+          text: '10. Web 开发拓展框架',
+          collapsed: false,
+          items: [
+            { text: '总览', link: '/web-development/web-development-frameworks/' },
+            { text: '01. Beego 框架', link: '/web-development/web-development-frameworks/01-beego' },
+            { text: '02. Iris 框架', link: '/web-development/web-development-frameworks/02-iris' }
+          ]
+        }
       ]
     }
   ],
 
-  // Web 开发拓展框架
-  '/web-development-frameworks/': [
+  // Web 开发拓展框架（子目录页面访问时使用）
+  '/web-development/web-development-frameworks/': [
     {
-      text: 'Web 开发拓展框架',
+      text: 'Web 开发',
       collapsed: false,
       items: [
-        { text: '总览', link: '/web-development-frameworks/' },
-        { text: '01. Beego 框架', link: '/web-development-frameworks/01-beego' },
-        { text: '02. Iris 框架', link: '/web-development-frameworks/02-iris' }
+        { text: '总览', link: '/web-development/' },
+        { text: '01. HTTP 服务器', link: '/web-development/01-http-server' },
+        { text: '02. Gin 基础', link: '/web-development/02-gin-basics' },
+        { text: '03. Gin 路由', link: '/web-development/03-gin-routing' },
+        { text: '04. Gin 中间件', link: '/web-development/04-gin-middleware' },
+        { text: '05. Gin 模板', link: '/web-development/05-gin-template' },
+        { text: '06. 数据验证', link: '/web-development/06-gin-validation' },
+        { text: '07. 认证授权', link: '/web-development/07-gin-auth' },
+        { text: '08. REST API 设计', link: '/web-development/08-rest-api' },
+        { text: '09. Gin 数据库操作', link: '/web-development/09-gin-database' },
+        {
+          text: '10. Web 开发拓展框架',
+          collapsed: false,
+          items: [
+            { text: '总览', link: '/web-development/web-development-frameworks/' },
+            { text: '01. Beego 框架', link: '/web-development/web-development-frameworks/01-beego' },
+            { text: '02. Iris 框架', link: '/web-development/web-development-frameworks/02-iris' }
+          ]
+        }
       ]
     }
   ],

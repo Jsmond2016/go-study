@@ -91,7 +91,7 @@ func main() {
 
 完成基础 Web 开发后，可以学习其他框架：
 
-- [Web 开发拓展框架](../web-development-frameworks/) - Beego、Iris 等框架
+- [Web 开发拓展框架](./web-development-frameworks/) - Beego、Iris 等框架
 
 ## ⏭️ 下一阶段
 
