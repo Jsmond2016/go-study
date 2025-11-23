@@ -163,12 +163,13 @@ go-study/
 │   ├── projects/            # 实战项目
 │   ├── guide/               # 学习指南
 │   └── resources/           # 学习资源
-├── examples/                 # 代码示例
+├── examples/                 # 代码示例（与文档对应）
 │   ├── basics/              # 基础语法示例
 │   ├── standard-library/    # 标准库示例
 │   ├── web-development/     # Web 开发示例
-│   └── projects/            # 项目示例
-├── code/                     # 练习代码
+│   ├── database/            # 数据库示例
+│   ├── projects/            # 项目示例
+│   └── microservices/       # 微服务示例
 ├── tools/                    # 工具脚本
 └── docs/.vitepress/          # VitePress 配置
 ```
