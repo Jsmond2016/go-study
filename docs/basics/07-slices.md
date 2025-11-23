@@ -1,487 +1,567 @@
-# Golang 遍历操作详解
+---
+title: 切片
+difficulty: intermediate
+duration: "4-5小时"
+prerequisites: ["变量与常量", "数据类型", "数组"]
+tags: ["切片", "动态数组", "扩容", "内存管理"]
+---
 
-## 概述
+# 切片
 
-Go 语言提供了多种遍历数据结构的方式，主要通过 `for` 循环和 `for...range` 语法来实现。本文将详细介绍 Go 语言中各种数据结构的遍历方法，特别关注字符和数组的遍历。
+切片（Slice）是 Go 语言中最重要的数据结构之一，提供了动态数组的功能。切片比数组更灵活，是 Go 程序中处理序列数据的首选方式。
 
-## 1. 基础遍历语法
+## 📋 学习目标
 
-### 1.1 传统 for 循环
-```go
-// 传统索引遍历
-for i := 0; i < len(slice); i++ {
-    fmt.Printf("索引: %d, 值: %v\n", i, slice[i])
-}
-```
+- [ ] 理解切片的概念和用途
+- [ ] 掌握切片的声明和初始化
+- [ ] 理解切片的底层实现原理
+- [ ] 学会切片的常用操作
+- [ ] 掌握切片的扩容机制
+- [ ] 理解切片的内存管理
+- [ ] 学会使用多维切片
 
-### 1.2 for...range 循环
-```go
-// range 遍历（推荐）
-for index, value := range collection {
-    fmt.Printf("索引: %d, 值: %v\n", index, value)
-}
+## 🎯 切片基础
 
-// 只需要值
-for _, value := range collection {
-    fmt.Printf("值: %v\n", value)
-}
+### 什么是切片
 
-// 只需要索引
-for index := range collection {
-    fmt.Printf("索引: %d\n", index)
-}
-```
+切片是对数组的抽象，提供了动态大小的序列。切片包含三个部分：
+- **指针**：指向底层数组
+- **长度（length）**：切片中元素的数量
+- **容量（capacity）**：底层数组从切片起始位置到数组末尾的元素数量
 
-## 2. 字符串遍历
-
-### 2.1 按字节遍历（ASCII 字符）
-```go
-str := "Hello"
-
-// 传统方式（按字节）
-for i := 0; i < len(str); i++ {
-    fmt.Printf("索引: %d, 字符: %c\n", i, str[i])
-}
-
-// 输出结果：
-// 索引: 0, 字符: H
-// 索引: 1, 字符: e
-// 索引: 2, 字符: l
-// 索引: 3, 字符: l
-// 索引: 4, 字符: o
-
-// range 方式（按字节）
-for i, b := range []byte(str) {
-    fmt.Printf("索引: %d, 字节: %c\n", i, b)
-}
-
-// 输出结果：
-// 索引: 0, 字节: H
-// 索引: 1, 字节: e
-// 索引: 2, 字节: l
-// 索引: 3, 字节: l
-// 索引: 4, 字节: o
-```
-
-### 2.2 按字符遍历（Unicode）
-```go
-str := "你好，世界"
-
-// range 方式（推荐，支持 Unicode）
-for i, char := range str {
-    fmt.Printf("索引: %d, 字符: %c, Unicode: %U\n", i, char, char)
-}
-
-// 输出结果：
-// 索引: 0, 字符: 你, Unicode: U+4F60
-// 索引: 3, 字符: 好, Unicode: U+597D
-// 索引: 6, 字符: ，, Unicode: U+FF0C
-// 索引: 9, 字符: 世, Unicode: U+4E16
-// 索引: 12, 字符: 界, Unicode: U+754C
-
-// 只获取字符
-for _, char := range str {
-    fmt.Printf("字符: %c\n", char)
-}
-
-// 输出结果：
-// 字符: 你
-// 字符: 好
-// 字符: ，
-// 字符: 世
-// 字符: 界
-```
-
-### 2.3 字符串遍历示例
 ```go
 package main
 
-import (
-    "fmt"
-    "unicode/utf8"
-)
+import "fmt"
 
 func main() {
-    // ASCII 字符串
-    asciiStr := "Hello Go"
-    fmt.Println("ASCII 字符串遍历:")
-    for i, char := range asciiStr {
-        fmt.Printf("位置: %d, 字符: %c\n", i, char)
-    }
-    
-    // 输出结果：
-    // ASCII 字符串遍历:
-    // 位置: 0, 字符: H
-    // 位置: 1, 字符: e
-    // 位置: 2, 字符: l
-    // 位置: 3, 字符: l
-    // 位置: 4, 字符: o
-    // 位置: 5, 字符:  
-    // 位置: 6, 字符: G
-    // 位置: 7, 字符: o
-    
-    // Unicode 字符串
-    unicodeStr := "你好，Go语言"
-    fmt.Println("\nUnicode 字符串遍历:")
-    for i, char := range unicodeStr {
-        fmt.Printf("位置: %d, 字符: %c, 字节数: %d\n", 
-            i, char, utf8.RuneLen(char))
-    }
-    
-    // 输出结果：
-    // Unicode 字符串遍历:
-    // 位置: 0, 字符: 你, 字节数: 3
-    // 位置: 3, 字符: 好, 字节数: 3
-    // 位置: 6, 字符: ，, 字节数: 3
-    // 位置: 9, 字符: G, 字节数: 1
-    // 位置: 10, 字符: o, 字节数: 1
-    // 位置: 11, 字符: 语, 字节数: 3
-    // 位置: 14, 字符: 言, 字节数: 3
-    
-    // 获取字符串长度
-    fmt.Printf("\n字节长度: %d\n", len(unicodeStr))
-    fmt.Printf("字符数量: %d\n", utf8.RuneCountInString(unicodeStr))
-    
-    // 输出结果：
-    // 字节长度: 17
-    // 字符数量: 7
+	// 声明切片（nil 切片）
+	var slice1 []int
+	fmt.Printf("nil 切片: %v (len=%d, cap=%d, isNil=%t)\n", 
+		slice1, len(slice1), cap(slice1), slice1 == nil)
+	
+	// 直接初始化
+	slice2 := []int{1, 2, 3, 4, 5}
+	fmt.Printf("直接初始化: %v (len=%d, cap=%d)\n", 
+		slice2, len(slice2), cap(slice2))
+	
+	// 使用 make 创建
+	slice3 := make([]int, 5)        // 长度为5，容量为5
+	slice4 := make([]int, 3, 10)    // 长度为3，容量为10
+	fmt.Printf("make 创建: %v (len=%d, cap=%d)\n", 
+		slice3, len(slice3), cap(slice3))
+	fmt.Printf("make 指定容量: %v (len=%d, cap=%d)\n", 
+		slice4, len(slice4), cap(slice4))
 }
 ```
 
-## 3. 数组遍历
-
-### 3.1 固定长度数组
-```go
-// 声明数组
-var arr [5]int = [5]int{1, 2, 3, 4, 5}
-
-// 传统 for 循环遍历
-fmt.Println("传统 for 循环:")
-for i := 0; i < len(arr); i++ {
-    fmt.Printf("arr[%d] = %d\n", i, arr[i])
-}
-
-// 输出结果：
-// 传统 for 循环:
-// arr[0] = 1
-// arr[1] = 2
-// arr[2] = 3
-// arr[3] = 4
-// arr[4] = 5
-
-// range 遍历（推荐）
-fmt.Println("\nrange 遍历:")
-for index, value := range arr {
-    fmt.Printf("arr[%d] = %d\n", index, value)
-}
-
-// 输出结果：
-// range 遍历:
-// arr[0] = 1
-// arr[1] = 2
-// arr[2] = 3
-// arr[3] = 4
-// arr[4] = 5
-```
-
-### 3.2 多维数组遍历
-```go
-// 二维数组
-var matrix [3][3]int = [3][3]int{
-    {1, 2, 3},
-    {4, 5, 6},
-    {7, 8, 9},
-}
-
-// 遍历二维数组
-for i, row := range matrix {
-    for j, value := range row {
-        fmt.Printf("matrix[%d][%d] = %d\n", i, j, value)
-    }
-}
-
-// 输出结果：
-// matrix[0][0] = 1
-// matrix[0][1] = 2
-// matrix[0][2] = 3
-// matrix[1][0] = 4
-// matrix[1][1] = 5
-// matrix[1][2] = 6
-// matrix[2][0] = 7
-// matrix[2][1] = 8
-// matrix[2][2] = 9
-```
-
-## 4. 切片遍历
-
-### 4.1 基本切片遍历
-```go
-slice := []int{10, 20, 30, 40, 50}
-
-// range 遍历（最常用）
-for index, value := range slice {
-    fmt.Printf("slice[%d] = %d\n", index, value)
-}
-
-// 输出结果：
-// slice[0] = 10
-// slice[1] = 20
-// slice[2] = 30
-// slice[3] = 40
-// slice[4] = 50
-
-// 只遍历值
-for _, value := range slice {
-    fmt.Printf("值: %d\n", value)
-}
-
-// 输出结果：
-// 值: 10
-// 值: 20
-// 值: 30
-// 值: 40
-// 值: 50
-```
-
-### 4.2 切片遍历注意事项
-```go
-slice := []string{"Apple", "Banana", "Cherry"}
-
-// 注意：range 中的 value 是副本
-for i, value := range slice {
-    // 修改 value 不会影响原切片
-    value = value + " Modified"
-    fmt.Printf("索引: %d, 修改后的值: %s\n", i, value)
-}
-
-// 输出结果：
-// 索引: 0, 修改后的值: Apple Modified
-// 索引: 1, 修改后的值: Banana Modified
-// 索引: 2, 修改后的值: Cherry Modified
-
-fmt.Println("原切片:", slice) // 原切片未改变
-
-// 输出结果：
-// 原切片: [Apple Banana Cherry]
-
-// 正确的修改方式
-for i := range slice {
-    slice[i] = slice[i] + " Modified"
-}
-fmt.Println("修改后的切片:", slice)
-
-// 输出结果：
-// 修改后的切片: [Apple Modified Banana Modified Cherry Modified]
-```
-
-## 5. 映射（Map）遍历
-
-### 5.1 基本 Map 遍历
-```go
-m := map[string]int{
-    "Apple":  1,
-    "Banana": 2,
-    "Cherry": 3,
-}
-
-// 遍历键值对
-for key, value := range m {
-    fmt.Printf("%s: %d\n", key, value)
-}
-
-// 可能的输出结果（顺序随机）：
-// Apple: 1
-// Banana: 2
-// Cherry: 3
-
-// 只遍历键
-for key := range m {
-    fmt.Printf("键: %s\n", key)
-}
-
-// 可能的输出结果（顺序随机）：
-// 键: Apple
-// 键: Banana
-// 键: Cherry
-
-// 只遍历值
-for _, value := range m {
-    fmt.Printf("值: %d\n", value)
-}
-
-// 可能的输出结果（顺序随机）：
-// 值: 1
-// 值: 2
-// 值: 3
-```
-
-### 5.2 Map 遍历顺序
-```go
-// 注意：Map 的遍历顺序是随机的
-m := map[int]string{
-    1: "one",
-    2: "two", 
-    3: "three",
-}
-
-fmt.Println("第一次遍历:")
-for k, v := range m {
-    fmt.Printf("%d: %s\n", k, v)
-}
-
-// 可能的输出结果：
-// 第一次遍历:
-// 3: three
-// 1: one
-// 2: two
-
-fmt.Println("\n第二次遍历:")
-for k, v := range m {
-    fmt.Printf("%d: %s\n", k, v)
-}
-
-// 可能的输出结果（顺序可能不同）：
-// 第二次遍历:
-// 2: two
-// 3: three
-// 1: one
-// 两次遍历的顺序可能不同
-```
-
-## 6. 通道（Channel）遍历
+### 从数组创建切片
 
 ```go
-ch := make(chan int)
+package main
 
-// 启动 goroutine 发送数据
-go func() {
-    for i := 0; i < 5; i++ {
-        ch <- i
-    }
-    close(ch)
-}()
+import "fmt"
 
-// 遍历通道（直到通道关闭）
-for value := range ch {
-    fmt.Printf("接收到: %d\n", value)
-}
-
-// 输出结果：
-// 接收到: 0
-// 接收到: 1
-// 接收到: 2
-// 接收到: 3
-// 接收到: 4
-```
-
-## 7. 遍历最佳实践
-
-### 7.1 性能考虑
-```go
-// 对于大型切片，避免不必要的拷贝
-largeSlice := make([]int, 1000000)
-
-// 好的做法：只获取索引
-for i := range largeSlice {
-    // 使用 largeSlice[i]
-    process(largeSlice[i])
-}
-
-// 避免的做法：拷贝整个值
-// for _, value := range largeSlice {
-//     process(value) // 每次都会拷贝
-// }
-```
-
-### 7.2 并发安全遍历
-```go
-// 在遍历过程中修改集合是危险的
-slice := []int{1, 2, 3, 4, 5}
-
-// 危险的做法
-for i, value := range slice {
-    if value == 3 {
-        // 不能在遍历过程中修改切片
-        // slice = append(slice, 6) // 会导致未定义行为
-        fmt.Printf("找到: %d\n", value)
-    }
-}
-
-// 安全的做法：创建副本
-safeSlice := make([]int, len(slice))
-copy(safeSlice, slice)
-
-for i, value := range safeSlice {
-    if value == 3 {
-        slice = append(slice, 6) // 安全
-        fmt.Printf("找到: %d\n", value)
-    }
+func main() {
+	// 创建数组
+	arr := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	
+	// 从数组创建切片
+	slice1 := arr[2:7]  // 包含索引2到6的元素
+	fmt.Printf("arr[2:7] = %v\n", slice1)
+	
+	// 切片的切片
+	slice2 := slice1[1:4]  // 从现有切片创建新切片
+	fmt.Printf("slice1[1:4] = %v\n", slice2)
+	
+	// 完整切片表达式
+	slice3 := arr[2:7:8]  // [low:high:max]，容量为 max-low
+	fmt.Printf("arr[2:7:8] = %v (len=%d, cap=%d)\n", 
+		slice3, len(slice3), cap(slice3))
 }
 ```
 
-## 8. 常用遍历模式
+## 🔍 切片的底层原理
 
-### 8.1 过滤模式
+### 切片的结构
+
+切片本身不存储数据，而是引用底层数组的一部分。
+
 ```go
+package main
+
+import "fmt"
+
+func main() {
+	// 创建一个切片
+	s := make([]int, 3, 5)
+	s[0], s[1], s[2] = 10, 20, 30
+	
+	fmt.Printf("原始切片: %v (len=%d, cap=%d)\n", s, len(s), cap(s))
+	
+	// 创建新切片，共享底层数组
+	s2 := s[1:3]
+	fmt.Printf("新切片: %v (len=%d, cap=%d)\n", s2, len(s2), cap(s2))
+	
+	// 修改新切片会影响原切片（共享底层数组）
+	s2[0] = 99
+	fmt.Printf("修改新切片后:\n")
+	fmt.Printf("原切片: %v\n", s)
+	fmt.Printf("新切片: %v\n", s2)
+}
+```
+
+### 切片的零值
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var s []int
+	fmt.Printf("零值切片: %v\n", s)
+	fmt.Printf("是否为 nil: %t\n", s == nil)
+	fmt.Printf("长度: %d, 容量: %d\n", len(s), cap(s))
+	
+	// nil 切片可以安全使用
+	s = append(s, 1, 2, 3)
+	fmt.Printf("append 后: %v\n", s)
+}
+```
+
+## 🛠️ 切片操作
+
+### 添加元素（append）
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	slice := []int{1, 2, 3}
+	fmt.Printf("原始切片: %v (len=%d, cap=%d)\n", 
+		slice, len(slice), cap(slice))
+	
+	// 添加单个元素
+	slice = append(slice, 4)
+	fmt.Printf("添加单个元素: %v (len=%d, cap=%d)\n", 
+		slice, len(slice), cap(slice))
+	
+	// 添加多个元素
+	slice = append(slice, 5, 6, 7)
+	fmt.Printf("添加多个元素: %v\n", slice)
+	
+	// 添加另一个切片
+	another := []int{8, 9, 10}
+	slice = append(slice, another...)
+	fmt.Printf("添加另一个切片: %v\n", slice)
+}
+```
+
+### 删除元素
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	slice := []int{1, 2, 3, 4, 5}
+	fmt.Printf("原始切片: %v\n", slice)
+	
+	// 删除索引为 2 的元素
+	index := 2
+	slice = append(slice[:index], slice[index+1:]...)
+	fmt.Printf("删除索引 %d: %v\n", index, slice)
+	
+	// 删除第一个元素
+	slice = slice[1:]
+	fmt.Printf("删除第一个元素: %v\n", slice)
+	
+	// 删除最后一个元素
+	slice = slice[:len(slice)-1]
+	fmt.Printf("删除最后一个元素: %v\n", slice)
+	
+	// 删除指定范围的元素
+	slice = []int{1, 2, 3, 4, 5, 6, 7, 8}
+	slice = append(slice[:2], slice[5:]...)  // 删除索引2到4
+	fmt.Printf("删除范围 [2:5]: %v\n", slice)
+}
+```
+
+### 复制切片
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	original := []int{1, 2, 3, 4, 5}
+	
+	// 深拷贝
+	copy1 := make([]int, len(original))
+	copy(copy1, original)
+	fmt.Printf("原切片: %v\n", original)
+	fmt.Printf("深拷贝: %v\n", copy1)
+	
+	// 修改拷贝不影响原切片
+	copy1[0] = 99
+	fmt.Printf("修改拷贝后:\n")
+	fmt.Printf("原切片: %v\n", original)
+	fmt.Printf("深拷贝: %v\n", copy1)
+	
+	// 浅拷贝（共享底层数组）
+	copy2 := original
+	copy2[0] = 88
+	fmt.Printf("浅拷贝后:\n")
+	fmt.Printf("原切片: %v\n", original)  // 也被修改了
+	fmt.Printf("浅拷贝: %v\n", copy2)
+}
+```
+
+### 切片截取
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	slice := []int{1, 2, 3, 4, 5}
+	
+	// 截取切片
+	slice1 := slice[1:4]    // [2,3,4]
+	slice2 := slice[2:]     // [3,4,5]
+	slice3 := slice[:3]     // [1,2,3]
+	
+	fmt.Printf("原切片: %v\n", slice)
+	fmt.Printf("slice[1:4]: %v\n", slice1)
+	fmt.Printf("slice[2:]: %v\n", slice2)
+	fmt.Printf("slice[:3]: %v\n", slice3)
+	
+	// 注意：截取的切片共享底层数组
+	slice1[0] = 99
+	fmt.Printf("修改 slice1[0] 后:\n")
+	fmt.Printf("原切片: %v\n", slice)  // 也被修改了
+}
+```
+
+## 📈 切片扩容
+
+### 扩容机制
+
+当切片容量不足时，Go 会自动扩容。扩容策略：
+- 如果容量 < 1024，容量翻倍
+- 如果容量 >= 1024，每次增加 25%
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var s []int
+	
+	fmt.Println("演示切片扩容:")
+	for i := 0; i < 20; i++ {
+		oldCap := cap(s)
+		s = append(s, i)
+		newCap := cap(s)
+		
+		if oldCap != newCap {
+			fmt.Printf("添加 %d: len=%d, cap=%d -> %d (扩容)\n", 
+				i, len(s), oldCap, newCap)
+		}
+	}
+}
+```
+
+### 预分配容量
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 不预分配容量
+	var s1 []int
+	for i := 0; i < 1000; i++ {
+		s1 = append(s1, i)
+	}
+	fmt.Printf("不预分配: 最终 cap=%d\n", cap(s1))
+	
+	// 预分配容量（性能更好）
+	s2 := make([]int, 0, 1000)
+	for i := 0; i < 1000; i++ {
+		s2 = append(s2, i)
+	}
+	fmt.Printf("预分配: 最终 cap=%d\n", cap(s2))
+}
+```
+
+## 💾 内存管理
+
+### 避免内存泄漏
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 大切片
+	large := make([]int, 1000)
+	for i := range large {
+		large[i] = i
+	}
+	
+	// 只使用前10个元素
+	small := large[:10]
+	fmt.Printf("small: len=%d, cap=%d\n", len(small), cap(small))
+	
+	// 问题：small 仍然引用整个 large 的底层数组
+	// 解决：创建新的切片，只复制需要的元素
+	small2 := make([]int, 10)
+	copy(small2, large[:10])
+	fmt.Printf("small2: len=%d, cap=%d\n", len(small2), cap(small2))
+	
+	// 现在 large 可以被垃圾回收
+	large = nil
+}
+```
+
+### 切片作为函数参数
+
+```go
+package main
+
+import "fmt"
+
+// 修改切片（会影响原切片）
+func modifySlice(s []int) {
+	if len(s) > 0 {
+		s[0] = 999
+	}
+}
+
+// 追加元素（不会影响原切片，除非重新赋值）
+func appendToSlice(s []int) {
+	s = append(s, 100)
+	fmt.Printf("函数内: %v (len=%d, cap=%d)\n", s, len(s), cap(s))
+}
+
+func main() {
+	slice := []int{1, 2, 3}
+	fmt.Printf("原始: %v\n", slice)
+	
+	// 修改元素会影响原切片
+	modifySlice(slice)
+	fmt.Printf("修改后: %v\n", slice)
+	
+	// 追加元素不会影响原切片（除非重新赋值）
+	appendToSlice(slice)
+	fmt.Printf("追加后: %v\n", slice)  // 未改变
+	
+	// 需要重新赋值
+	slice = append(slice, 200)
+	fmt.Printf("重新赋值后: %v\n", slice)
+}
+```
+
+## 🔄 多维切片
+
+### 二维切片
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 创建二维切片
+	matrix := make([][]int, 3)
+	for i := range matrix {
+		matrix[i] = make([]int, 4)
+		for j := range matrix[i] {
+			matrix[i][j] = i*4 + j + 1
+		}
+	}
+	
+	fmt.Println("二维切片:")
+	for i, row := range matrix {
+		fmt.Printf("  行 %d: %v\n", i, row)
+	}
+	
+	// 不规则的二维切片
+	jagged := [][]int{
+		{1, 2, 3},
+		{4, 5},
+		{6, 7, 8, 9},
+	}
+	
+	fmt.Println("\n不规则二维切片:")
+	for i, row := range jagged {
+		fmt.Printf("  行 %d: %v\n", i, row)
+	}
+	
+	// 动态添加行和列
+	matrix = append(matrix, []int{13, 14, 15, 16})  // 添加新行
+	matrix[0] = append(matrix[0], 17)               // 添加列
+	
+	fmt.Println("\n添加后的矩阵:")
+	for i, row := range matrix {
+		fmt.Printf("  行 %d: %v\n", i, row)
+	}
+}
+```
+
+## 🎯 常用操作模式
+
+### 过滤
+
+```go
+func filter(slice []int, predicate func(int) bool) []int {
+	result := make([]int, 0)
+	for _, v := range slice {
+		if predicate(v) {
+			result = append(result, v)
+		}
+	}
+	return result
+}
+
+// 使用
 numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-var evenNumbers []int
-
-for _, num := range numbers {
-    if num%2 == 0 {
-        evenNumbers = append(evenNumbers, num)
-    }
-}
-fmt.Println("偶数:", evenNumbers)
-
-// 输出结果：
-// 偶数: [2 4 6 8 10]
+evens := filter(numbers, func(n int) bool {
+	return n%2 == 0
+})
 ```
 
-### 8.2 映射转换模式
-```go
-words := []string{"hello", "world", "golang"}
-var upperWords []string
+### 映射转换
 
-for _, word := range words {
-    upperWords = append(upperWords, strings.ToUpper(word))
+```go
+func mapSlice(slice []int, transform func(int) int) []int {
+	result := make([]int, len(slice))
+	for i, v := range slice {
+		result[i] = transform(v)
+	}
+	return result
 }
-fmt.Println("大写:", upperWords)
 
-// 输出结果：
-// 大写: [HELLO WORLD GOLANG]
-```
-
-### 8.3 累积模式
-```go
+// 使用
 numbers := []int{1, 2, 3, 4, 5}
-sum := 0
-
-for _, num := range numbers {
-    sum += num
-}
-fmt.Println("总和:", sum)
-
-// 输出结果：
-// 总和: 15
+doubled := mapSlice(numbers, func(n int) int {
+	return n * 2
+})
 ```
 
-## 9. 总结
+### 查找
 
-### 9.1 字符遍历选择
-- **ASCII 字符串**：直接使用 `for i := 0; i < len(str); i++`
-- **Unicode 字符串**：使用 `for i, char := range str`（推荐）
+```go
+func contains(slice []int, item int) bool {
+	for _, v := range slice {
+		if v == item {
+			return true
+		}
+	}
+	return false
+}
 
-### 9.2 数组/切片遍历选择
-- **需要索引**：`for i, v := range slice`
-- **只需要值**：`for _, v := range slice`
-- **需要修改原值**：`for i := range slice { slice[i] = newValue }`
-- **性能敏感**：使用传统 for 循环避免拷贝
+func indexOf(slice []int, item int) int {
+	for i, v := range slice {
+		if v == item {
+			return i
+		}
+	}
+	return -1
+}
+```
 
-### 9.3 推荐做法
-1. 优先使用 `for...range` 语法，代码更简洁
-2. 注意 Unicode 字符的处理
-3. 避免在遍历过程中修改集合
-4. 对于大型数据结构，考虑性能影响
-5. 使用有意义的变量名提高代码可读性
+## ⚠️ 常见陷阱
 
-这些遍历操作是 Go 语言编程的基础，掌握它们对于高效编写 Go 代码至关重要。
+### 1. 在循环中使用 append
+
+```go
+// ❌ 错误：可能导致意外的行为
+var result []int
+for i := 0; i < 3; i++ {
+	result = append(result, i)
+	// 如果 result 在循环外被其他 goroutine 修改，会有问题
+}
+
+// ✅ 正确：预分配容量
+result := make([]int, 0, 3)
+for i := 0; i < 3; i++ {
+	result = append(result, i)
+}
+```
+
+### 2. 共享底层数组
+
+```go
+// 注意：多个切片可能共享底层数组
+s1 := []int{1, 2, 3, 4, 5}
+s2 := s1[1:4]  // 共享底层数组
+
+s2[0] = 99
+fmt.Println(s1)  // [1, 99, 3, 4, 5] - s1 也被修改了
+
+// 如果需要独立，使用 copy
+s3 := make([]int, len(s1))
+copy(s3, s1)
+```
+
+### 3. 切片作为函数参数
+
+```go
+// 注意：切片是引用类型，但 append 需要重新赋值
+func addElement(s []int, val int) {
+	s = append(s, val)  // 不会影响原切片
+	// 需要返回新切片
+}
+
+// 正确做法
+func addElement(s []int, val int) []int {
+	return append(s, val)
+}
+```
+
+## 🏃‍♂️ 实践练习
+
+### 练习 1: 实现栈
+
+使用切片实现一个栈数据结构。
+
+### 练习 2: 切片去重
+
+实现一个函数，去除切片中的重复元素。
+
+### 练习 3: 切片合并
+
+实现一个函数，合并多个切片。
+
+## 🤔 思考题
+
+1. 切片和数组有什么区别？
+2. 切片的扩容机制是什么？
+3. 什么时候应该预分配切片容量？
+4. 如何避免切片的内存泄漏？
+5. 切片作为函数参数时需要注意什么？
+
+## 📚 扩展阅读
+
+- [Go 切片官方文档](https://golang.org/ref/spec#Slice_types)
+- [切片内部实现](https://github.com/golang/go/blob/master/src/runtime/slice.go)
+- [切片最佳实践](https://github.com/golang/go/wiki/SliceTricks)
+
+## ⏭️ 下一章节
+
+[映射](./08-maps.md) → 学习 Go 语言的映射（Map）数据结构
+
+---
+
+**💡 提示**: 切片是 Go 语言中最常用的数据结构，理解其底层原理和内存管理对于编写高效的 Go 程序至关重要！
