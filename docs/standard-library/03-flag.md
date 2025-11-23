@@ -35,10 +35,10 @@ func main() {
 	name := flag.String("name", "Guest", "用户姓名")
 	age := flag.Int("age", 0, "用户年龄")
 	married := flag.Bool("married", false, "是否已婚")
-	
+
 	// 解析命令行参数
 	flag.Parse()
-	
+
 	// 使用标志值（注意：返回的是指针）
 	fmt.Printf("姓名: %s\n", *name)
 	fmt.Printf("年龄: %d\n", *age)
@@ -65,21 +65,21 @@ import (
 func main() {
 	// 字符串标志
 	name := flag.String("name", "default", "字符串标志")
-	
+
 	// 整数标志
 	age := flag.Int("age", 0, "整数标志")
-	
+
 	// 布尔标志
 	verbose := flag.Bool("verbose", false, "详细输出")
-	
+
 	// 浮点数标志
 	height := flag.Float64("height", 0.0, "身高（米）")
-	
+
 	// 持续时间标志
 	timeout := flag.Duration("timeout", 30*time.Second, "超时时间")
-	
+
 	flag.Parse()
-	
+
 	fmt.Printf("姓名: %s\n", *name)
 	fmt.Printf("年龄: %d\n", *age)
 	fmt.Printf("详细输出: %t\n", *verbose)
@@ -108,7 +108,7 @@ var (
 
 func main() {
 	flag.Parse()
-	
+
 	fmt.Printf("姓名: %s\n", *name)
 	fmt.Printf("年龄: %d\n", *age)
 	fmt.Printf("已婚: %t\n", *married)
@@ -127,12 +127,12 @@ import (
 
 func main() {
 	flag.Parse()
-	
+
 	// 获取非选项参数
 	args := flag.Args()
 	fmt.Printf("非选项参数: %v\n", args)
 	fmt.Printf("参数数量: %d\n", flag.NArg())
-	
+
 	// 访问特定参数
 	if flag.NArg() > 0 {
 		fmt.Printf("第一个参数: %s\n", flag.Arg(0))
@@ -164,10 +164,10 @@ func main() {
 		fmt.Fprintf(os.Stderr, "选项:\n")
 		flag.PrintDefaults()
 	}
-	
+
 	name := flag.String("name", "Guest", "用户姓名")
 	flag.Parse()
-	
+
 	fmt.Printf("姓名: %s\n", *name)
 }
 ```
@@ -189,11 +189,11 @@ import (
 func main() {
 	// 创建新的标志集
 	fs := flag.NewFlagSet("demo", flag.ExitOnError)
-	
+
 	// 在标志集中定义标志
 	name := fs.String("name", "default", "名称")
 	age := fs.Int("age", 0, "年龄")
-	
+
 	// 解析参数
 	args := []string{"-name", "张三", "-age", "30"}
 	err := fs.Parse(args)
@@ -201,7 +201,7 @@ func main() {
 		fmt.Printf("解析错误: %v\n", err)
 		return
 	}
-	
+
 	fmt.Printf("姓名: %s\n", *name)
 	fmt.Printf("年龄: %d\n", *age)
 }
@@ -220,13 +220,13 @@ import (
 func main() {
 	// ExitOnError: 遇到错误时调用 os.Exit(2)
 	fs1 := flag.NewFlagSet("exit", flag.ExitOnError)
-	
+
 	// ContinueOnError: 遇到错误时返回错误，不退出
 	fs2 := flag.NewFlagSet("continue", flag.ContinueOnError)
-	
+
 	// PanicOnError: 遇到错误时 panic
 	fs3 := flag.NewFlagSet("panic", flag.PanicOnError)
-	
+
 	_ = fs1
 	_ = fs2
 	_ = fs3
@@ -250,9 +250,9 @@ func main() {
 		fmt.Println("命令: user, admin")
 		os.Exit(1)
 	}
-	
+
 	command := os.Args[1]
-	
+
 	switch command {
 	case "user":
 		handleUserCommand(os.Args[2:])
@@ -268,9 +268,9 @@ func handleUserCommand(args []string) {
 	fs := flag.NewFlagSet("user", flag.ExitOnError)
 	username := fs.String("username", "", "用户名")
 	password := fs.String("password", "", "密码")
-	
+
 	fs.Parse(args)
-	
+
 	fmt.Printf("用户登录: %s\n", *username)
 }
 
@@ -278,9 +278,9 @@ func handleAdminCommand(args []string) {
 	fs := flag.NewFlagSet("admin", flag.ExitOnError)
 	admin := fs.String("admin", "", "管理员用户名")
 	level := fs.Int("level", 1, "权限级别")
-	
+
 	fs.Parse(args)
-	
+
 	fmt.Printf("管理员: %s, 级别: %d\n", *admin, *level)
 }
 ```
@@ -313,9 +313,9 @@ func (s *stringList) Set(value string) error {
 func main() {
 	var tags stringList
 	flag.Var(&tags, "tag", "标签（可多次使用）")
-	
+
 	flag.Parse()
-	
+
 	fmt.Printf("标签: %v\n", tags)
 }
 ```
@@ -345,14 +345,14 @@ func main() {
 		https    = flag.Bool("https", false, "启用HTTPS")
 		timeout  = flag.Duration("timeout", 30*time.Second, "请求超时")
 	)
-	
+
 	flag.Parse()
-	
+
 	scheme := "http"
 	if *https {
 		scheme = "https"
 	}
-	
+
 	fmt.Printf("服务器地址: %s://%s:%d\n", scheme, *host, *port)
 	fmt.Printf("超时时间: %v\n", *timeout)
 }
@@ -377,9 +377,9 @@ func main() {
 		username = flag.String("db-user", "root", "数据库用户名")
 		password = flag.String("db-pass", "", "数据库密码")
 	)
-	
+
 	flag.Parse()
-	
+
 	fmt.Printf("数据库: %s@%s:%d/%s\n", *username, *host, *port, *database)
 }
 ```
@@ -401,9 +401,9 @@ func main() {
 		debug      = flag.Bool("debug", false, "调试模式")
 		logLevel   = flag.String("log-level", "info", "日志级别")
 	)
-	
+
 	flag.Parse()
-	
+
 	fmt.Printf("配置文件: %s\n", *configFile)
 	fmt.Printf("运行环境: %s\n", *env)
 	fmt.Printf("调试模式: %t\n", *debug)

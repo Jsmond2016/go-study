@@ -37,19 +37,19 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("整数: %d\n", i)
-	
+
 	// 字符串转 int64（指定进制）
 	i64, err := strconv.ParseInt("123", 10, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("int64: %d\n", i64)
-	
+
 	// 不同进制
 	hex, _ := strconv.ParseInt("FF", 16, 64)
 	oct, _ := strconv.ParseInt("777", 8, 64)
 	bin, _ := strconv.ParseInt("1010", 2, 64)
-	
+
 	fmt.Printf("十六进制 FF: %d\n", hex)
 	fmt.Printf("八进制 777: %d\n", oct)
 	fmt.Printf("二进制 1010: %d\n", bin)
@@ -70,11 +70,11 @@ func main() {
 	// int 转字符串
 	s := strconv.Itoa(123)
 	fmt.Printf("字符串: %s\n", s)
-	
+
 	// int64 转字符串（指定进制）
 	s2 := strconv.FormatInt(255, 16) // 十六进制
 	fmt.Printf("255 的十六进制: %s\n", s2)
-	
+
 	s3 := strconv.FormatInt(255, 2) // 二进制
 	fmt.Printf("255 的二进制: %s\n", s3)
 }
@@ -97,7 +97,7 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("浮点数: %f\n", f)
-	
+
 	// 字符串转 float32
 	f32, err := strconv.ParseFloat("3.14", 32)
 	if err != nil {
@@ -121,12 +121,12 @@ func main() {
 	// float64 转字符串
 	s := strconv.FormatFloat(3.14159, 'f', 2, 64)
 	fmt.Printf("保留2位小数: %s\n", s) // 3.14
-	
+
 	// 格式说明符
 	// 'f': 普通格式
 	// 'e': 科学计数法
 	// 'g': 自动选择最短格式
-	
+
 	s2 := strconv.FormatFloat(1234.567, 'e', 2, 64)
 	fmt.Printf("科学计数法: %s\n", s2) // 1.23e+03
 }
@@ -151,13 +151,13 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("true: %t\n", b1)
-	
+
 	b2, _ := strconv.ParseBool("false")
 	fmt.Printf("false: %t\n", b2)
-	
+
 	b3, _ := strconv.ParseBool("1") // "1", "t", "T", "true", "TRUE" 都是 true
 	fmt.Printf("1: %t\n", b3)
-	
+
 	b4, _ := strconv.ParseBool("0") // "0", "f", "F", "false", "FALSE" 都是 false
 	fmt.Printf("0: %t\n", b4)
 }
@@ -176,7 +176,7 @@ import (
 func main() {
 	s1 := strconv.FormatBool(true)
 	fmt.Printf("true: %s\n", s1) // "true"
-	
+
 	s2 := strconv.FormatBool(false)
 	fmt.Printf("false: %s\n", s2) // "false"
 }
@@ -198,14 +198,14 @@ func main() {
 	// 添加引号
 	quoted := strconv.Quote("Hello, World!")
 	fmt.Printf("带引号: %s\n", quoted) // "Hello, World!"
-	
+
 	// 移除引号
 	unquoted, err := strconv.Unquote(quoted)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("移除引号: %s\n", unquoted) // Hello, World!
-	
+
 	// ASCII 引号
 	asciiQuoted := strconv.QuoteToASCII("你好")
 	fmt.Printf("ASCII 引号: %s\n", asciiQuoted) // "\u4f60\u597d"
@@ -231,7 +231,7 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Printf("uint64: %d\n", u)
-	
+
 	// uint64 转字符串
 	s := strconv.FormatUint(123, 10)
 	fmt.Printf("字符串: %s\n", s)
@@ -251,11 +251,11 @@ import (
 
 func parseSize(sizeStr string) (int64, error) {
 	sizeStr = strings.TrimSpace(sizeStr)
-	
+
 	// 提取数字和单位
 	var numStr string
 	var unit string
-	
+
 	for i, r := range sizeStr {
 		if r >= '0' && r <= '9' || r == '.' {
 			numStr += string(r)
@@ -264,12 +264,12 @@ func parseSize(sizeStr string) (int64, error) {
 			break
 		}
 	}
-	
+
 	num, err := strconv.ParseFloat(numStr, 64)
 	if err != nil {
 		return 0, err
 	}
-	
+
 	multiplier := int64(1)
 	switch unit {
 	case "K", "KB":
@@ -279,7 +279,7 @@ func parseSize(sizeStr string) (int64, error) {
 	case "G", "GB":
 		multiplier = 1024 * 1024 * 1024
 	}
-	
+
 	return int64(num) * multiplier, nil
 }
 
@@ -310,7 +310,7 @@ type Config struct {
 
 func parseConfig(args map[string]string) (*Config, error) {
 	config := &Config{}
-	
+
 	// 解析端口
 	if portStr, ok := args["port"]; ok {
 		port, err := strconv.Atoi(portStr)
@@ -319,7 +319,7 @@ func parseConfig(args map[string]string) (*Config, error) {
 		}
 		config.Port = port
 	}
-	
+
 	// 解析调试模式
 	if debugStr, ok := args["debug"]; ok {
 		debug, err := strconv.ParseBool(debugStr)
@@ -328,7 +328,7 @@ func parseConfig(args map[string]string) (*Config, error) {
 		}
 		config.Debug = debug
 	}
-	
+
 	return config, nil
 }
 ```

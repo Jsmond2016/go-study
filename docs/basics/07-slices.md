@@ -37,20 +37,20 @@ import "fmt"
 func main() {
 	// 声明切片（nil 切片）
 	var slice1 []int
-	fmt.Printf("nil 切片: %v (len=%d, cap=%d, isNil=%t)\n", 
+	fmt.Printf("nil 切片: %v (len=%d, cap=%d, isNil=%t)\n",
 		slice1, len(slice1), cap(slice1), slice1 == nil)
-	
+
 	// 直接初始化
 	slice2 := []int{1, 2, 3, 4, 5}
-	fmt.Printf("直接初始化: %v (len=%d, cap=%d)\n", 
+	fmt.Printf("直接初始化: %v (len=%d, cap=%d)\n",
 		slice2, len(slice2), cap(slice2))
-	
+
 	// 使用 make 创建
 	slice3 := make([]int, 5)        // 长度为5，容量为5
 	slice4 := make([]int, 3, 10)    // 长度为3，容量为10
-	fmt.Printf("make 创建: %v (len=%d, cap=%d)\n", 
+	fmt.Printf("make 创建: %v (len=%d, cap=%d)\n",
 		slice3, len(slice3), cap(slice3))
-	fmt.Printf("make 指定容量: %v (len=%d, cap=%d)\n", 
+	fmt.Printf("make 指定容量: %v (len=%d, cap=%d)\n",
 		slice4, len(slice4), cap(slice4))
 }
 ```
@@ -65,18 +65,18 @@ import "fmt"
 func main() {
 	// 创建数组
 	arr := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-	
+
 	// 从数组创建切片
 	slice1 := arr[2:7]  // 包含索引2到6的元素
 	fmt.Printf("arr[2:7] = %v\n", slice1)
-	
+
 	// 切片的切片
 	slice2 := slice1[1:4]  // 从现有切片创建新切片
 	fmt.Printf("slice1[1:4] = %v\n", slice2)
-	
+
 	// 完整切片表达式
 	slice3 := arr[2:7:8]  // [low:high:max]，容量为 max-low
-	fmt.Printf("arr[2:7:8] = %v (len=%d, cap=%d)\n", 
+	fmt.Printf("arr[2:7:8] = %v (len=%d, cap=%d)\n",
 		slice3, len(slice3), cap(slice3))
 }
 ```
@@ -96,13 +96,13 @@ func main() {
 	// 创建一个切片
 	s := make([]int, 3, 5)
 	s[0], s[1], s[2] = 10, 20, 30
-	
+
 	fmt.Printf("原始切片: %v (len=%d, cap=%d)\n", s, len(s), cap(s))
-	
+
 	// 创建新切片，共享底层数组
 	s2 := s[1:3]
 	fmt.Printf("新切片: %v (len=%d, cap=%d)\n", s2, len(s2), cap(s2))
-	
+
 	// 修改新切片会影响原切片（共享底层数组）
 	s2[0] = 99
 	fmt.Printf("修改新切片后:\n")
@@ -123,7 +123,7 @@ func main() {
 	fmt.Printf("零值切片: %v\n", s)
 	fmt.Printf("是否为 nil: %t\n", s == nil)
 	fmt.Printf("长度: %d, 容量: %d\n", len(s), cap(s))
-	
+
 	// nil 切片可以安全使用
 	s = append(s, 1, 2, 3)
 	fmt.Printf("append 后: %v\n", s)
@@ -141,18 +141,18 @@ import "fmt"
 
 func main() {
 	slice := []int{1, 2, 3}
-	fmt.Printf("原始切片: %v (len=%d, cap=%d)\n", 
+	fmt.Printf("原始切片: %v (len=%d, cap=%d)\n",
 		slice, len(slice), cap(slice))
-	
+
 	// 添加单个元素
 	slice = append(slice, 4)
-	fmt.Printf("添加单个元素: %v (len=%d, cap=%d)\n", 
+	fmt.Printf("添加单个元素: %v (len=%d, cap=%d)\n",
 		slice, len(slice), cap(slice))
-	
+
 	// 添加多个元素
 	slice = append(slice, 5, 6, 7)
 	fmt.Printf("添加多个元素: %v\n", slice)
-	
+
 	// 添加另一个切片
 	another := []int{8, 9, 10}
 	slice = append(slice, another...)
@@ -170,20 +170,20 @@ import "fmt"
 func main() {
 	slice := []int{1, 2, 3, 4, 5}
 	fmt.Printf("原始切片: %v\n", slice)
-	
+
 	// 删除索引为 2 的元素
 	index := 2
 	slice = append(slice[:index], slice[index+1:]...)
 	fmt.Printf("删除索引 %d: %v\n", index, slice)
-	
+
 	// 删除第一个元素
 	slice = slice[1:]
 	fmt.Printf("删除第一个元素: %v\n", slice)
-	
+
 	// 删除最后一个元素
 	slice = slice[:len(slice)-1]
 	fmt.Printf("删除最后一个元素: %v\n", slice)
-	
+
 	// 删除指定范围的元素
 	slice = []int{1, 2, 3, 4, 5, 6, 7, 8}
 	slice = append(slice[:2], slice[5:]...)  // 删除索引2到4
@@ -200,19 +200,19 @@ import "fmt"
 
 func main() {
 	original := []int{1, 2, 3, 4, 5}
-	
+
 	// 深拷贝
 	copy1 := make([]int, len(original))
 	copy(copy1, original)
 	fmt.Printf("原切片: %v\n", original)
 	fmt.Printf("深拷贝: %v\n", copy1)
-	
+
 	// 修改拷贝不影响原切片
 	copy1[0] = 99
 	fmt.Printf("修改拷贝后:\n")
 	fmt.Printf("原切片: %v\n", original)
 	fmt.Printf("深拷贝: %v\n", copy1)
-	
+
 	// 浅拷贝（共享底层数组）
 	copy2 := original
 	copy2[0] = 88
@@ -231,17 +231,17 @@ import "fmt"
 
 func main() {
 	slice := []int{1, 2, 3, 4, 5}
-	
+
 	// 截取切片
 	slice1 := slice[1:4]    // [2,3,4]
 	slice2 := slice[2:]     // [3,4,5]
 	slice3 := slice[:3]     // [1,2,3]
-	
+
 	fmt.Printf("原切片: %v\n", slice)
 	fmt.Printf("slice[1:4]: %v\n", slice1)
 	fmt.Printf("slice[2:]: %v\n", slice2)
 	fmt.Printf("slice[:3]: %v\n", slice3)
-	
+
 	// 注意：截取的切片共享底层数组
 	slice1[0] = 99
 	fmt.Printf("修改 slice1[0] 后:\n")
@@ -264,15 +264,15 @@ import "fmt"
 
 func main() {
 	var s []int
-	
+
 	fmt.Println("演示切片扩容:")
 	for i := 0; i < 20; i++ {
 		oldCap := cap(s)
 		s = append(s, i)
 		newCap := cap(s)
-		
+
 		if oldCap != newCap {
-			fmt.Printf("添加 %d: len=%d, cap=%d -> %d (扩容)\n", 
+			fmt.Printf("添加 %d: len=%d, cap=%d -> %d (扩容)\n",
 				i, len(s), oldCap, newCap)
 		}
 	}
@@ -293,7 +293,7 @@ func main() {
 		s1 = append(s1, i)
 	}
 	fmt.Printf("不预分配: 最终 cap=%d\n", cap(s1))
-	
+
 	// 预分配容量（性能更好）
 	s2 := make([]int, 0, 1000)
 	for i := 0; i < 1000; i++ {
@@ -318,17 +318,17 @@ func main() {
 	for i := range large {
 		large[i] = i
 	}
-	
+
 	// 只使用前10个元素
 	small := large[:10]
 	fmt.Printf("small: len=%d, cap=%d\n", len(small), cap(small))
-	
+
 	// 问题：small 仍然引用整个 large 的底层数组
 	// 解决：创建新的切片，只复制需要的元素
 	small2 := make([]int, 10)
 	copy(small2, large[:10])
 	fmt.Printf("small2: len=%d, cap=%d\n", len(small2), cap(small2))
-	
+
 	// 现在 large 可以被垃圾回收
 	large = nil
 }
@@ -357,15 +357,15 @@ func appendToSlice(s []int) {
 func main() {
 	slice := []int{1, 2, 3}
 	fmt.Printf("原始: %v\n", slice)
-	
+
 	// 修改元素会影响原切片
 	modifySlice(slice)
 	fmt.Printf("修改后: %v\n", slice)
-	
+
 	// 追加元素不会影响原切片（除非重新赋值）
 	appendToSlice(slice)
 	fmt.Printf("追加后: %v\n", slice)  // 未改变
-	
+
 	// 需要重新赋值
 	slice = append(slice, 200)
 	fmt.Printf("重新赋值后: %v\n", slice)
@@ -390,28 +390,28 @@ func main() {
 			matrix[i][j] = i*4 + j + 1
 		}
 	}
-	
+
 	fmt.Println("二维切片:")
 	for i, row := range matrix {
 		fmt.Printf("  行 %d: %v\n", i, row)
 	}
-	
+
 	// 不规则的二维切片
 	jagged := [][]int{
 		{1, 2, 3},
 		{4, 5},
 		{6, 7, 8, 9},
 	}
-	
+
 	fmt.Println("\n不规则二维切片:")
 	for i, row := range jagged {
 		fmt.Printf("  行 %d: %v\n", i, row)
 	}
-	
+
 	// 动态添加行和列
 	matrix = append(matrix, []int{13, 14, 15, 16})  // 添加新行
 	matrix[0] = append(matrix[0], 17)               // 添加列
-	
+
 	fmt.Println("\n添加后的矩阵:")
 	for i, row := range matrix {
 		fmt.Printf("  行 %d: %v\n", i, row)

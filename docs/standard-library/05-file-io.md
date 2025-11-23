@@ -38,7 +38,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	fmt.Printf("文件内容:\n%s", data)
 }
 ```
@@ -60,12 +60,12 @@ func main() {
 		log.Fatal(err)
 	}
 	defer file.Close()
-	
+
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
 	}
-	
+
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
@@ -89,7 +89,7 @@ func main() {
 		log.Fatal(err)
 	}
 	defer file.Close()
-	
+
 	buf := make([]byte, 1024) // 1KB 缓冲区
 	for {
 		n, err := file.Read(buf)
@@ -118,7 +118,7 @@ import (
 
 func main() {
 	data := []byte("Hello, Go!")
-	
+
 	err := ioutil.WriteFile("output.txt", data, 0644)
 	if err != nil {
 		log.Fatal(err)
@@ -141,7 +141,7 @@ func main() {
 		log.Fatal(err)
 	}
 	defer file.Close()
-	
+
 	_, err = file.WriteString("追加的内容\n")
 	if err != nil {
 		log.Fatal(err)
@@ -165,10 +165,10 @@ func main() {
 		log.Fatal(err)
 	}
 	defer file.Close()
-	
+
 	writer := bufio.NewWriter(file)
 	defer writer.Flush()
-	
+
 	writer.WriteString("第一行\n")
 	writer.WriteString("第二行\n")
 }
@@ -191,7 +191,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	// 创建多级目录
 	err = os.MkdirAll("path/to/dir", 0755)
 	if err != nil {
@@ -215,7 +215,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	for _, entry := range entries {
 		fmt.Println(entry.Name(), entry.IsDir())
 	}
@@ -237,13 +237,13 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	// 删除目录（必须为空）
 	err = os.Remove("mydir")
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	// 删除目录及其内容
 	err = os.RemoveAll("path/to/dir")
 	if err != nil {
@@ -269,7 +269,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	fmt.Printf("文件名: %s\n", info.Name())
 	fmt.Printf("大小: %d 字节\n", info.Size())
 	fmt.Printf("模式: %v\n", info.Mode())
@@ -317,19 +317,19 @@ func main() {
 	// 路径拼接
 	path := filepath.Join("dir", "subdir", "file.txt")
 	fmt.Println(path) // dir/subdir/file.txt (Unix) 或 dir\subdir\file.txt (Windows)
-	
+
 	// 获取目录
 	dir := filepath.Dir(path)
 	fmt.Println(dir)
-	
+
 	// 获取文件名
 	filename := filepath.Base(path)
 	fmt.Println(filename)
-	
+
 	// 获取扩展名
 	ext := filepath.Ext(path)
 	fmt.Println(ext)
-	
+
 	// 获取绝对路径
 	absPath, err := filepath.Abs(path)
 	if err != nil {
@@ -356,7 +356,7 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(matched) // true
-	
+
 	// 文件路径匹配
 	matched, err = filepath.Match("test/*.go", "test/main.go")
 	fmt.Println(matched) // true
@@ -381,13 +381,13 @@ func copyFile(src, dst string) error {
 		return err
 	}
 	defer sourceFile.Close()
-	
+
 	destFile, err := os.Create(dst)
 	if err != nil {
 		return err
 	}
 	defer destFile.Close()
-	
+
 	_, err = io.Copy(destFile, sourceFile)
 	return err
 }
@@ -438,7 +438,7 @@ func readLines(filename string) ([]string, error) {
 		return nil, err
 	}
 	defer file.Close()
-	
+
 	var lines []string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -454,7 +454,7 @@ func writeLines(lines []string, filename string) error {
 		return err
 	}
 	defer file.Close()
-	
+
 	writer := bufio.NewWriter(file)
 	for _, line := range lines {
 		fmt.Fprintln(writer, line)
@@ -467,12 +467,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	// 处理行
 	for i, line := range lines {
 		lines[i] = strings.ToUpper(line)
 	}
-	
+
 	err = writeLines(lines, "output.txt")
 	if err != nil {
 		log.Fatal(err)

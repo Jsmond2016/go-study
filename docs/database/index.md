@@ -62,12 +62,12 @@ func main() {
 		log.Fatal(err)
 	}
 	defer db.Close()
-	
+
 	err = db.Ping()
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	log.Println("数据库连接成功")
 }
 ```
