@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    name: 代码检查
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 设置 Go 环境
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      
+      - name: 安装 golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: latest
+      
+      - name: 运行 golangci-lint
+        run: golangci-lint run ./...
+  
+  test:
+    name: 运行测试
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 设置 Go 环境
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      
+      - name: 同步工作空间
+        run: go work sync
+      
+      - name: 运行测试
+        run: go test -v -race ./...
+      
+      - name: 生成测试覆盖率
+        run: go test -coverprofile=coverage.out ./...
+      
+      - name: 上传覆盖率报告
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.out
+          flags: unittests
+          name: codecov-umbrella
+  
+  build:
+    name: 构建项目
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 设置 Go 环境
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      
+      - name: 同步工作空间
+        run: go work sync
+      
+      - name: 构建所有示例
+        run: |
+          mkdir -p bin
+          for dir in examples/*/; do
+            if [ -f "$dir/go.mod" ]; then
+              echo "构建 $dir"
+              cd "$dir" && go build -o ../../bin/$(basename $dir) . && cd ../..
+            fi
+          done
+      
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v3
+        with:
+          name: binaries
+          path: bin/
+  
+  docs:
+    name: 构建文档
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+      
+      - name: 安装依赖
+        run: pnpm install
+      
+      - name: 构建文档
+        run: pnpm build
+      
+      - name: 上传文档
+        uses: actions/upload-artifact@v3
+        with:
+          name: docs
+          path: docs/.vitepress/dist
+
