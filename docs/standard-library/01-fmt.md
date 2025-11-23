@@ -201,6 +201,64 @@ func main() {
 }
 ```
 
+## 📥 输入函数
+
+### Scan 系列函数
+
+`Scan` 系列函数从标准输入读取数据：
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var name string
+	var age int
+	var married bool
+
+	// Scan: 从标准输入扫描，由空白符分隔
+	fmt.Scan(&name, &age, &married)
+	fmt.Printf("扫描结果: name=%s age=%d married=%t\n", name, age, married)
+
+	// Scanf: 按照指定格式读取
+	fmt.Scanf("name:%s age:%d married:%t", &name, &age, &married)
+	fmt.Printf("格式化扫描结果: name=%s age=%d married=%t\n", name, age, married)
+
+	// Scanln: 遇到换行时停止
+	fmt.Scanln(&name, &age, &married)
+	fmt.Printf("Scanln结果: name=%s age=%d married=%t\n", name, age, married)
+}
+```
+
+### Sprint 系列函数
+
+`Sprint` 系列函数生成字符串而不输出：
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	hello := "hello"
+	world := "world"
+
+	// Sprint: 拼接字符串
+	s1 := fmt.Sprint("测试 Sprint", " ", hello, " ", world)
+
+	// Sprintf: 格式化拼接
+	name := "枯藤"
+	age := 18
+	s2 := fmt.Sprintf("name:%s,age:%d", name, age)
+
+	// Sprintln: 拼接并添加换行符
+	s3 := fmt.Sprintln("枯藤")
+
+	fmt.Println(s1, s2, s3)
+}
+```
+
 ## 🔧 高级功能
 
 ### Sprintf - 格式化字符串

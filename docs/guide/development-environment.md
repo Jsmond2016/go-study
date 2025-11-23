@@ -231,6 +231,49 @@ cat go.work
 go work sync
 ```
 
+### 多版本 Go 管理（goenv）
+
+如果需要管理多个 Go 版本，可以使用 goenv：
+
+**安装**:
+```bash
+# macOS
+brew install goenv
+
+# 配置环境变量（添加到 ~/.zshrc 或 ~/.bashrc）
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+export GOROOT_MIRROR=https://goproxy.cn/dl  # 使用国内镜像
+eval "$(goenv init -)"
+export PATH=$PATH:$(go env GOPATH)/bin
+```
+
+**常用命令**:
+```bash
+# 查看所有命令
+goenv commands
+
+# 安装 Go 版本
+goenv install 1.21.0
+
+# 设置全局版本
+goenv global 1.21.0
+
+# 设置本地版本（项目级别）
+goenv local 1.21.0
+
+# 查看已安装的版本
+goenv versions
+
+# 查看当前版本
+goenv version
+```
+
+**优势**:
+- 支持多版本切换
+- 项目级别版本管理
+- 自动切换版本
+
 ## 🌐 网络配置
 
 ### Go 代理配置

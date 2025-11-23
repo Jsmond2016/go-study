@@ -110,6 +110,123 @@ go install golang.org/x/tools/gopls@latest
 - 阻塞分析
 - 协程分析
 
+## 📚 实用工具库推荐
+
+### 切片和集合操作
+
+#### go-funk
+
+类似 JavaScript 中 Lodash 的功能，提供丰富的集合操作：
+
+```go
+import "github.com/thoas/go-funk"
+
+// 过滤
+evens := funk.Filter([]int{1, 2, 3, 4, 5}, func(x int) bool {
+    return x%2 == 0
+})
+
+// 映射
+doubled := funk.Map([]int{1, 2, 3}, func(x int) int {
+    return x * 2
+})
+
+// 查找
+found := funk.Find([]int{1, 2, 3, 4, 5}, func(x int) bool {
+    return x > 3
+})
+```
+
+**链接**: https://github.com/thoas/go-funk
+
+#### lo
+
+现代的 Go 工具集，提供函数式编程风格：
+
+```go
+import "github.com/samber/lo"
+
+// 过滤
+evens := lo.Filter([]int{1, 2, 3, 4, 5}, func(x int, _ int) bool {
+    return x%2 == 0
+})
+
+// 去重
+unique := lo.Uniq([]int{1, 2, 2, 3, 3, 4})
+
+// 分组
+grouped := lo.GroupBy([]int{1, 2, 3, 4, 5}, func(x int) string {
+    if x%2 == 0 {
+        return "even"
+    }
+    return "odd"
+})
+```
+
+**链接**: https://github.com/samber/lo
+
+### 字符串处理
+
+#### xstrings
+
+提供丰富的字符串处理函数：
+
+```go
+import "github.com/huandu/xstrings"
+
+// 驼峰命名转换
+snakeCase := xstrings.ToSnakeCase("HelloWorld")    // hello_world
+camelCase := xstrings.ToCamelCase("hello_world")   // HelloWorld
+
+// 字符串翻转
+reversed := xstrings.Reverse("Hello")              // olleH
+
+// 字符串填充
+padded := xstrings.LeftPad("Hello", 10, ".")      // .....Hello
+```
+
+**链接**: https://github.com/huandu/xstrings
+
+### 日期时间处理
+
+#### carbon
+
+类似 PHP Carbon 的时间处理功能：
+
+```go
+import "github.com/golang-module/carbon"
+
+// 时间创建和格式化
+now := carbon.Now()
+
+// 时间计算
+tomorrow := now.AddDay()
+yesterday := now.SubDay()
+
+// 时间比较
+isWeekend := now.IsWeekend()
+isLeapYear := now.IsLeapYear()
+
+// 友好格式化
+diff := now.DiffForHumans() // 例如：1 小时前
+```
+
+**链接**: https://github.com/golang-module/carbon
+
+### 其他实用库
+
+#### lancet
+
+全面、高效、可复用的 Go 工具函数库：
+
+**链接**: https://github.com/duke-git/lancet
+
+#### goutil
+
+Go 常用的一些工具函数：
+
+**链接**: https://github.com/gookit/goutil
+
 ## 💡 使用建议
 
 ### 工具选择
@@ -117,6 +234,13 @@ go install golang.org/x/tools/gopls@latest
 1. **初学者**: VS Code + Go 扩展
 2. **专业开发**: GoLand
 3. **轻量级**: VS Code + 必要插件
+
+### 工具库选择
+
+1. **优先使用标准库**: 标准库通常性能更好、更稳定
+2. **选择维护活跃的库**: 关注 GitHub stars 和更新频率
+3. **考虑性能影响**: 对性能敏感的场景要谨慎选择
+4. **注意版本兼容性**: 确保库与 Go 版本兼容
 
 ### 工具配置
 

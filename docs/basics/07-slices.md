@@ -481,6 +481,68 @@ func indexOf(slice []int, item int) int {
 }
 ```
 
+### 删除操作
+
+```go
+// 删除指定位置的元素
+slice := []int{1, 2, 3, 4, 5}
+i := 2 // 要删除的索引
+slice = append(slice[:i], slice[i+1:]...)  // 删除索引i的元素
+
+// 删除指定范围的元素
+slice = append(slice[:i], slice[j:]...)    // 删除索引i到j的元素
+
+// 删除并保持顺序（使用copy）
+copy(slice[i:], slice[i+1:])
+slice = slice[:len(slice)-1]
+```
+
+### 排序操作
+
+```go
+import "sort"
+
+// 基本类型排序
+numbers := []int{4, 2, 1, 3, 5}
+sort.Ints(numbers)               // 升序排序
+sort.Sort(sort.Reverse(sort.IntSlice(numbers))) // 降序排序
+
+// 自定义类型排序
+type Person struct {
+    Name string
+    Age  int
+}
+
+people := []Person{
+    {"Alice", 25},
+    {"Bob", 30},
+    {"Charlie", 20},
+}
+
+sort.Slice(people, func(i, j int) bool {
+    return people[i].Age < people[j].Age
+})
+```
+
+### 搜索操作
+
+```go
+import "sort"
+
+// 线性查找
+slice := []int{1, 2, 3, 4, 5}
+for i, v := range slice {
+    if v == 3 {
+        fmt.Printf("找到元素 %d 在位置 %d\n", v, i)
+        break
+    }
+}
+
+// 二分查找（要求切片已排序）
+numbers := []int{1, 2, 3, 4, 5}
+index := sort.SearchInts(numbers, 3)  // 返回值为2
+```
+
 ## ⚠️ 常见陷阱
 
 ### 1. 在循环中使用 append

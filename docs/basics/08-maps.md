@@ -397,6 +397,196 @@ func main() {
 }
 ```
 
+## 💡 实用技巧
+
+### 使用空结构体作为集合
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 使用空结构体作为集合元素，节省内存
+	seen := make(map[string]struct{})
+	
+	items := []string{"apple", "banana", "apple", "orange", "banana"}
+	for _, item := range items {
+		seen[item] = struct{}{} // 空结构体不占用内存
+	}
+	
+	fmt.Printf("唯一元素: ")
+	for key := range seen {
+		fmt.Printf("%s ", key)
+	}
+	fmt.Println()
+}
+```
+
+### 键值对调
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 原始映射
+	original := map[string]int{
+		"apple":  1,
+		"banana": 2,
+		"orange": 3,
+	}
+	
+	// 键值对调
+	reverse := make(map[int]string)
+	for k, v := range original {
+		reverse[v] = k
+	}
+	
+	fmt.Printf("原始映射: %v\n", original)
+	fmt.Printf("反转映射: %v\n", reverse)
+}
+```
+
+### 复合键
+
+```go
+package main
+
+import "fmt"
+
+// 使用结构体作为复合键
+type Key struct {
+	Path string
+	Type string
+}
+
+func main() {
+	// 使用复合键
+	m := make(map[Key]string)
+	m[Key{Path: "/api/users", Type: "GET"}] = "用户列表"
+	m[Key{Path: "/api/users", Type: "POST"}] = "创建用户"
+	m[Key{Path: "/api/users/1", Type: "GET"}] = "用户详情"
+	
+	// 访问
+	value := m[Key{Path: "/api/users", Type: "GET"}]
+	fmt.Printf("路由处理: %s\n", value)
+}
+```
+
+### Map 作为函数缓存
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var cache = make(map[string]interface{})
+var cacheMu sync.RWMutex
+
+// 模拟耗时计算
+func computeExpensiveOperation(key string) interface{} {
+	time.Sleep(100 * time.Millisecond) // 模拟耗时操作
+	return fmt.Sprintf("result for %s", key)
+}
+
+func getWithCache(key string) interface{} {
+	// 先读锁检查缓存
+	cacheMu.RLock()
+	if val, ok := cache[key]; ok {
+		cacheMu.RUnlock()
+		return val
+	}
+	cacheMu.RUnlock()
+	
+	// 计算值
+	val := computeExpensiveOperation(key)
+	
+	// 写锁更新缓存
+	cacheMu.Lock()
+	cache[key] = val
+	cacheMu.Unlock()
+	
+	return val
+}
+
+func main() {
+	// 第一次调用，需要计算
+	start := time.Now()
+	result1 := getWithCache("key1")
+	fmt.Printf("第一次: %v (耗时: %v)\n", result1, time.Since(start))
+	
+	// 第二次调用，从缓存获取
+	start = time.Now()
+	result2 := getWithCache("key1")
+	fmt.Printf("第二次: %v (耗时: %v)\n", result2, time.Since(start))
+}
+```
+
+### 使用 sync.Map 实现并发安全
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func main() {
+	var sm sync.Map
+	
+	// 存储
+	sm.Store("key1", "value1")
+	sm.Store("key2", "value2")
+	
+	// 读取
+	if value, ok := sm.Load("key1"); ok {
+		fmt.Printf("key1: %v\n", value)
+	}
+	
+	// 删除
+	sm.Delete("key2")
+	
+	// 遍历
+	sm.Range(func(key, value interface{}) bool {
+		fmt.Printf("key: %v, value: %v\n", key, value)
+		return true // 返回 false 停止遍历
+	})
+	
+	// 加载或存储（如果不存在则存储）
+	actual, loaded := sm.LoadOrStore("key3", "value3")
+	fmt.Printf("key3 loaded: %t, value: %v\n", loaded, actual)
+}
+```
+
+### 预分配容量
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 当知道大约容量时，预分配可提高性能
+	expectedSize := 100
+	m := make(map[string]int, expectedSize)
+	
+	// 添加元素
+	for i := 0; i < expectedSize; i++ {
+		key := fmt.Sprintf("key%d", i)
+		m[key] = i
+	}
+	
+	fmt.Printf("映射大小: %d\n", len(m))
+}
+```
+
 ## 📊 实际应用
 
 ### 配置管理
