@@ -9,9 +9,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 22.12.0
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "22.12.0"
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.23.0
       # - name: create env file
       #   run: |
       #     touch .env
@@ -19,8 +23,6 @@ jobs:
       #     echo VITE_CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} >> .env
       - name: install and build
         run: |
-          corepack enable
-          corepack prepare pnpm@10.0.0 --activate
           pnpm install
           pnpm build
       - name: 部署到 github-page...

@@ -8,7 +8,7 @@ export default defineConfig({
   description: '从零基础到实战应用的完整 Go 语言学习路径',
 
   // 基础路径配置
-  base: '/',
+  base: '/go-study/',
 
   // 语言配置
   lang: 'zh-CN',
