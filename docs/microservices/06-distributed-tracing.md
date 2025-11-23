@@ -608,6 +608,17 @@ if err != nil {
 - [Jaeger 官方文档](https://www.jaegertracing.io/docs/)
 - [分布式追踪最佳实践](https://opentelemetry.io/docs/best-practices/)
 
+## 💻 代码示例
+
+完整的代码示例请参考：
+- [代码示例](../../examples/microservices/06-distributed-tracing/)
+
+示例包括：
+- 基础追踪示例
+- gRPC 服务追踪
+- HTTP 服务追踪
+- Jaeger 集成
+
 ## ⏭️ 下一步
 
 - [配置中心](./07-config-center.md) - 学习配置管理

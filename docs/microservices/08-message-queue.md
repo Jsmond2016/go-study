@@ -360,6 +360,16 @@ d.Nack(false, true)
 - [Kafka 官方文档](https://kafka.apache.org/documentation/)
 - [消息队列最佳实践](https://www.rabbitmq.com/best-practices.html)
 
+## 💻 代码示例
+
+完整的代码示例请参考：
+- [代码示例](../../examples/microservices/08-message-queue/)
+
+示例包括：
+- RabbitMQ 生产者和消费者
+- Kafka 生产者和消费者
+- 消息确认和重试机制
+
 ## ⏭️ 下一步
 
 - [服务网格](./09-service-mesh.md) - 学习服务网格

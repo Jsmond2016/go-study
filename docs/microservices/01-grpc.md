@@ -753,6 +753,49 @@ defer stream.CloseSend()
 defer stream.CloseRecv()
 ```
 
+## ❓ 常见问题
+
+### Q1: gRPC 和 REST 有什么区别？什么时候用 gRPC？
+
+**A:** gRPC 使用 HTTP/2 和 Protocol Buffers，性能更高，适合内部服务通信。REST 使用 HTTP/1.1 和 JSON，更适合对外 API。选择建议：
+- 内部服务间通信：使用 gRPC
+- 对外 API：使用 REST
+- 需要流式传输：使用 gRPC
+- 需要浏览器直接调用：使用 REST
+
+### Q2: 如何处理 gRPC 超时？
+
+**A:** 使用 Context 设置超时：
+
+```go
+ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+defer cancel()
+resp, err := client.SomeMethod(ctx, req)
+```
+
+### Q3: gRPC 支持哪些流类型？
+
+**A:** gRPC 支持三种流类型：
+- **一元 RPC**：请求-响应模式
+- **服务器流**：客户端发送一个请求，服务器返回流
+- **客户端流**：客户端发送流，服务器返回一个响应
+- **双向流**：客户端和服务器都可以发送流
+
+### Q4: 如何实现 gRPC 认证？
+
+**A:** 可以使用多种认证方式：
+- **TLS/SSL**：传输层安全
+- **Token 认证**：在元数据中传递 token
+- **拦截器**：在拦截器中验证认证信息
+
+### Q5: gRPC 错误处理最佳实践是什么？
+
+**A:**
+1. 使用 `status` 包返回标准错误码
+2. 错误信息要明确，便于调试
+3. 区分客户端错误和服务器错误
+4. 记录详细的错误日志
+
 ## 📝 实践练习
 
 1. **基础练习**：创建一个计算器服务，支持加减乘除运算

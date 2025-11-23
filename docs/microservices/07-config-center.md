@@ -469,6 +469,17 @@ client.AddChangeListener(&ConfigChangeListener{
 - [Nacos 官方文档](https://nacos.io/docs/what-is-nacos.html)
 - [配置中心最佳实践](https://www.apolloconfig.io/#/zh/design/apollo-design)
 
+## 💻 代码示例
+
+完整的代码示例请参考：
+- [代码示例](../../examples/microservices/07-config-center/)
+
+示例包括：
+- Apollo 基础使用
+- Apollo 数据库配置
+- Nacos 基础使用
+- Nacos 配置发布
+
 ## ⏭️ 下一步
 
 - [消息队列](./08-message-queue.md) - 学习异步通信
