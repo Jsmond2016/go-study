@@ -1,0 +1,11 @@
+go 1.25.4
+
+use (
+	./examples/basics
+	./examples/advanced
+	./examples/standard-library
+	./examples/database
+	./examples/web-development
+	./examples/microservices
+	./examples/projects
+)
