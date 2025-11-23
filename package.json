@@ -1,6 +1,7 @@
 {
   "name": "golang-study",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "repository": "git@github.com:Jsmond2016/go-study.git",
   "author": "Jsmond2016 <Jsmond2016@gmail.com>",
