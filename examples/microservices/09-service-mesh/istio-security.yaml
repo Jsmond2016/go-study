@@ -1,0 +1,94 @@
+# Istio 安全策略配置
+
+# 1. 启用严格 mTLS 模式
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: default
+spec:
+  mtls:
+    mode: STRICT  # 强制所有服务间通信使用 mTLS
+---
+# 2. 授权策略 - 允许特定服务访问
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: demo-service-authz
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: demo-service
+  action: ALLOW
+  rules:
+  # 允许来自 ingress gateway 的请求
+  - from:
+    - source:
+        principals: ["cluster.local/ns/istio-system/sa/istio-ingressgateway-service-account"]
+  # 允许来自特定服务的请求
+  - from:
+    - source:
+        namespaces: ["default"]
+        principals: ["cluster.local/ns/default/sa/client-service"]
+    to:
+    - operation:
+        methods: ["GET", "POST"]
+        paths: ["/api/*"]
+---
+# 3. 请求认证 - JWT 验证
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
+metadata:
+  name: demo-service-jwt
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: demo-service
+  jwtRules:
+  - issuer: "https://your-auth-server.com"
+    jwksUri: "https://your-auth-server.com/.well-known/jwks.json"
+    audiences:
+    - "demo-service"
+---
+# 4. 授权策略 - 基于 JWT 的访问控制
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: demo-service-jwt-authz
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: demo-service
+  action: ALLOW
+  rules:
+  # 要求必须有有效的 JWT token
+  - from:
+    - source:
+        requestPrincipals: ["*"]
+    to:
+    - operation:
+        paths: ["/api/protected/*"]
+  # /api/public/* 不需要认证
+  - to:
+    - operation:
+        paths: ["/api/public/*"]
+---
+# 5. 授权策略 - 拒绝特定请求
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-admin-access
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: demo-service
+  action: DENY
+  rules:
+  # 拒绝对 /admin 路径的访问
+  - to:
+    - operation:
+        paths: ["/admin/*"]

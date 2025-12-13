@@ -1,0 +1,136 @@
+# Kubernetes Deployment for demo service
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service
+  labels:
+    app: demo-service
+spec:
+  ports:
+  - port: 8080
+    name: http
+    targetPort: 8080
+  selector:
+    app: demo-service
+---
+# Deployment for version v1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-service-v1
+  labels:
+    app: demo-service
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: demo-service
+        version: v1
+    spec:
+      containers:
+      - name: demo-service
+        image: demo-service:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SERVICE_NAME
+          value: "demo-service"
+        - name: SERVICE_VERSION
+          value: "v1"
+        - name: PORT
+          value: "8080"
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+---
+# Deployment for version v2
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-service-v2
+  labels:
+    app: demo-service
+    version: v2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-service
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: demo-service
+        version: v2
+    spec:
+      containers:
+      - name: demo-service
+        image: demo-service:v2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SERVICE_NAME
+          value: "demo-service"
+        - name: SERVICE_VERSION
+          value: "v2"
+        - name: PORT
+          value: "8080"
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"

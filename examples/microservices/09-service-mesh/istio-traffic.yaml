@@ -1,0 +1,100 @@
+# Istio VirtualService - 流量路由
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: demo-service
+spec:
+  hosts:
+  - demo-service
+  http:
+  # 基于 header 的路由（金丝雀发布）
+  - match:
+    - headers:
+        x-user-type:
+          exact: premium
+    route:
+    - destination:
+        host: demo-service
+        subset: v2
+      weight: 100
+  # 基于权重的路由（A/B 测试）
+  - route:
+    - destination:
+        host: demo-service
+        subset: v1
+      weight: 80
+    - destination:
+        host: demo-service
+        subset: v2
+      weight: 20
+---
+# Istio DestinationRule - 定义服务子集和策略
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: demo-service
+spec:
+  host: demo-service
+  trafficPolicy:
+    # 连接池设置
+    connectionPool:
+      tcp:
+        maxConnections: 100
+      http:
+        http1MaxPendingRequests: 1
+        http2MaxRequests: 100
+        maxRequestsPerConnection: 2
+    # 负载均衡策略
+    loadBalancer:
+      simple: LEAST_REQUEST
+    # 异常检测（熔断）
+    outlierDetection:
+      consecutiveErrors: 5
+      interval: 30s
+      baseEjectionTime: 30s
+      maxEjectionPercent: 50
+      minHealthPercent: 25
+  # 定义服务子集
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+---
+# Istio Gateway - 入口网关配置
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: demo-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+# VirtualService for Gateway
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: demo-gateway-vs
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - demo-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api
+    route:
+    - destination:
+        host: demo-service
+        port:
+          number: 8080

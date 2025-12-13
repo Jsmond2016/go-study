@@ -267,6 +267,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: '总览', link: '/microservices/' },
         // 第一部分：gRPC 基础
         { text: '01. gRPC', link: '/microservices/01-grpc' },
+        { text: '01-1. gRPC 流式通信', link: '/microservices/01-streaming' },
         { text: '02. Protocol Buffers', link: '/microservices/02-protobuf' },
         // 第二部分：服务治理
         { text: '03. 服务发现', link: '/microservices/03-service-discovery' },
@@ -291,7 +292,9 @@ export const sidebar: DefaultTheme.Sidebar = {
             { text: '06. API 网关', link: '/microservices/ecommerce-microservices/06-gateway' },
             { text: '07. 部署运维', link: '/microservices/ecommerce-microservices/07-deployment' }
           ]
-        }
+        },
+        // 第五部分：测试与最佳实践
+        { text: '11. 微服务测试指南', link: '/microservices/10-testing' }
       ]
     }
   ],

@@ -33,13 +33,16 @@ tags: ["微服务", "gRPC", "服务发现", "负载均衡", "API 网关"]
 | 章节                                    | 内容               | 预计时间 | 难度 | 代码示例 |
 | --------------------------------------- | ------------------ | -------- | ---- | -------- |
 | [gRPC 基础](./01-grpc.md)               | gRPC 基础和使用    | 5-6小时  | ⭐⭐⭐ | [示例代码](../../examples/microservices/01-grpc/) |
+| [gRPC 流式通信](./01-streaming.md)       | gRPC 四种流式RPC详解 | 4-6小时  | ⭐⭐⭐ | [示例代码](../../examples/microservices/01-grpc/streaming/) |
 | [Protocol Buffers](./02-protobuf.md)    | protobuf 定义和使用 | 4-5小时  | ⭐⭐⭐ | [示例代码](../../examples/microservices/02-protobuf/) |
 
 **学习内容**：
 - gRPC 概念和架构
 - gRPC 服务端和客户端实现
 - 拦截器和错误处理
-- 流式传输（单向流、双向流）
+- **四种流式 RPC 模式**（简单、服务端流式、客户端流式、双向流式）
+- **流式通信的应用场景和最佳实践**
+- **流式 RPC 的单元测试**
 - Protocol Buffers 语法和类型
 - 服务定义和代码生成
 
@@ -76,14 +79,17 @@ tags: ["微服务", "gRPC", "服务发现", "负载均衡", "API 网关"]
 | [分布式追踪](./06-distributed-tracing.md) | 可观测性和追踪     | 4-5小时  | ⭐⭐⭐⭐ | [示例代码](../../examples/microservices/06-distributed-tracing/) |
 | [配置中心](./07-config-center.md)      | 配置管理和动态更新 | 4-5小时  | ⭐⭐⭐ | [示例代码](../../examples/microservices/07-config-center/) |
 | [消息队列](./08-message-queue.md)       | 异步通信和解耦     | 5-6小时  | ⭐⭐⭐⭐ | [示例代码](../../examples/microservices/08-message-queue/) |
-| [服务网格](./09-service-mesh.md)        | Istio 服务网格     | 6-8小时  | ⭐⭐⭐⭐⭐ | - |
+| [服务网格](./09-service-mesh.md)        | Istio 服务网格     | 6-8小时  | ⭐⭐⭐⭐⭐ | [示例代码](../../examples/microservices/09-service-mesh/) |
 
 **学习内容**：
 - OpenTelemetry 和 Jaeger 分布式追踪
 - Apollo 和 Nacos 配置中心
 - RabbitMQ 和 Kafka 消息队列
-- Istio 服务网格基础
-- 流量管理、安全策略、可观测性
+- **Istio 服务网格完整实践**
+- **流量管理**（A/B 测试、金丝雀发布、熔断）
+- **安全策略**（mTLS、JWT 认证、授权策略）
+- **可观测性**（Prometheus 指标、Jaeger 追踪、Kiali 可视化）
+- **Kubernetes 集成和部署**
 
 **前置知识**：
 - 完成第二部分：服务治理
@@ -107,6 +113,26 @@ tags: ["微服务", "gRPC", "服务发现", "负载均衡", "API 网关"]
 - 完成前三部分学习
 - Docker 和 Docker Compose
 - 数据库基础（SQLite/MySQL）
+
+### 🧪 第五部分：测试与最佳实践（第12周）
+
+| 章节                                    | ���容               | 预计时间 | 难度 | 代码示例 |
+| --------------------------------------- | ------------------ | -------- | ---- | -------- |
+| [微服务测试指南](./10-testing.md)       | 完整测试策略       | 4-6小时  | ⭐⭐⭐⭐ | [示例代码](../../examples/microservices/TESTING.md) |
+
+**学习内容**：
+- **gRPC 服务测试**（In-Memory Server）
+- **HTTP API 测试**（httptest）
+- **Mock 和 Stub 技术**（testify/mock、GoMock）
+- **数据库测试**（SQLite、testcontainers）
+- **集成测试和 E2E 测试**
+- **性能测试和基准测试**
+- **测试覆盖率分析**
+- **CI/CD 集成**
+
+**前置知识**：
+- Go 测试基础
+- 完成部分微服务示例
 
 ## 🚀 快速开始
 
