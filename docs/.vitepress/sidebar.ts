@@ -293,6 +293,20 @@ export const sidebar: DefaultTheme.Sidebar = {
             { text: '07. 部署运维', link: '/microservices/ecommerce-microservices/07-deployment' }
           ]
         },
+        {
+          text: '10-1. 在线书店实战项目',
+          collapsed: false,
+          items: [
+            { text: '项目概述', link: '/microservices/bookstore-project/' },
+            { text: '01. 环境搭建', link: '/microservices/bookstore-project/01-setup' },
+            { text: '02. 架构设计', link: '/microservices/bookstore-project/02-architecture' },
+            { text: '03. Book Service', link: '/microservices/bookstore-project/03-book-service' },
+            { text: '04. User Service', link: '/microservices/bookstore-project/04-user-service' },
+            { text: '05. API Gateway', link: '/microservices/bookstore-project/05-gateway' },
+            { text: '06. 集成测试', link: '/microservices/bookstore-project/06-integration' },
+            { text: '07. Docker 部署', link: '/microservices/bookstore-project/07-deployment' }
+          ]
+        },
         // 第五部分：测试与最佳实践
         { text: '11. 微服务测试指南', link: '/microservices/10-testing' }
       ]

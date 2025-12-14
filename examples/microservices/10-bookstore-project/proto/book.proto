@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package book;
+
+option go_package = "./proto/book;book";
+
+// 图书服务
+service BookService {
+  // 获取图书详情
+  rpc GetBook(GetBookRequest) returns (BookResponse);
+
+  // 获取图书列表
+  rpc ListBooks(ListBooksRequest) returns (ListBooksResponse);
+
+  // 创建图书
+  rpc CreateBook(CreateBookRequest) returns (BookResponse);
+
+  // 更新图书
+  rpc UpdateBook(UpdateBookRequest) returns (BookResponse);
+
+  // 删除图书
+  rpc DeleteBook(DeleteBookRequest) returns (DeleteBookResponse);
+
+  // 搜索图书
+  rpc SearchBooks(SearchBooksRequest) returns (ListBooksResponse);
+}
+
+// 图书信息
+message Book {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string isbn = 4;
+  string publisher = 5;
+  double price = 6;
+  int32 stock = 7;
+  string category = 8;
+  string description = 9;
+  string cover_url = 10;
+  int64 created_at = 11;
+  int64 updated_at = 12;
+}
+
+// 获取图书请求
+message GetBookRequest {
+  int64 id = 1;
+}
+
+// 图书响应
+message BookResponse {
+  Book book = 1;
+}
+
+// 获取图书列表请求
+message ListBooksRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string category = 3;
+}
+
+// 图书列表响应
+message ListBooksResponse {
+  repeated Book books = 1;
+  int32 total = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
+
+// 创建图书请求
+message CreateBookRequest {
+  string title = 1;
+  string author = 2;
+  string isbn = 3;
+  string publisher = 4;
+  double price = 5;
+  int32 stock = 6;
+  string category = 7;
+  string description = 8;
+  string cover_url = 9;
+}
+
+// 更新图书请求
+message UpdateBookRequest {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string publisher = 4;
+  double price = 5;
+  int32 stock = 6;
+  string category = 7;
+  string description = 8;
+  string cover_url = 9;
+}
+
+// 删除图书请求
+message DeleteBookRequest {
+  int64 id = 1;
+}
+
+// 删除图书响应
+message DeleteBookResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// 搜索图书请求
+message SearchBooksRequest {
+  string keyword = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+}

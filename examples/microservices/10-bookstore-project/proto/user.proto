@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "./proto/user;user";
+
+// 用户服务
+service UserService {
+  // 用户注册
+  rpc Register(RegisterRequest) returns (UserResponse);
+
+  // 用户登录
+  rpc Login(LoginRequest) returns (LoginResponse);
+
+  // 获取用户信息
+  rpc GetUser(GetUserRequest) returns (UserResponse);
+
+  // 更新用户信息
+  rpc UpdateUser(UpdateUserRequest) returns (UserResponse);
+
+  // 验证 Token
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+}
+
+// 用户信息
+message User {
+  int64 id = 1;
+  string username = 2;
+  string email = 3;
+  string phone = 4;
+  string avatar = 5;
+  int64 created_at = 6;
+  int64 updated_at = 7;
+}
+
+// 注册请求
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+  string phone = 4;
+}
+
+// 用户响应
+message UserResponse {
+  User user = 1;
+}
+
+// 登录请求
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+// 登录响应
+message LoginResponse {
+  User user = 1;
+  string token = 2;
+  int64 expires_at = 3;
+}
+
+// 获取用户请求
+message GetUserRequest {
+  int64 id = 1;
+}
+
+// 更新用户请求
+message UpdateUserRequest {
+  int64 id = 1;
+  string email = 2;
+  string phone = 3;
+  string avatar = 4;
+}
+
+// 验证 Token 请求
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+// 验证 Token 响应
+message ValidateTokenResponse {
+  bool valid = 1;
+  int64 user_id = 2;
+  string username = 3;
+}
